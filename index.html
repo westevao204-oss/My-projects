@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundry. — Learn to Build the Web</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ DESIGN TOKENS & THEMING ============ */
+:root {
+  /* Brand Accents */
+  --primary: #F59E0B;
+  --primary-hover: #D97706;
+  --primary-glow: rgba(245, 158, 11, 0.4);
+  --primary-grad: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+  --primary-grad-glow: 0 10px 25px -4px rgba(234, 88, 12, 0.45);
+
+  --accent-purple: #8B5CF6;
+  --accent-cyan: #06B6D4;
+  --accent-rose: #F43F5E;
+  --accent-green: #10B981;
+  --accent-blue: #3B82F6;
+
+  /* Fonts */
+  --head: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', Consolas, monospace;
+
+  /* Radii */
+  --radius: 18px;
+  --radius-sm: 10px;
+  --radius-pill: 9999px;
+
+  /* Default Dark Mode (Inspired by E-Online & Class) */
+  --bg: #0B0F17;
+  --surface: #121826;
+  --surface-hover: #172033;
+  --surface-dim: #182234;
+  --surface-glass: rgba(18, 24, 38, 0.85);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-focus: rgba(245, 158, 11, 0.5);
+
+  --fg: #F8FAFC;
+  --fg-dim: #94A3B8;
+  --fg-faint: #64748B;
+  --code-bg: #070B11;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.25);
+}
+
+:root[data-theme="light"] {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-hover: #F1F5F9;
+  --surface-dim: #F1F5F9;
+  --surface-glass: rgba(255, 255, 255, 0.9);
+  --border: #E2E8F0;
+  --border-subtle: #F1F5F9;
+  --border-focus: rgba(245, 158, 11, 0.5);
+
+  --fg: #0F172A;
+  --fg-dim: #475569;
+  --fg-faint: #94A3B8;
+  --code-bg: #0F172A;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.15);
+}
+
+/* ============ DARK MODE — COLOUR DAMPING ============ */
+/* Muted accent palette — still identifiable but not neon-vivid */
+:root[data-theme="dark"] {
+  --accent-purple: #7C6FA0;   /* was #8B5CF6 */
+  --accent-cyan:   #3A8FA3;   /* was #06B6D4 */
+  --accent-rose:   #A0445A;   /* was #F43F5E */
+  --accent-green:  #3A8C6E;   /* was #10B981 */
+  --accent-blue:   #4A72A8;   /* was #3B82F6 */
+
+  /* Primary amber — slightly cooled */
+  --primary:       #D4880A;
+  --primary-hover: #B8730A;
+  --primary-glow:  rgba(212, 136, 10, 0.25);
+  --primary-grad:  linear-gradient(135deg, #C47F0A 0%, #9A4A08 100%);
+  --primary-grad-glow: 0 10px 25px -4px rgba(156, 74, 8, 0.3);
+
+  /* Softer glow in body bg */
+  --shadow-glow: 0 0 20px rgba(212, 136, 10, 0.12);
+}
+
+/* Squircle cards — deep, desaturated tones instead of vivid gradients */
+:root[data-theme="dark"] .squircle-card.c-magenta {
+  background: linear-gradient(145deg, #6B2A3A 0%, #3D1420 100%);
+  box-shadow: 0 8px 20px -4px rgba(80, 20, 35, 0.5);
+}
+:root[data-theme="dark"] .squircle-card.c-orange {
+  background: linear-gradient(145deg, #7A4E0A 0%, #4A2E06 100%);
+  box-shadow: 0 8px 20px -4px rgba(80, 50, 5, 0.5);
+}
+:root[data-theme="dark"] .squircle-card.c-cyan {
+  background: linear-gradient(145deg, #1A5568 0%, #0D3040 100%);
+  box-shadow: 0 8px 20px -4px rgba(10, 40, 55, 0.5);
+}
+:root[data-theme="dark"] .squircle-card.c-purple {
+  background: linear-gradient(145deg, #3D2A6B 0%, #22163D 100%);
+  box-shadow: 0 8px 20px -4px rgba(30, 15, 55, 0.5);
+}
+
+/* Chart bars — muted in dark mode */
+:root[data-theme="dark"] .bar-pink   { background: #6B3045; opacity: 0.85; }
+:root[data-theme="dark"] .bar-orange { background: #7A4E0A; opacity: 0.9; }
+:root[data-theme="dark"] .bar-cyan   { background: #1E5F72; opacity: 0.85; }
+:root[data-theme="dark"] .bar-purple { background: #3D2A6B; opacity: 0.85; }
+
+/* Hero glow — much softer in dark mode */
+:root[data-theme="dark"] .hero-glow {
+  background: radial-gradient(circle, rgba(180, 100, 10, 0.10) 0%, transparent 70%);
+}
+
+/* Gradient text — warm but not electric */
+:root[data-theme="dark"] .gradient-text {
+  background: linear-gradient(135deg, #C47F0A 0%, #8A3808 50%, #7A2A48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Browse-all circle — toned primary */
+:root[data-theme="dark"] .browse-circle {
+  background: var(--primary-grad);
+}
+
+/* Body background noise — suppress bright glow blobs in dark mode */
+:root[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 85% 10%, rgba(180, 100, 8, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 10% 85%, rgba(80, 50, 120, 0.02) 0%, transparent 45%);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  background-image: 
+    radial-gradient(circle at 85% 10%, rgba(245, 158, 11, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 10% 85%, rgba(139, 92, 246, 0.05) 0%, transparent 45%);
+  color: var(--fg);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--head);
+  color: var(--fg);
+  margin: 0 0 .4em;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+p { line-height: 1.65; color: var(--fg-dim); margin: 0 0 1em; font-size: 14.5px; }
+code, pre, .mono { font-family: var(--mono); }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: var(--head); cursor: pointer; transition: all 0.2s ease; }
+::selection { background: rgba(245, 158, 11, 0.3); color: #FFF; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* Subtle blueprint texture */
+.grid-tex {
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+/* ============ APP SHELL ============ */
+#app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  flex: 0 0 250px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 30;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand {
+  padding: 22px 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+}
+.brand-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.45));
+  transition: transform 0.22s ease;
+}
+.brand:hover .brand-logo-img {
+  transform: scale(1.05);
+}
+.brand-name {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+}
+.brand-name span { color: var(--primary); }
+.brand-sub { font-size: 11px; color: var(--fg-faint); margin-top: -1px; }
+
+.nav { padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: var(--fg-dim);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.nav-item:hover { background: var(--surface-dim); color: var(--fg); }
+.nav-item.active {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--primary);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  font-weight: 700;
+}
+.nav-icon { width: 20px; text-align: center; font-size: 16px; }
+
+.side-progress {
+  margin: auto 16px 20px;
+  padding: 16px;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.side-progress .lbl {
+  font-size: 11.5px;
+  color: var(--fg-faint);
+  margin-bottom: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.xp-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.xp-num { font-family: var(--head); font-weight: 800; font-size: 19px; color: var(--fg); }
+.streak {
+  font-size: 12.5px;
+  color: var(--primary);
+  font-weight: 700;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.bar { height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--primary-grad); border-radius: 999px; transition: width 0.4s ease; }
+
+/* Main column */
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 28px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.hamburger {
+  display: none;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 18px;
+  color: var(--fg);
+}
+.search-wrap { flex: 1; max-width: 440px; position: relative; }
+.search-input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg);
+  font-size: 13.5px;
+  transition: all 0.2s ease;
+}
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+  outline: none;
+}
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--fg-faint); }
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  max-height: 380px;
+  overflow-y: auto;
+  z-index: 50;
+}
+.search-results .sr-item { padding: 12px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s ease; }
+.search-results .sr-item:last-child { border-bottom: none; }
+.search-results .sr-item:hover { background: var(--surface-dim); }
+.sr-kind { font-size: 10.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--primary); font-weight: 700; }
+.sr-title { font-size: 14px; font-weight: 600; margin-top: 3px; color: var(--fg); }
+.topbar-spacer { flex: 1; }
+.mode-switcher {
+  display: flex;
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+.mode-btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.mode-btn:hover { color: var(--fg); }
+.mode-btn.active {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+}
+:root[data-theme="light"] .mode-btn.active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+@media (max-width: 680px) {
+  .mode-btn span.mode-text { display: none; }
+  .mode-btn { padding: 6px 9px; }
+}
+.theme-toggle {
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.theme-toggle:hover { background: var(--surface-hover); border-color: var(--primary); }
+
+.content { padding: 32px 36px 70px; max-width: 1200px; width: 100%; margin: 0 auto; }
+@media (max-width: 900px) { .content { padding: 22px 18px 60px; } }
+
+/* ============ REUSABLE UI & BUTTONS ============ */
+.eyebrow {
+  font-size: 12.5px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.page-head { margin-bottom: 28px; }
+.page-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; }
+.page-head .sub { font-size: 15.5px; color: var(--fg-dim); max-width: 680px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+.grid { display: grid; gap: 20px; }
+.grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 960px) { .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--head);
+  letter-spacing: -0.01em;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.22s cubic-bezier(0.16,1,0.3,1),
+              background 0.22s ease,
+              border-color 0.22s ease;
+}
+
+/* --- Primary: deep indigo-violet with shimmer sweep --- */
+.btn-primary {
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px -4px rgba(139, 92, 246, 0.55);
+}
+/* Shimmer pseudo-element */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 30%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px -6px rgba(139, 92, 246, 0.65),
+              0 0 0 4px rgba(139, 92, 246, 0.18);
+  background: linear-gradient(135deg, #4F52E8 0%, #7C3AED 50%, #9333EA 100%);
+}
+.btn-primary:hover::after {
+  transform: translateX(100%);
+}
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* --- Outline: glass border with colour-fill on hover --- */
+.btn-outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--fg);
+  backdrop-filter: blur(4px);
+}
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(168,85,247,0.12) 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.btn-outline:hover {
+  border-color: #8B5CF6;
+  color: var(--fg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -6px rgba(139, 92, 246, 0.3),
+              0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+.btn-outline:hover::before {
+  opacity: 1;
+}
+.btn-outline:active { transform: translateY(0px); }
+
+/* Light-mode tweaks */
+:root[data-theme="light"] .btn-outline {
+  border-color: #CBD5E1;
+  color: #1E293B;
+}
+:root[data-theme="light"] .btn-outline:hover {
+  border-color: #7C3AED;
+  color: #4F52E8;
+}
+
+/* Ghost (editor toolbar) — unchanged */
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--fg-dim);
+  padding: 8px 12px;
+}
+.btn-ghost:hover { color: var(--fg); background: var(--surface-dim); }
+.btn-sm { padding: 7px 14px; font-size: 13px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+}
+.tag-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+.tag-amber { background: rgba(245, 158, 11, 0.15); color: var(--primary); }
+.tag-rose { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+.tag-blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.tag-purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+.tag-gray { background: var(--surface-dim); color: var(--fg-dim); border: 1px solid var(--border); }
+
+/* ============ BENTO HERO & SQUIRCLE CATEGORIES (Inspired by Reference Images) ============ */
+.hero-banner {
+  position: relative;
+  background: linear-gradient(135deg, rgba(24, 34, 52, 0.7) 0%, rgba(18, 24, 38, 0.95) 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 42px 40px;
+  margin-bottom: 34px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+:root[data-theme="light"] .hero-banner {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-color: #E2E8F0;
+}
+.hero-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+.hero-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 900px) { .hero-layout { flex-direction: column; align-items: flex-start; } }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, rgba(6,182,212,0.15) 0%, rgba(99,102,241,0.15) 100%);
+  border: 1.5px solid rgba(99,102,241,0.35);
+  color: #6EE7F7;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 16px;
+  box-shadow: 0 0 18px -4px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.hero-badge:hover {
+  box-shadow: 0 0 28px -2px rgba(99,102,241,0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+/* Light mode hero badge */
+:root[data-theme="light"] .hero-badge {
+  background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(168,85,247,0.08) 100%);
+  border-color: rgba(99,102,241,0.3);
+  color: #4F52E8;
+  box-shadow: 0 2px 14px -4px rgba(99,102,241,0.2);
+}
+.hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+@media (max-width: 600px) { .hero-title { font-size: 28px; } }
+.gradient-text {
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 50%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 15.5px;
+  color: var(--fg-dim);
+  max-width: 540px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 28px; }
+.hero-stats-row { display: flex; gap: 28px; border-top: 1px solid var(--border); padding-top: 20px; }
+.hero-stat-item .h-num { font-size: 24px; font-weight: 800; font-family: var(--head); color: var(--fg); }
+.hero-stat-item .h-lbl { font-size: 12px; color: var(--fg-faint); margin-top: 2px; }
+
+/* Floating Student Hub Widget (Matches Image 1) */
+.hub-card {
+  width: 300px;
+  flex: 0 0 300px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+@media (max-width: 900px) { .hub-card { width: 100%; flex: none; } }
+.hub-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.hub-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--primary-grad); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.hub-title { font-size: 14px; font-weight: 700; color: var(--fg); }
+.hub-sub { font-size: 12px; color: var(--fg-faint); }
+.chart-box {
+  background: var(--surface-dim);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.chart-lbl { font-size: 11px; font-weight: 700; color: var(--fg-faint); text-transform: uppercase; margin-bottom: 10px; }
+.chart-bars { display: flex; align-items: flex-end; justify-content: space-between; height: 50px; gap: 8px; }
+.c-bar {
+  flex: 1;
+  border-radius: 6px;
+  transition: height 0.4s ease;
+}
+.bar-pink { background: var(--accent-rose); height: 70%; }
+.bar-orange { background: var(--primary); height: 95%; }
+.bar-cyan { background: var(--accent-cyan); height: 60%; }
+.bar-purple { background: var(--accent-purple); height: 85%; }
+
+/* Squircle Course Category Cards (Directly matching Image 1) */
+.cat-section { margin-bottom: 34px; }
+.cat-sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+.cat-sec-head h2 { font-size: 22px; font-weight: 800; margin: 0; }
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 100px;
+  gap: 16px;
+  align-items: center;
+}
+@media (max-width: 1040px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .cat-grid { grid-template-columns: 1fr; } }
+.squircle-card {
+  height: 160px;
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.squircle-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+}
+.squircle-card.c-magenta { background: linear-gradient(145deg, #F43F5E 0%, #BE123C 100%); box-shadow: 0 10px 24px -4px rgba(244, 63, 94, 0.4); }
+.squircle-card.c-orange { background: linear-gradient(145deg, #F59E0B 0%, #D97706 100%); box-shadow: 0 10px 24px -4px rgba(245, 158, 11, 0.4); }
+.squircle-card.c-cyan { background: linear-gradient(145deg, #06B6D4 0%, #0369A1 100%); box-shadow: 0 10px 24px -4px rgba(6, 182, 212, 0.4); }
+.squircle-card.c-purple { background: linear-gradient(145deg, #8B5CF6 0%, #6D28D9 100%); box-shadow: 0 10px 24px -4px rgba(139, 92, 246, 0.4); }
+
+.sq-icon { font-size: 24px; }
+.sq-title { font-family: var(--head); font-size: 17px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+.sq-line { width: 34px; height: 3px; background: rgba(255, 255, 255, 0.6); border-radius: 999px; }
+
+.browse-all-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+.browse-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary-grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: var(--primary-grad-glow);
+  transition: all 0.22s ease;
+}
+.browse-all-btn:hover .browse-circle { transform: scale(1.08) rotate(45deg); }
+.browse-lbl { font-size: 13px; font-weight: 700; color: var(--fg-dim); }
+
+/* ============ ROADMAP & LEVEL CARDS ============ */
+.roadmap-track { position: relative; padding-left: 30px; border-left: 2px solid var(--border); margin-left: 12px; }
+.level-node { position: relative; padding-bottom: 28px; }
+.level-node:last-child { padding-bottom: 0; }
+.level-dot {
+  position: absolute;
+  left: -41px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--fg-faint);
+}
+.level-dot.done { background: var(--accent-green); border-color: var(--accent-green); color: #FFF; }
+.level-dot.current { background: var(--primary); border-color: var(--primary); color: #FFF; box-shadow: var(--shadow-glow); }
+.level-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.level-card:hover { border-color: var(--primary); transform: translateX(3px); }
+.level-card .lh { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.level-card h3 { font-size: 17px; margin: 0; }
+.level-meta { font-size: 13px; color: var(--fg-faint); margin-top: 3px; }
+.level-card.locked { opacity: 0.65; }
+
+/* ============ LESSON VIEWER & CODEBOX ============ */
+.lesson-layout { display: flex; gap: 28px; align-items: flex-start; }
+.lesson-toc { width: 260px; flex: 0 0 260px; position: sticky; top: 86px; }
+.toc-group { margin-bottom: 16px; }
+.toc-group-title { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-faint); font-weight: 800; margin: 0 0 8px 4px; }
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--fg-dim);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+.toc-item:hover { background: var(--surface-dim); color: var(--fg); }
+.toc-item.active { background: rgba(245, 158, 11, 0.12); color: var(--primary); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.2); }
+.toc-check { font-size: 12px; width: 16px; }
+.lesson-body { flex: 1; min-width: 0; }
+@media (max-width: 900px) { .lesson-layout { flex-direction: column; } .lesson-toc { width: 100%; flex: none; position: static; } }
+
+.lesson-sec { margin-bottom: 28px; }
+.lesson-sec h3 { font-size: 13.5px; display: flex; align-items: center; gap: 10px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: .05em; font-weight: 800; margin-bottom: 12px; }
+.lesson-sec .num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-dim);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+.analogy-box {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 3px solid var(--primary);
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Modern macOS style Codebox */
+.codebox {
+  background: var(--code-bg);
+  color: #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-family: var(--mono);
+  font-size: 13px;
+  overflow-x: auto;
+  line-height: 1.65;
+  white-space: pre;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.line-explain { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+.line-explain:last-child { border-bottom: none; }
+.line-explain code { background: var(--surface-dim); padding: 3px 8px; border-radius: 6px; font-size: 12.5px; flex: 0 0 auto; color: var(--primary); border: 1px solid var(--border); }
+
+.mistake { display: flex; gap: 12px; margin-bottom: 12px; font-size: 14px; }
+.mistake .m-wrong { color: var(--accent-rose); font-weight: 800; font-size: 15px; }
+.mistake .m-right { color: var(--accent-green); font-weight: 700; }
+
+/* Quizzes */
+.quiz-q { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.quiz-q:last-child { border: none; }
+.quiz-q p.qtext { color: var(--fg); font-weight: 700; margin-bottom: 12px; font-size: 15px; }
+.quiz-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--fg);
+  font-weight: 500;
+  transition: all 0.18s ease;
+}
+.quiz-opt:hover { border-color: var(--primary); background: var(--surface-dim); }
+.quiz-opt.correct { background: rgba(16, 185, 129, 0.15); border-color: var(--accent-green); color: var(--accent-green); font-weight: 700; }
+.quiz-opt.wrong { background: rgba(244, 63, 94, 0.15); border-color: var(--accent-rose); color: var(--accent-rose); font-weight: 700; }
+.quiz-opt:disabled { cursor: default; }
+
+.next-box {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(234, 88, 12, 0.05) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.toast {
+  position: fixed;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ============ CODE PLAYGROUND ============ */
+.editor-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 18px 0;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.editor-tabs { display: flex; background: var(--surface-dim); border-bottom: 1px solid var(--border); align-items: center; }
+.etab {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-dim);
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border);
+  font-family: var(--mono);
+}
+.etab.active { background: var(--surface); color: var(--primary); box-shadow: inset 0 -2px 0 var(--primary); }
+.editor-actions { margin-left: auto; display: flex; gap: 8px; padding: 6px 12px; }
+.editor-panes { display: flex; min-height: 280px; }
+.editor-pane { flex: 1; min-width: 0; }
+.editor-pane textarea {
+  width: 100%;
+  height: 280px;
+  border: none;
+  resize: vertical;
+  padding: 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  background: var(--surface);
+  color: var(--fg);
+  line-height: 1.6;
+}
+.editor-preview { flex: 1; min-width: 0; border-left: 1px solid var(--border); background: #FFFFFF; }
+.editor-preview iframe { width: 100%; height: 280px; border: none; display: block; }
+@media (max-width: 760px) { .editor-panes { flex-direction: column; } .editor-preview { border-left: none; border-top: 1px solid var(--border); } }
+.hint-block { background: var(--surface-dim); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; font-size: 14px; }
+.hint-block b { font-family: var(--head); font-size: 13px; color: var(--primary); }
+
+/* Projects */
+.proj-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s ease, border-color 0.2s ease; }
+.proj-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+.proj-bar { height: 4px; width: 100%; }
+.proj-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.proj-body h3 { font-size: 16.5px; margin-bottom: 6px; }
+.proj-body .pd { font-size: 13.5px; color: var(--fg-dim); flex: 1; margin-bottom: 14px; }
+.proj-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.skill-chip { font-size: 11px; background: var(--surface-dim); border: 1px solid var(--border); padding: 3px 8px; border-radius: 6px; color: var(--fg-dim); margin-right: 4px; font-weight: 600; }
+
+/* Badges */
+.badge { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
+.badge .b-emoji { font-size: 34px; margin-bottom: 10px; filter: grayscale(1); opacity: .3; }
+.badge.unlocked .b-emoji { filter: none; opacity: 1; }
+.badge h4 { font-size: 14px; margin-bottom: 4px; }
+.badge p { font-size: 12px; margin: 0; }
+
+/* Glossary */
+.gloss-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.gloss-item:first-child { padding-top: 0; }
+.gloss-term { font-family: var(--head); font-size: 17px; font-weight: 800; margin-bottom: 6px; color: var(--fg); }
+.gloss-related { margin-top: 10px; }
+.gloss-related span { font-size: 11.5px; color: var(--primary); background: rgba(245, 158, 11, 0.12); padding: 3px 9px; border-radius: 999px; margin-right: 6px; cursor: pointer; font-weight: 600; }
+
+/* Mobile nav */
+@media (max-width: 760px) {
+  .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); box-shadow: 0 0 0 9999px rgba(0,0,0,0); }
+  .sidebar.open { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+  .hamburger { display: inline-block; }
+  .side-progress { margin-bottom: 80px; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+/* =========================================================================
+   FOUNDRY — a beginner web-development learning platform
+   Single-file SPA: hash router + localStorage-backed progress store.
+   Sections in this file:
+     1. CONTENT DATA  (levels, lessons, projects, glossary, achievements)
+     2. STORE         (progress, xp, streak — persisted to localStorage)
+     3. ROUTER + RENDER (page components)
+     4. CODE PLAYGROUND (live HTML/CSS/JS preview)
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------
+   1. CONTENT DATA
+--------------------------------------------------------------------- */
+
+const GLOSSARY = [
+  {term:"HTML", simple:"The language you use to write the content and structure of a web page — headings, paragraphs, images, links.", tech:"HyperText Markup Language: a markup language that defines the structure of a document using nested elements.", example:"<h1>Hello</h1>", related:["CSS","DOM","Semantic HTML"]},
+  {term:"CSS", simple:"The language that styles your HTML — colors, spacing, layout, fonts.", tech:"Cascading Style Sheets: a stylesheet language used to describe the presentation of a document written in HTML.", example:"h1 { color: blue; }", related:["HTML","Selector","Box Model"]},
+  {term:"JavaScript", simple:"The language that makes web pages interactive — it can react to clicks, change content, and talk to servers.", tech:"A high-level, dynamically-typed scripting language that runs in the browser (and elsewhere) to add behavior to web pages.", example:"alert('Hi!');", related:["DOM","Function","Variable"]},
+  {term:"Variable", simple:"A labeled box where you store a value so you can use it later.", tech:"A named reference to a value stored in memory, declared with let, const, or var in JavaScript.", example:"let age = 25;", related:["JavaScript","Data type"]},
+  {term:"Function", simple:"A reusable block of instructions you can run whenever you need it, like a recipe.", tech:"A block of code designed to perform a particular task, defined once and invoked (called) as needed.", example:"function greet(){ return 'hi'; }", related:["Parameter","Return"]},
+  {term:"Array", simple:"A single list that holds multiple values in order, like a numbered shelf.", tech:"An ordered, zero-indexed collection of values stored under a single variable name.", example:"let colors = ['red','green','blue'];", related:["Object","Loop","forEach"]},
+  {term:"Object", simple:"A way to group related information together using labels, like a filled-out form.", tech:"A collection of key–value pairs used to represent structured data in JavaScript.", example:"let user = { name:'Ada', age:30 };", related:["Array","JSON"]},
+  {term:"DOM", simple:"The browser's way of representing your HTML page as something JavaScript can read and change.", tech:"Document Object Model: a tree-like, in-memory representation of the HTML document that scripts can query and manipulate.", example:"document.getElementById('title')", related:["JavaScript","HTML","querySelector"]},
+  {term:"API", simple:"A way for two pieces of software to talk to each other — like a waiter taking your order to the kitchen.", tech:"Application Programming Interface: a defined set of rules that lets one program request data or services from another.", example:"fetch('https://api.example.com/users')", related:["HTTP","JSON","fetch"]},
+  {term:"HTTP", simple:"The set of rules browsers and servers use to send requests and responses to each other.", tech:"HyperText Transfer Protocol: the application-layer protocol used for transmitting web resources between clients and servers.", example:"GET /index.html HTTP/1.1", related:["API","Server","Status code"]},
+  {term:"JSON", simple:"A simple text format for sending structured data, built out of objects and arrays.", tech:"JavaScript Object Notation: a lightweight, language-independent data-interchange format based on JS object syntax.", example:'{"name":"Ada","age":30}', related:["API","Object","fetch"]},
+  {term:"Server", simple:"A computer somewhere else that stores your website and sends it to visitors when asked.", tech:"A program (and the machine running it) that listens for requests and returns responses, often over HTTP.", example:"A machine running Node.js on port 3000", related:["Backend","Hosting","API"]},
+  {term:"Database", simple:"An organized place to permanently store data so it isn't lost when the server restarts.", tech:"A structured system for storing, managing, and querying persistent data, often organized into tables.", example:"A users table with columns id, name, email", related:["SQL","Table","Backend"]},
+  {term:"SQL", simple:"A language for asking a database questions and telling it what to store, change, or delete.", tech:"Structured Query Language: the standard language for defining and manipulating relational databases.", example:"SELECT * FROM users WHERE age > 18;", related:["Database","Table"]},
+  {term:"Git", simple:"A tool that saves snapshots of your code over time, so you can undo mistakes and track changes.", tech:"A distributed version-control system for tracking changes in source code during software development.", example:"git commit -m \"add login page\"", related:["Repository","GitHub"]},
+  {term:"Repository", simple:"A project folder that Git is keeping a history of.", tech:"A storage location (often called a 'repo') containing a project's files and its full version history.", example:"github.com/you/my-portfolio", related:["Git","GitHub"]},
+  {term:"Framework", simple:"A pre-built toolkit that gives you structure and shortcuts so you don't build everything from zero.", tech:"A reusable set of libraries, conventions, and tools that provides a foundation for building applications.", example:"React, Vue, Express", related:["Library"]},
+  {term:"Library", simple:"A collection of ready-made code you can borrow instead of writing it yourself.", tech:"A collection of pre-written functions/modules that a program can call, without dictating the app's structure.", example:"Using Chart.js to draw a graph", related:["Framework"]},
+  {term:"Frontend", simple:"Everything a visitor actually sees and clicks on in their browser.", tech:"The client-side portion of an application: the UI layer built with HTML, CSS, and JavaScript that runs in the browser.", example:"The layout, colors, and buttons of a site", related:["Backend","HTML","CSS"]},
+  {term:"Backend", simple:"The behind-the-scenes part of an app that handles data, logic, and security on a server.", tech:"The server-side portion of an application responsible for business logic, data storage, and APIs.", example:"Code that checks a password and saves an order", related:["Frontend","Server","Database"]},
+  {term:"Full-stack", simple:"Knowing and building both the frontend and the backend of an application.", tech:"Describes a developer or application that spans both client-side and server-side development.", example:"A to-do app with a React UI and a Node.js API", related:["Frontend","Backend"]},
+  {term:"Authentication", simple:"Proving who you are, usually with a username and password.", tech:"The process of verifying the identity of a user or system.", example:"Logging in with an email and password", related:["Authorization","Server"]},
+  {term:"Authorization", simple:"Deciding what someone who's already logged in is allowed to do.", tech:"The process of determining whether an authenticated identity has permission to perform an action.", example:"Only admins can delete other users' posts", related:["Authentication"]},
+  {term:"Semantic HTML", simple:"Using HTML tags that describe what the content *means*, not just how it looks.", tech:"Writing markup using elements (nav, header, article, footer) chosen for their meaning rather than their default appearance.", example:"<nav> instead of <div class='nav'>", related:["HTML","Accessibility"]},
+  {term:"Responsive design", simple:"Building a site so it looks good on phones, tablets, and desktops.", tech:"A design approach using flexible layouts and media queries so a UI adapts to different viewport sizes.", example:"A 3-column layout that becomes 1 column on mobile", related:["CSS","Media query"]},
+  {term:"undefined", simple:"JavaScript's way of saying 'this variable exists, but nobody ever gave it a value.'", tech:"A primitive value automatically assigned to declared variables that have not been initialized, and returned by missing object properties or functions with no return statement.", example:"let x; console.log(x); // undefined", related:["Variable","JavaScript"]},
+];
+
+const ACHIEVEMENTS = [
+  {id:"first_lesson", emoji:"🏁", name:"First Steps", desc:"Complete your first lesson", check:s=>s.completedLessons.length>=1},
+  {id:"first_website", emoji:"🏆", name:"First Website", desc:"Finish Project 0", check:s=>s.completedProjects.includes("p0")},
+  {id:"html_explorer", emoji:"📄", name:"HTML Explorer", desc:"Finish 3 HTML lessons", check:s=>countByLevel(s,"html")>=3},
+  {id:"html_builder", emoji:"🧱", name:"HTML Builder", desc:"Complete all Level 1 lessons", check:s=>levelLessonsDone(s,"html")},
+  {id:"quiz_ace", emoji:"🎯", name:"Quiz Ace", desc:"Score 100% on any quiz", check:s=>s.perfectQuizzes>=1},
+  {id:"project_finisher", emoji:"🛠️", name:"Project Finisher", desc:"Complete 2 projects", check:s=>s.completedProjects.length>=2},
+  {id:"streak3", emoji:"🔥", name:"On a Roll", desc:"Reach a 3-day streak", check:s=>s.streak>=3},
+  {id:"xp500", emoji:"⭐", name:"Rising Builder", desc:"Earn 500 XP", check:s=>s.xp>=500},
+];
+function countByLevel(s,lvl){ return LEVELS.find(l=>l.id===lvl).lessons.filter(l=>s.completedLessons.includes(l.id)).length; }
+function levelLessonsDone(s,lvl){ const L=LEVELS.find(l=>l.id===lvl); return L.lessons.every(l=>s.completedLessons.includes(l.id)); }
+
+/* ---- Lesson content helper: each lesson follows the 11-part structure ---- */
+function L(id,title,data){ return Object.assign({id,title}, data); }
+
+const LVL0_LESSONS = [
+  L("web-internet","What Is the Internet?",{
+    goal:"Understand what the Internet actually is, in plain terms, before touching any code.",
+    simple:"The Internet is a giant network of computers around the world that are all connected together and can send information to each other.",
+    analogy:"Think of the Internet like the postal system, but for computers. Every computer has an address, and they can mail data — web pages, photos, messages — to each other almost instantly.",
+    syntaxLabel:"No syntax yet",
+    syntax:"This lesson has no code — just concepts. You'll write your first code in the next lesson.",
+    example:"", exampleNote:"",
+    lines:[],
+    tryIt:"Open your browser right now and visit any two different websites. Notice that both loaded through the same browser, even though they live on completely different computers somewhere else in the world.",
+    mistakes:[["Thinking 'the Internet' and 'a website' are the same thing.","The Internet is the network. A website is just one destination you can reach through it."]],
+    quiz:[
+      {q:"What is the Internet, in simple terms?",opts:["A single giant computer","A worldwide network of connected computers","A type of website","A programming language"],a:1},
+      {q:"Which analogy best fits the Internet?",opts:["A library with one book","A postal system connecting many addresses","A single road with no branches","A television channel"],a:1},
+      {q:"True or false: every website lives on your own computer.",opts:["True","False"],a:1},
+    ],
+    challenge:"Name three different websites you visited today and guess (just guess!) what kind of computer might be storing each one.",
+    next:"What a website and a browser actually are — and how they're different."
+  }),
+  L("web-website-browser","Websites & Browsers",{
+    goal:"Understand what a website is, what a browser does, and how they relate.",
+    simple:"A website is a collection of files (HTML, CSS, JavaScript, images) stored somewhere. A browser is the program on your computer — like Chrome or Safari — that requests those files and displays them for you.",
+    analogy:"A website is like a restaurant's kitchen and menu combined. A browser is like the waiter: it goes and asks the kitchen for what you ordered, then brings it back and presents it to you nicely.",
+    syntaxLabel:"No syntax yet",
+    syntax:"Still concept-only — but here's a preview of what a website's files look like:",
+    example:"index.html\nstyles.css\nscript.js\nimages/logo.png",
+    exampleNote:"A simple website's file structure",
+    lines:[
+      ["index.html","The main page's content and structure"],
+      ["styles.css","The visual styling for that content"],
+      ["script.js","The interactive behavior"],
+      ["images/logo.png","A media file the page displays"],
+    ],
+    tryIt:"Open your browser's dev tools (right-click any web page → 'Inspect') and look at the HTML that appears. That's the raw material your browser is turning into the page you see.",
+    mistakes:[["Assuming the browser stores the website permanently.","The browser usually just asks for the files each time (sometimes caching them briefly) — the real files live on a server."]],
+    quiz:[
+      {q:"What does a browser do?",opts:["Stores every website permanently","Requests and displays website files","Writes HTML for you","Hosts your website"],a:1},
+      {q:"Which of these is NOT typically part of a website's files?",opts:["HTML","CSS","JavaScript","A physical keyboard"],a:3},
+      {q:"In the restaurant analogy, the browser is the...",opts:["Kitchen","Menu","Waiter","Chef"],a:2},
+    ],
+    challenge:"List three browsers you know of (e.g. Chrome, Safari, Firefox, Edge) and open the same website in two of them to compare.",
+    next:"What servers, domains, and hosting are — the pieces that make a website reachable."
+  }),
+  L("web-server-domain-hosting","Servers, Domains & Hosting",{
+    goal:"Learn what a server is, what a domain name does, and what hosting means.",
+    simple:"A server is a computer that's always on and connected to the Internet, waiting to send out website files when asked. A domain (like example.com) is a human-friendly address that points to that server. Hosting is the service that keeps your website's files running on a server 24/7.",
+    analogy:"The server is the building where a shop lives. The domain name is the street address people use to find it. Hosting is the company that rents you the building and keeps the lights on.",
+    syntaxLabel:"No syntax yet",
+    syntax:"A domain name breaks down like this:",
+    example:"https://www.example.com/about",
+    exampleNote:"Anatomy of a URL",
+    lines:[
+      ["https://","The protocol — the rules used to transfer the page securely"],
+      ["www.example.com","The domain — the address of the server"],
+      ["/about","The specific page being requested"],
+    ],
+    tryIt:"Look at the address bar right now. Identify the protocol, the domain, and the path of the page you're on.",
+    mistakes:[["Thinking a domain name IS the website.","A domain is just an address. It points to wherever the site is actually hosted — you can move hosts without changing the domain."]],
+    quiz:[
+      {q:"What is a domain name?",opts:["The server's operating system","A human-friendly address that points to a server","A type of hosting company","A programming language"],a:1},
+      {q:"What does 'hosting' provide?",opts:["A domain name generator","A place for your website's files to live and be served 24/7","Free code editors","A design template"],a:1},
+      {q:"In https://www.example.com/about, what is '/about'?",opts:["The protocol","The domain","The specific page being requested","The hosting provider"],a:2},
+    ],
+    challenge:"Break down the URL of your favorite website into its protocol, domain, and path, the way we did in the example above.",
+    next:"The difference between frontend and backend work."
+  }),
+  L("web-frontend-backend","Frontend vs Backend",{
+    goal:"Understand the two broad halves of web development and how they work together.",
+    simple:"Frontend is everything a visitor sees and interacts with directly in the browser — layout, colors, buttons. Backend is the behind-the-scenes part that runs on a server — storing data, checking passwords, and deciding what information to send back.",
+    analogy:"Think of a restaurant again: the frontend is the dining room — the menu, the tables, what the customer experiences. The backend is the kitchen — invisible to the customer, but where the real work of preparing their order happens.",
+    syntaxLabel:"No syntax yet",
+    syntax:"A simple mental map:",
+    example:"Frontend: HTML, CSS, JavaScript (runs in the browser)\nBackend: server code, databases (runs on a server)",
+    exampleNote:"",
+    lines:[],
+    tryIt:"Next time you log into any app, imagine the two halves: the login form you see is frontend; the part that checks your password against stored data is backend.",
+    mistakes:[["Believing you must learn backend before frontend.","Most people learn frontend first because you can see results immediately — this platform follows that order too."]],
+    quiz:[
+      {q:"Which of these is a frontend technology?",opts:["A database","CSS","A server","SQL"],a:1},
+      {q:"Where does backend code typically run?",opts:["Only inside the browser","On a server","Only on mobile devices","Nowhere — it's theoretical"],a:1},
+      {q:"In the restaurant analogy, the kitchen represents...",opts:["Frontend","Backend","The domain name","The browser"],a:1},
+    ],
+    challenge:"Pick an app you use daily and write one sentence describing what you think its frontend does, and one sentence about what its backend might be doing.",
+    next:"How HTML, CSS, and JavaScript work together to build a page."
+  }),
+  L("web-html-css-js","How HTML, CSS & JavaScript Work Together",{
+    goal:"See the big picture of the three core web languages before diving into each one.",
+    simple:"HTML gives a page its content and structure. CSS gives it style and layout. JavaScript gives it behavior and interactivity. Every website you've ever used is built from some combination of these three.",
+    analogy:"HTML is the skeleton of a body — the structure. CSS is the skin, clothes, and styling — how it looks. JavaScript is the muscles and nerves — what makes it move and react.",
+    syntaxLabel:"A tiny preview",
+    syntax:"Here's how the three come together on one button:",
+    example:"<!-- HTML: structure -->\n<button id=\"myBtn\">Click me</button>\n\n/* CSS: style */\n#myBtn { background: blue; color: white; }\n\n// JavaScript: behavior\ndocument.getElementById(\"myBtn\").onclick = function() {\n  alert(\"You clicked it!\");\n};",
+    exampleNote:"",
+    lines:[
+      ["&lt;button id=\"myBtn\"&gt;","HTML creates a button element and gives it an ID"],
+      ["#myBtn { background: blue; }","CSS finds that ID and styles it"],
+      ["document.getElementById(...)","JavaScript finds that same element and adds a click behavior"],
+    ],
+    tryIt:"Right-click any button on a real website and choose 'Inspect'. Try to spot the HTML tag, then look for style rules nearby.",
+    mistakes:[["Trying to learn all three at once.","This platform teaches them one at a time, in order, so each one builds cleanly on the last."]],
+    quiz:[
+      {q:"Which language handles a page's visual style?",opts:["HTML","CSS","JavaScript","HTTP"],a:1},
+      {q:"Which language would you use to react to a button click?",opts:["HTML","CSS","JavaScript","SQL"],a:2},
+      {q:"In the body analogy, HTML represents the...",opts:["Skin","Muscles","Skeleton","Heartbeat"],a:2},
+      {q:"What does CSS stand for?",opts:["Computer Style System","Cascading Style Sheets","Creative Styling Script","Colorful Styling Syntax"],a:1},
+    ],
+    challenge:"Write down, in your own words, one sentence each for what HTML, CSS, and JavaScript do. No code needed yet.",
+    next:"Time to build your first real web page — Project 0."
+  }),
+];
+
+const LVL1_LESSONS = [
+  L("html-structure","HTML Document Structure",{
+    goal:"Learn the required skeleton every HTML page starts with.",
+    simple:"Every HTML page starts with the same basic skeleton of tags that tell the browser 'this is an HTML document, here's the invisible setup info, and here's the visible content.'",
+    analogy:"Think of it like the required first page of a form — before you write your actual answers, there's always a standard header the form needs.",
+    syntaxLabel:"Syntax",
+    syntax:"<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <title>My Page</title>\n  </head>\n  <body>\n    <!-- visible content goes here -->\n  </body>\n</html>",
+    example:"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Hello, world!</h1>\n</body>\n</html>",
+    exampleNote:"A minimal complete HTML page",
+    lines:[
+      ["&lt;!DOCTYPE html&gt;","Tells the browser this is a modern HTML document"],
+      ["&lt;html lang=\"en\"&gt;","The root element that wraps everything; lang helps accessibility tools"],
+      ["&lt;head&gt;","Invisible setup info: title, character encoding, linked files"],
+      ["&lt;title&gt;My First Page&lt;/title&gt;","Text shown in the browser tab"],
+      ["&lt;body&gt;","Everything visitors actually see goes inside here"],
+      ["&lt;h1&gt;Hello, world!&lt;/h1&gt;","A heading — the first visible content"],
+    ],
+    tryIt:"In the editor below, change the text inside &lt;title&gt; and &lt;h1&gt; to your own name, then press Run.",
+    mistakes:[
+      ["Forgetting to close a tag, e.g. &lt;body&gt; without &lt;/body&gt;.","Every opening tag needs a matching closing tag (with a few exceptions like &lt;img&gt;)."],
+      ["Putting visible content in &lt;head&gt; instead of &lt;body&gt;.","&lt;head&gt; is for metadata only — nothing there is shown on the page itself."],
+    ],
+    quiz:[
+      {q:"What does &lt;!DOCTYPE html&gt; do?",opts:["Adds a picture","Tells the browser this is a modern HTML document","Creates a paragraph","Links a stylesheet"],a:1},
+      {q:"Where does visible page content go?",opts:["Inside &lt;head&gt;","Inside &lt;body&gt;","Inside &lt;title&gt;","Nowhere specific"],a:1},
+      {q:"What shows up in the browser tab?",opts:["The contents of &lt;body&gt;","The contents of &lt;title&gt;","The DOCTYPE","The lang attribute"],a:1},
+    ],
+    challenge:"Build a full HTML skeleton from memory (don't peek!) with a title of 'My Practice Page' and one heading that says 'Practice Makes Progress'.",
+    next:"Headings and paragraphs — your first real content tags.",
+    playground:{html:"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Hello, world!</h1>\n</body>\n</html>", css:"", js:""}
+  }),
+  L("html-text","Headings & Paragraphs",{
+    goal:"Structure text content using headings and paragraphs.",
+    simple:"Headings (h1 through h6) create titles and section labels, from biggest/most important (h1) to smallest (h6). Paragraphs (p) hold blocks of regular text.",
+    analogy:"Headings are like chapter and section titles in a book. Paragraphs are the actual body text underneath each one.",
+    syntaxLabel:"Syntax",
+    syntax:"<h1>Biggest heading</h1>\n<h2>Smaller heading</h2>\n<p>A paragraph of regular text.</p>",
+    example:"<h1>My Recipe Blog</h1>\n<h2>Today's Recipe: Pancakes</h2>\n<p>These pancakes are fluffy, quick, and perfect for a weekend morning.</p>",
+    exampleNote:"",
+    lines:[
+      ["&lt;h1&gt;My Recipe Blog&lt;/h1&gt;","The main page title — use only one h1 per page"],
+      ["&lt;h2&gt;Today's Recipe...&lt;/h2&gt;","A section heading, one level below h1"],
+      ["&lt;p&gt;These pancakes...&lt;/p&gt;","A paragraph of normal text"],
+    ],
+    tryIt:"Add an h2 subheading and two paragraphs describing your favorite hobby.",
+    mistakes:[
+      ["Using multiple &lt;h1&gt; tags on one page.","Stick to one h1 per page for clear structure — use h2, h3, etc. for subsections."],
+      ["Skipping heading levels, like going from h1 straight to h4.","Keep headings in order (h1 → h2 → h3) so the structure makes sense, especially for screen readers."],
+    ],
+    quiz:[
+      {q:"Which heading tag is the largest / most important?",opts:["h6","h1","h3","p"],a:1},
+      {q:"What holds a block of regular text?",opts:["&lt;h1&gt;","&lt;p&gt;","&lt;head&gt;","&lt;title&gt;"],a:1},
+      {q:"How many h1 tags should a typical page have?",opts:["As many as you want","Exactly one","Zero","At least five"],a:1},
+    ],
+    challenge:"Build a mini 'About Me' section with one h1, two h2 subheadings, and a paragraph under each.",
+    next:"Links and images — connecting pages and adding visuals.",
+    playground:{html:"<h1>My Recipe Blog</h1>\n<h2>Today's Recipe: Pancakes</h2>\n<p>These pancakes are fluffy, quick, and perfect for a weekend morning.</p>", css:"body{font-family: sans-serif; padding: 20px;}", js:""}
+  }),
+  L("html-links-images","Links & Images",{
+    goal:"Add clickable links and images to a page.",
+    simple:"The &lt;a&gt; tag creates a clickable link using an href attribute for the destination. The &lt;img&gt; tag displays a picture using a src attribute for its location.",
+    analogy:"A link is like a signpost pointing somewhere else. An image tag is like a picture frame that pulls in a photo from wherever you tell it to look.",
+    syntaxLabel:"Syntax",
+    syntax:"<a href=\"https://example.com\">Visit Example</a>\n<img src=\"photo.jpg\" alt=\"A description of the photo\">",
+    example:"<a href=\"https://developer.mozilla.org\" target=\"_blank\">Read the MDN docs</a>\n<img src=\"https://picsum.photos/300/180\" alt=\"A random placeholder photo\">",
+    exampleNote:"",
+    lines:[
+      ["href=\"...\"","The destination URL the link points to"],
+      ["target=\"_blank\"","Opens the link in a new tab"],
+      ["&lt;img src=\"...\"&gt;","Points to the image file to display"],
+      ["alt=\"...\"","Describes the image for screen readers and if it fails to load"],
+    ],
+    tryIt:"Add a link to your favorite website and an image (you can use https://picsum.photos/200) with a meaningful alt text.",
+    mistakes:[
+      ["Leaving out the alt attribute on images.","alt text is read aloud by screen readers and shown if the image fails to load — never skip it."],
+      ["Writing href=\"example.com\" without https://.","Without a protocol, the browser may treat it as a relative path on your own site instead of an external link."],
+    ],
+    quiz:[
+      {q:"Which attribute sets a link's destination?",opts:["src","alt","href","target"],a:2},
+      {q:"Which attribute describes an image for accessibility?",opts:["href","alt","src","title only"],a:1},
+      {q:"What does target=\"_blank\" do?",opts:["Deletes the link","Opens the link in a new tab","Makes the link red","Disables the link"],a:1},
+    ],
+    challenge:"Create a tiny 'favorites' page with 3 links to sites you like and 1 image, each with proper alt text.",
+    next:"Lists and tables — organizing content.",
+    playground:{html:"<a href=\"https://developer.mozilla.org\" target=\"_blank\">Read the MDN docs</a>\n<br><br>\n<img src=\"https://picsum.photos/300/180\" alt=\"A random placeholder photo\">", css:"body{font-family: sans-serif; padding: 20px;}", js:""}
+  }),
+  L("html-lists-tables","Lists & Tables",{
+    goal:"Organize content into lists and tables.",
+    simple:"Unordered lists (ul) make bullet points, ordered lists (ol) make numbered steps, and tables (table) organize data into rows and columns.",
+    analogy:"A list is like a grocery list or a set of numbered instructions. A table is like a spreadsheet — rows and columns of related data.",
+    syntaxLabel:"Syntax",
+    syntax:"<ul>\n  <li>Bullet item</li>\n</ul>\n<ol>\n  <li>Step one</li>\n</ol>\n<table>\n  <tr><th>Name</th><th>Age</th></tr>\n  <tr><td>Ada</td><td>28</td></tr>\n</table>",
+    example:"<ul>\n  <li>Milk</li>\n  <li>Eggs</li>\n</ul>\n<table>\n  <tr><th>Item</th><th>Price</th></tr>\n  <tr><td>Coffee</td><td>$3</td></tr>\n  <tr><td>Tea</td><td>$2</td></tr>\n</table>",
+    exampleNote:"",
+    lines:[
+      ["&lt;ul&gt;...&lt;/ul&gt;","An unordered (bulleted) list wrapper"],
+      ["&lt;li&gt;Milk&lt;/li&gt;","One list item"],
+      ["&lt;table&gt;...&lt;/table&gt;","A table wrapper"],
+      ["&lt;tr&gt;","A table row"],
+      ["&lt;th&gt; / &lt;td&gt;","A header cell / a regular data cell"],
+    ],
+    tryIt:"Build a 3-item numbered list of steps to make tea, then a small 2-column table comparing two of your favorite foods.",
+    mistakes:[
+      ["Putting text directly inside &lt;ul&gt; without an &lt;li&gt;.","Every list item needs its own &lt;li&gt; wrapper."],
+      ["Using &lt;td&gt; for header cells.","Use &lt;th&gt; for headers so browsers and screen readers know they're labels, not data."],
+    ],
+    quiz:[
+      {q:"Which tag creates a numbered list?",opts:["&lt;ul&gt;","&lt;ol&gt;","&lt;li&gt;","&lt;table&gt;"],a:1},
+      {q:"What does &lt;th&gt; represent?",opts:["A table row","A header cell","A data cell","A list item"],a:1},
+      {q:"Every item inside a &lt;ul&gt; or &lt;ol&gt; must be wrapped in...",opts:["&lt;td&gt;","&lt;li&gt;","&lt;tr&gt;","&lt;span&gt;"],a:1},
+    ],
+    challenge:"Build a small weekly schedule as a table: one column for the day, one for your main task.",
+    next:"Forms and inputs — collecting information from users.",
+    playground:{html:"<ul>\n  <li>Milk</li>\n  <li>Eggs</li>\n</ul>\n<table border=\"1\" cellpadding=\"6\">\n  <tr><th>Item</th><th>Price</th></tr>\n  <tr><td>Coffee</td><td>$3</td></tr>\n  <tr><td>Tea</td><td>$2</td></tr>\n</table>", css:"body{font-family: sans-serif; padding: 20px;}", js:""}
+  }),
+  L("html-forms","Forms & Inputs",{
+    goal:"Collect information from a visitor using forms.",
+    simple:"A &lt;form&gt; wraps a group of inputs — text fields, checkboxes, buttons — that let visitors enter and submit information.",
+    analogy:"A form is like a paper form you fill out at a doctor's office: labeled blanks for different pieces of information, and a submit button at the end.",
+    syntaxLabel:"Syntax",
+    syntax:"<form>\n  <label for=\"name\">Name</label>\n  <input type=\"text\" id=\"name\" name=\"name\">\n  <button type=\"submit\">Submit</button>\n</form>",
+    example:"<form>\n  <label for=\"email\">Email</label>\n  <input type=\"email\" id=\"email\" name=\"email\" required>\n  <br>\n  <label for=\"msg\">Message</label>\n  <textarea id=\"msg\" name=\"msg\"></textarea>\n  <br>\n  <button type=\"submit\">Send</button>\n</form>",
+    exampleNote:"",
+    lines:[
+      ["&lt;label for=\"email\"&gt;","Text that describes the input; 'for' links it to the input's id"],
+      ["&lt;input type=\"email\"&gt;","A text field that expects an email address"],
+      ["required","Tells the browser this field cannot be left empty"],
+      ["&lt;textarea&gt;","A bigger multi-line text box"],
+      ["&lt;button type=\"submit\"&gt;","A button that submits the form"],
+    ],
+    tryIt:"Build a small contact form with a name field, an email field, and a submit button — connect each label to its input using 'for' and 'id'.",
+    mistakes:[
+      ["Leaving out the &lt;label&gt; tag.","Labels are essential for accessibility — screen readers rely on them to describe each field."],
+      ["Mismatching a label's 'for' and an input's 'id'.","They must be spelled exactly the same, or the connection breaks."],
+    ],
+    quiz:[
+      {q:"What connects a &lt;label&gt; to its &lt;input&gt;?",opts:["Matching 'for' and 'id'","Matching colors","Being next to each other","Nothing needed"],a:0},
+      {q:"Which attribute prevents an empty field from being submitted?",opts:["type","required","name","label"],a:1},
+      {q:"Which tag is best for a multi-line message box?",opts:["&lt;input&gt;","&lt;textarea&gt;","&lt;p&gt;","&lt;label&gt;"],a:1},
+    ],
+    challenge:"Add a dropdown (&lt;select&gt;) with 3 options to your contact form for 'reason for contact'.",
+    next:"Semantic HTML, div/span, and organizing a page with classes and IDs.",
+    playground:{html:"<form>\n  <label for=\"email\">Email</label><br>\n  <input type=\"email\" id=\"email\" name=\"email\" required>\n  <br><br>\n  <label for=\"msg\">Message</label><br>\n  <textarea id=\"msg\" name=\"msg\"></textarea>\n  <br><br>\n  <button type=\"submit\">Send</button>\n</form>", css:"body{font-family: sans-serif; padding: 20px;} input, textarea{display:block; margin-bottom:8px; padding:6px;}", js:""}
+  }),
+  L("html-semantic","Semantic HTML, div/span, and Classes/IDs",{
+    goal:"Learn to structure a page meaningfully and target elements with classes and IDs.",
+    simple:"Semantic tags like &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, and &lt;footer&gt; describe what a section of the page *is*, instead of using generic &lt;div&gt; everywhere. Classes and IDs let you label elements so CSS and JavaScript can find and style them.",
+    analogy:"A &lt;div&gt; is a plain unlabeled box. Semantic tags are labeled boxes — like moving boxes marked 'kitchen' or 'bedroom' instead of just 'box 1', 'box 2'. Classes are like sticky notes you can put on many boxes at once; an ID is a unique nameplate for exactly one box.",
+    syntaxLabel:"Syntax",
+    syntax:"<header class=\"site-header\">\n  <nav>...</nav>\n</header>\n<main id=\"content\">\n  <span class=\"highlight\">Important</span>\n</main>\n<footer>...</footer>",
+    example:"<header>\n  <h1>My Site</h1>\n  <nav>\n    <a href=\"#\">Home</a>\n    <a href=\"#\">About</a>\n  </nav>\n</header>\n<main>\n  <p>Welcome! <span class=\"highlight\">New here?</span></p>\n</main>\n<footer>\n  <p>&copy; 2026</p>\n</footer>",
+    exampleNote:"",
+    lines:[
+      ["&lt;header&gt;","The introductory section of a page, often with a logo and title"],
+      ["&lt;nav&gt;","A block of navigation links"],
+      ["&lt;main&gt;","The primary content of the page (use once per page)"],
+      ["&lt;span class=\"highlight\"&gt;","An inline element with a class CSS/JS can target"],
+      ["&lt;footer&gt;","Closing content like copyright info"],
+    ],
+    tryIt:"Rebuild a small page using header, nav, main, and footer instead of plain divs, and add one class to something you want to style later.",
+    mistakes:[
+      ["Using &lt;div&gt; for everything.","div is a fine fallback when nothing semantic fits, but reach for header/nav/main/footer/article/section first — they help accessibility and SEO."],
+      ["Reusing the same ID on multiple elements.","IDs must be unique per page — use a class instead if several elements need the same label."],
+    ],
+    quiz:[
+      {q:"Which tag is meant for a page's main navigation links?",opts:["&lt;div&gt;","&lt;nav&gt;","&lt;span&gt;","&lt;main&gt;"],a:1},
+      {q:"Can the same ID be used on two elements in one page?",opts:["Yes, always","No, IDs must be unique","Only in the head","Only inside forms"],a:1},
+      {q:"What is a class best used for?",opts:["Labeling exactly one unique element","Labeling many elements that share a style or behavior","Storing JavaScript code","Setting a page title"],a:1},
+      {q:"span is typically used for...","opts":["A full-width block section","A small inline piece of content","A page's main content","A navigation menu"],a:1},
+    ],
+    challenge:"Take any earlier project you've built and refactor its layout to use header, main, and footer.",
+    next:"You've finished Level 1: HTML! Time for Project 1 and beyond — or move on to Level 2: CSS.",
+    playground:{html:"<header>\n  <h1>My Site</h1>\n  <nav>\n    <a href=\"#\">Home</a>\n    <a href=\"#\">About</a>\n  </nav>\n</header>\n<main>\n  <p>Welcome! <span class=\"highlight\">New here?</span></p>\n</main>\n<footer>\n  <p>&copy; 2026</p>\n</footer>", css:"body{font-family: sans-serif; padding: 20px;}\n.highlight{background: yellow;}\nnav a{margin-right:10px;}", js:""}
+  }),
+];
+
+const LEVELS = [
+  {id:"web-basics", num:0, title:"Computer & Web Basics", icon:"🌐", color:"var(--blue)", lessons:LVL0_LESSONS, projectIds:["p0"], status:"available"},
+  {id:"html", num:1, title:"HTML", icon:"📄", color:"var(--amber)", lessons:LVL1_LESSONS, projectIds:["p1","p2","p3","p4"], status:"available"},
+  {id:"css", num:2, title:"CSS", icon:"🎨", color:"var(--sage)", lessons:[], projectIds:["p5","p6","p7","p8"], status:"planned"},
+  {id:"javascript", num:3, title:"JavaScript", icon:"⚡", color:"#7C5CE0", lessons:[], projectIds:["p9","p10","p11","p12","p13","p14","p15","p16"], status:"planned"},
+  {id:"git", num:4, title:"Git & GitHub", icon:"🌿", color:"#3E8E5B", lessons:[], projectIds:["p17"], status:"planned"},
+  {id:"apis", num:5, title:"APIs & the Web", icon:"🔌", color:"#2F9AA0", lessons:[], projectIds:["p18","p19","p20"], status:"planned"},
+  {id:"backend", num:6, title:"Backend Development", icon:"🖥️", color:"#B0554A", lessons:[], projectIds:[], status:"planned"},
+  {id:"databases", num:7, title:"Databases", icon:"🗄️", color:"#6A6F8C", lessons:[], projectIds:["p21","p22","p23"], status:"planned"},
+  {id:"fullstack", num:8, title:"Full-Stack Projects", icon:"🚀", color:"#C24B43", lessons:[], projectIds:["p24","p25","p26","p27","p28","p29","p30"], status:"planned"},
+];
+
+function P(id,data){ return Object.assign({id}, data); }
+const PROJECTS = [
+  P("p0",{title:"Build Your First Web Page", level:"web-basics", difficulty:"🟢", diffLabel:"Beginner", time:"20–30 min",
+    skills:["HTML structure","Basic tags"],
+    requirements:["A complete HTML skeleton (doctype, html, head, body)","A page &lt;title&gt;","One &lt;h1&gt; heading with your name","One paragraph about yourself"],
+    instructions:"Using everything from the Level 0 lessons, build one complete HTML page from scratch. This is your very first real webpage — keep it simple.",
+    expected:"A page that shows your name as a big heading and a short paragraph underneath it, with the browser tab showing your chosen title.",
+    starter:{html:"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title><!-- your title --></title>\n</head>\n<body>\n  <!-- your heading and paragraph go here -->\n</body>\n</html>", css:"", js:""},
+    hints:[
+      "Start with the exact skeleton from the 'HTML Document Structure' lesson.",
+      "Your visible content — the heading and paragraph — belongs inside &lt;body&gt;, not &lt;head&gt;.",
+      "Use &lt;h1&gt;Your Name&lt;/h1&gt; followed by &lt;p&gt;A sentence about you.&lt;/p&gt;."
+    ],
+    solution:{html:"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>About Me</title>\n</head>\n<body>\n  <h1>Jordan Rivera</h1>\n  <p>I'm just getting started with web development, and this is my very first web page!</p>\n</body>\n</html>", css:"body{font-family:sans-serif;padding:24px;}", js:""},
+    extensions:["Add a second paragraph about a hobby.","Add an image of something you like using &lt;img&gt;."]}),
+  P("p1",{title:"Personal Profile Page", level:"html", difficulty:"🟢", diffLabel:"Beginner", time:"30–45 min",
+    skills:["Headings","Paragraphs","Images","Lists"],
+    requirements:["A profile photo (any placeholder image URL)","A name as h1","A short bio paragraph","An unordered list of 3 interests"],
+    instructions:"Build a simple 'About Me' page: photo, name, short bio, and a bullet list of your interests.",
+    expected:"A page with an image at the top, your name as a heading, a paragraph of bio text, and a bulleted list of 3 interests.",
+    starter:{html:"<h1><!-- your name --></h1>\n<!-- image, bio paragraph, and list go here -->", css:"body{font-family:sans-serif;padding:20px;}", js:""},
+    hints:[
+      "Use &lt;img src=\"...\" alt=\"...\"&gt; for the photo — you can use https://picsum.photos/200 as a placeholder.",
+      "Order matters for readability: image, then heading, then bio, then list.",
+      "Wrap each interest in its own &lt;li&gt; inside a &lt;ul&gt;."
+    ],
+    solution:{html:"<img src=\"https://picsum.photos/150\" alt=\"Profile photo\">\n<h1>Jordan Rivera</h1>\n<p>I'm learning web development one project at a time. I love solving small puzzles and seeing a page come to life.</p>\n<ul>\n  <li>Hiking</li>\n  <li>Chess</li>\n  <li>Baking bread</li>\n</ul>", css:"body{font-family:sans-serif;padding:20px;} img{border-radius:50%;}", js:""},
+    extensions:["Add a second list of 3 skills you're learning.","Add a link to an imaginary portfolio using &lt;a&gt;."]}),
+  P("p2",{title:"Restaurant Menu", level:"html", difficulty:"🟢", diffLabel:"Beginner", time:"30–45 min",
+    skills:["Tables","Headings","Lists"],
+    requirements:["A restaurant name as h1","At least 2 menu categories as h2","A table per category with item name and price"],
+    instructions:"Build a simple restaurant menu page using tables to organize dishes by category and price.",
+    expected:"A page with a restaurant name, two or more section headings (like 'Starters' and 'Mains'), each followed by a table listing dish names and prices.",
+    starter:{html:"<h1><!-- restaurant name --></h1>\n<h2>Starters</h2>\n<table>\n  <!-- rows go here -->\n</table>", css:"body{font-family:sans-serif;padding:20px;} table{border-collapse:collapse;} td,th{border:1px solid #ccc;padding:6px 12px;}", js:""},
+    hints:[
+      "Start each table with a header row using &lt;th&gt; for 'Dish' and 'Price'.",
+      "Each dish is its own &lt;tr&gt; with two &lt;td&gt; cells.",
+      "Repeat the pattern for a second category like 'Mains' or 'Desserts'."
+    ],
+    solution:{html:"<h1>The Corner Table</h1>\n<h2>Starters</h2>\n<table>\n  <tr><th>Dish</th><th>Price</th></tr>\n  <tr><td>Garlic Bread</td><td>$5</td></tr>\n  <tr><td>Soup of the Day</td><td>$6</td></tr>\n</table>\n<h2>Mains</h2>\n<table>\n  <tr><th>Dish</th><th>Price</th></tr>\n  <tr><td>Grilled Salmon</td><td>$18</td></tr>\n  <tr><td>Veggie Pasta</td><td>$14</td></tr>\n</table>", css:"body{font-family:sans-serif;padding:20px;} table{border-collapse:collapse;margin-bottom:20px;} td,th{border:1px solid #ccc;padding:6px 12px;text-align:left;}", js:""},
+    extensions:["Add a 'Desserts' category.","Add a short description paragraph under each dish name."]}),
+  P("p3",{title:"Student Registration Form", level:"html", difficulty:"🟡", diffLabel:"Intermediate", time:"40–60 min",
+    skills:["Forms","Inputs","Labels","Accessibility"],
+    requirements:["Fields for name, email, and date of birth","A dropdown for grade/year","A submit button","Every input has a matching label"],
+    instructions:"Build a registration form a school might use to sign up new students, with properly labeled fields.",
+    expected:"A form with labeled text, email, and date fields, a dropdown, and a submit button — every label correctly linked to its input.",
+    starter:{html:"<form>\n  <!-- labeled fields go here -->\n  <button type=\"submit\">Register</button>\n</form>", css:"body{font-family:sans-serif;padding:20px;} label{display:block;margin-top:10px;} input,select{padding:6px;}", js:""},
+    hints:[
+      "Every &lt;label for=\"x\"&gt; needs an &lt;input id=\"x\"&gt; with a matching id.",
+      "Use type=\"date\" for date of birth and type=\"email\" for the email field.",
+      "Build the dropdown with &lt;select&gt; and a few &lt;option&gt; tags inside it."
+    ],
+    solution:{html:"<form>\n  <label for=\"name\">Full Name</label>\n  <input type=\"text\" id=\"name\" required>\n\n  <label for=\"email\">Email</label>\n  <input type=\"email\" id=\"email\" required>\n\n  <label for=\"dob\">Date of Birth</label>\n  <input type=\"date\" id=\"dob\">\n\n  <label for=\"grade\">Grade</label>\n  <select id=\"grade\">\n    <option>9th</option>\n    <option>10th</option>\n    <option>11th</option>\n    <option>12th</option>\n  </select>\n\n  <button type=\"submit\">Register</button>\n</form>", css:"body{font-family:sans-serif;padding:20px;} label{display:block;margin-top:10px;} input,select{padding:6px;width:220px;}", js:""},
+    extensions:["Add a checkbox for 'I agree to the terms'.","Add radio buttons for gender identity as optional."]}),
+  P("p4",{title:"Simple Portfolio Website", level:"html", difficulty:"🟡", diffLabel:"Intermediate", time:"45–75 min",
+    skills:["Semantic HTML","Structure","Links","Lists"],
+    requirements:["header with your name and nav links","main with an about section and a projects list","footer with contact info"],
+    instructions:"Combine everything from Level 1 into one multi-section portfolio page using semantic tags.",
+    expected:"A page with a header (name + nav), a main section with an About paragraph and a list of 2–3 fake projects, and a footer with contact info.",
+    starter:{html:"<header>\n  <!-- name + nav -->\n</header>\n<main>\n  <!-- about + projects -->\n</main>\n<footer>\n  <!-- contact -->\n</footer>", css:"body{font-family:sans-serif;padding:0;margin:0;} header,main,footer{padding:20px;} header{background:#222;color:#fff;} nav a{color:#fff;margin-right:12px;}", js:""},
+    hints:[
+      "Reuse the header/nav/main/footer pattern from the Semantic HTML lesson.",
+      "Inside main, use an h2 for 'About' and another h2 for 'Projects', with a &lt;ul&gt; listing project names.",
+      "The footer just needs an email link and maybe a copyright line."
+    ],
+    solution:{html:"<header>\n  <h1>Jordan Rivera</h1>\n  <nav>\n    <a href=\"#about\">About</a>\n    <a href=\"#projects\">Projects</a>\n  </nav>\n</header>\n<main>\n  <h2 id=\"about\">About</h2>\n  <p>I'm a beginner web developer building my very first portfolio.</p>\n  <h2 id=\"projects\">Projects</h2>\n  <ul>\n    <li>Personal Profile Page</li>\n    <li>Restaurant Menu</li>\n    <li>Student Registration Form</li>\n  </ul>\n</main>\n<footer>\n  <p>Contact: <a href=\"mailto:jordan@example.com\">jordan@example.com</a></p>\n</footer>", css:"body{font-family:sans-serif;padding:0;margin:0;} header,main,footer{padding:20px;} header{background:#1B2430;color:#fff;} nav a{color:#fff;margin-right:12px;text-decoration:none;} footer{background:#f1ece0;}", js:""},
+    extensions:["Link each project to a real anchor further down the page.","Add a simple skills list section."]}),
+];
+
+/* ---------------------------------------------------------------------
+   2. STORE — progress, xp, streak (persisted to localStorage)
+--------------------------------------------------------------------- */
+const STORE_KEY = "foundry_progress_v1";
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) {
+      const parsed = JSON.parse(raw);
+      parsed.quizClaimed = parsed.quizClaimed || {};
+      return parsed;
+    }
+  }catch(e){ console.warn("Could not read saved progress", e); }
+  return {
+    xp:0, streak:0, lastActive:null,
+    completedLessons:[], completedProjects:[], quizScores:{}, quizClaimed:{}, perfectQuizzes:0,
+    unlockedAchievements:[], notes:{}, theme:"dark"
+  };
+}
+let state = loadStore();
+function saveStore(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){ console.warn("Could not save progress", e); }
+}
+function touchStreak(){
+  const today = new Date().toDateString();
+  if(state.lastActive === today) return;
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  const yesterday = d.toDateString();
+  state.streak = (state.lastActive === yesterday) ? state.streak + 1 : 1;
+  state.lastActive = today;
+  saveStore();
+}
+touchStreak();
+
+function addXP(amount, reason){
+  state.xp += amount;
+  saveStore();
+  showToast(`+${amount} XP — ${reason}`);
+  checkAchievements();
+}
+function completeLesson(id){
+  if(state.completedLessons.includes(id)) return;
+  state.completedLessons.push(id);
+  saveStore();
+  addXP(15, "lesson complete");
+}
+function completeProject(id){
+  if(state.completedProjects.includes(id)) return;
+  state.completedProjects.push(id);
+  saveStore();
+  addXP(60, "project complete");
+}
+function recordQuiz(lessonId, correct, total){
+  state.quizScores[lessonId] = {correct, total};
+  if(correct === total) state.perfectQuizzes++;
+  if(!state.quizClaimed) state.quizClaimed = {};
+  if(!state.quizClaimed[lessonId] && correct >= Math.ceil(total * 0.6)){
+    state.quizClaimed[lessonId] = true;
+    addXP(5 * correct, "quiz passed");
+  }
+  saveStore();
+}
+function checkAchievements(){
+  ACHIEVEMENTS.forEach(a=>{
+    if(!state.unlockedAchievements.includes(a.id) && a.check(state)){
+      state.unlockedAchievements.push(a.id);
+      saveStore();
+      setTimeout(()=>showToast(`🏆 Achievement unlocked: ${a.name}`), 500);
+    }
+  });
+}
+checkAchievements();
+
+function levelProgress(levelId){
+  const lvl = LEVELS.find(l=>l.id===levelId);
+  if(!lvl) return 0;
+  const totalLessons = lvl.lessons.length;
+  const totalProjects = lvl.projectIds.length;
+  const doneLessons = lvl.lessons.filter(l=>state.completedLessons.includes(l.id)).length;
+  const doneProjects = lvl.projectIds.filter(id=>state.completedProjects.includes(id)).length;
+  const total = totalLessons + totalProjects;
+  const done = doneLessons + doneProjects;
+  return total===0 ? 0 : Math.round((done/total)*100);
+}
+function xpForLevel(xp){ return Math.floor(xp/150)+1; }
+
+/* ---------------------------------------------------------------------
+   3. ROUTER + RENDER
+--------------------------------------------------------------------- */
+function showToast(msg){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+function navigate(hash){ location.hash = hash; }
+window.addEventListener("hashchange", render);
+window.addEventListener("DOMContentLoaded", ()=>{
+  applyTheme();
+  render();
+  // Global click listener attached once to prevent memory leaks
+  document.addEventListener("click", (e)=>{
+    const results = document.getElementById("searchResults");
+    if(results && !e.target.closest(".search-wrap")) {
+      results.innerHTML = "";
+      results.classList.remove("search-results");
+    }
+    const sidebar = document.getElementById("sidebar");
+    const hamBtn = document.getElementById("hamBtn");
+    if(sidebar && sidebar.classList.contains("open") && !sidebar.contains(e.target) && e.target !== hamBtn && !hamBtn.contains(e.target)) {
+      sidebar.classList.remove("open");
+    }
+  });
+});
+
+function setMode(mode){
+  state.theme = mode;
+  saveStore();
+  applyTheme();
+  showToast(mode === 'dark' ? "🌙 Switched to Dark Mode" : "☀️ Switched to Light Mode");
+}
+
+function toggleTheme(){
+  const next = state.theme === 'dark' ? 'light' : 'dark';
+  setMode(next);
+}
+
+function applyTheme(){
+  if(state.theme === "light") document.documentElement.setAttribute("data-theme","light");
+  else document.documentElement.setAttribute("data-theme","dark");
+
+  document.querySelectorAll(".mode-btn").forEach(b => {
+    b.classList.toggle("active", b.getAttribute("data-mode") === state.theme);
+  });
+}
+
+function esc(s){
+  if(!s) return "";
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function findLesson(id){
+  for(const lvl of LEVELS){ const f = lvl.lessons.find(l=>l.id===id); if(f) return {lesson:f, level:lvl}; }
+  return null;
+}
+function findProject(id){ return PROJECTS.find(p=>p.id===id); }
+
+const NAV_ITEMS = [
+  {hash:"#/dashboard", icon:"🏠", label:"Dashboard"},
+  {hash:"#/roadmap", icon:"🗺️", label:"Roadmap"},
+  {hash:"#/learn", icon:"📘", label:"Learn"},
+  {hash:"#/projects", icon:"🧩", label:"Projects"},
+  {hash:"#/glossary", icon:"📖", label:"Glossary"},
+  {hash:"#/achievements", icon:"🏆", label:"Achievements"},
+];
+
+function render(){
+  const hash = location.hash || "#/dashboard";
+  const root = document.getElementById("app");
+  root.innerHTML = shellHTML(hash);
+  wireShell();
+
+  const contentEl = document.getElementById("content");
+  const [_, route, arg] = hash.split("/");
+  if(hash.startsWith("#/dashboard") || hash==="#/") contentEl.innerHTML = pageDashboard();
+  else if(hash.startsWith("#/roadmap")) contentEl.innerHTML = pageRoadmap();
+  else if(hash.startsWith("#/learn/")) { contentEl.innerHTML = pageLesson(arg); wireLesson(arg); return; }
+  else if(hash.startsWith("#/learn")) contentEl.innerHTML = pageLearnIndex();
+  else if(hash.startsWith("#/projects/")) { contentEl.innerHTML = pageProjectDetail(arg); wireProjectDetail(arg); return; }
+  else if(hash.startsWith("#/projects")) contentEl.innerHTML = pageProjects();
+  else if(hash.startsWith("#/glossary")) contentEl.innerHTML = pageGlossary();
+  else if(hash.startsWith("#/achievements")) contentEl.innerHTML = pageAchievements();
+  else contentEl.innerHTML = `<div class="empty"><div class="e-icon">🧭</div><h3>Page not found</h3><p>That page doesn't exist yet.</p></div>`;
+
+  wireGenericButtons();
+}
+
+function shellHTML(hash){
+  const totalXP = state.xp;
+  const lvl = xpForLevel(totalXP);
+  const xpIntoLevel = totalXP % 150;
+  return `
+  <button class="hamburger" id="hamBtn" aria-label="Open navigation menu">☰</button>
+  <div class="sidebar" id="sidebar">
+    <div class="brand" data-nav="#/dashboard" title="Go to Dashboard">
+      <img src="logo.png" alt="Foundry Logo" class="brand-logo-img">
+      <div>
+        <div class="brand-name">Foundry<span>.</span></div>
+        <div class="brand-sub">Learn to Build the Web</div>
+      </div>
+    </div>
+    <nav class="nav">
+      ${NAV_ITEMS.map(n=>`<button class="nav-item ${hash.startsWith(n.hash)?'active':''}" data-nav="${n.hash}"><span class="nav-icon">${n.icon}</span>${n.label}</button>`).join("")}
+    </nav>
+    <div class="side-progress">
+      <div class="lbl">Builder Level ${lvl}</div>
+      <div class="xp-row"><span class="xp-num">${totalXP} XP</span><span class="streak">🔥 ${state.streak}d</span></div>
+      <div class="bar"><div style="width:${(xpIntoLevel/150)*100}%"></div></div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="topbar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="searchInput" aria-label="Search curriculum" placeholder="Search lessons, projects, glossary…" autocomplete="off">
+        <div id="searchResults"></div>
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="mode-switcher" id="modeSwitcher" title="Change theme mode">
+        <button class="mode-btn ${state.theme==='light'?'active':''}" data-mode="light" title="Light mode">☀️ <span class="mode-text">Light</span></button>
+        <button class="mode-btn ${state.theme==='dark'?'active':''}" data-mode="dark" title="Dark mode">🌙 <span class="mode-text">Dark</span></button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>`;
+}
+
+function wireShell(){
+  document.querySelectorAll("#sidebar [data-nav], .brand[data-nav]").forEach(b=>{
+    b._wired = true;
+    b.addEventListener("click",()=>{
+      navigate(b.getAttribute("data-nav"));
+      document.getElementById("sidebar").classList.remove("open");
+    });
+  });
+  document.getElementById("hamBtn").addEventListener("click",(e)=>{
+    e.stopPropagation();
+    document.getElementById("sidebar").classList.toggle("open");
+  });
+
+
+  document.querySelectorAll(".mode-btn").forEach(b => {
+    b.addEventListener("click", () => {
+      setMode(b.getAttribute("data-mode"));
+    });
+  });
+
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+  input.addEventListener("input", ()=>{
+    const q = input.value.trim().toLowerCase();
+    if(q.length < 2){ results.innerHTML=""; results.classList.remove("search-results"); return; }
+    const hits = [];
+    LEVELS.forEach(lvl=>lvl.lessons.forEach(l=>{
+      if(l.title.toLowerCase().includes(q) || l.simple.toLowerCase().includes(q)) hits.push({kind:"Lesson", title:l.title, hash:`#/learn/${l.id}`});
+    }));
+    PROJECTS.forEach(p=>{ if(p.title.toLowerCase().includes(q)) hits.push({kind:"Project", title:p.title, hash:`#/projects/${p.id}`}); });
+    GLOSSARY.forEach(g=>{ if(g.term.toLowerCase().includes(q) || g.simple.toLowerCase().includes(q)) hits.push({kind:"Glossary", title:g.term, hash:`#/glossary`}); });
+    if(hits.length===0){ results.innerHTML = `<div class="sr-item"><div class="sr-title">No results</div></div>`; }
+    else results.innerHTML = hits.slice(0,8).map(h=>`<div class="sr-item" data-h="${h.hash}"><div class="sr-kind">${h.kind}</div><div class="sr-title">${esc(h.title)}</div></div>`).join("");
+    results.classList.add("search-results");
+    results.querySelectorAll(".sr-item[data-h]").forEach(el=>el.addEventListener("click",()=>{ navigate(el.getAttribute("data-h")); input.value=""; results.innerHTML=""; }));
+  });
+}
+
+/* ---- Dashboard ---- */
+function pageDashboard(){
+  const nextLesson = LEVELS.flatMap(l=>l.lessons).find(l=>!state.completedLessons.includes(l.id));
+  const recentAch = ACHIEVEMENTS.filter(a=>state.unlockedAchievements.includes(a.id)).slice(-3).reverse();
+  return `
+  <div class="hero-banner">
+    <div class="hero-glow"></div>
+    <div class="hero-layout">
+      <div>
+        <div class="hero-badge">✨ 100% Free · Browser-Based Web Academy</div>
+        <h1 class="hero-title">Investing in Knowledge and <span class="gradient-text">Your Future.</span></h1>
+        <p class="hero-sub">Master modern web development with structured 11-step interactive lessons, live in-browser playgrounds, and progressive real-world projects.</p>
+        <div class="hero-actions">
+          ${nextLesson ? `<button class="btn btn-primary" data-nav="#/learn/${nextLesson.id}">Continue Learning →</button>` : `<button class="btn btn-primary" data-nav="#/learn">Browse Lessons →</button>`}
+          <button class="btn btn-outline" data-nav="#/roadmap">Explore Roadmap</button>
+        </div>
+        <div class="hero-stats-row">
+          <div class="hero-stat-item"><div class="h-num">9</div><div class="h-lbl">Career Levels</div></div>
+          <div class="hero-stat-item"><div class="h-num">30+</div><div class="h-lbl">Guided Projects</div></div>
+          <div class="hero-stat-item"><div class="h-num">Live</div><div class="h-lbl">Interactive Sandbox</div></div>
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <div class="hub-header">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <img src="logo.png" alt="Foundry Logo" class="brand-logo-img" style="width:42px; height:42px;">
+            <div>
+              <div class="hub-title">Builder Level ${xpForLevel(state.xp)}</div>
+              <div class="hub-sub">${state.xp} Total XP Earned</div>
+            </div>
+          </div>
+          <span class="streak">🔥 ${state.streak}d</span>
+        </div>
+        <div class="chart-box">
+          <div class="chart-lbl">Learning Chart</div>
+          <div class="chart-bars">
+            <div class="c-bar bar-pink" title="Level 0 Web Basics"></div>
+            <div class="c-bar bar-orange" title="Level 1 HTML5"></div>
+            <div class="c-bar bar-cyan" title="Quizzes Completed"></div>
+            <div class="c-bar bar-purple" title="Projects Finished"></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--fg-dim);">
+          <span>${state.completedLessons.length} lessons done</span>
+          <span>${state.completedProjects.length} projects done</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Squircle Course Category Cards (Directly matching Image 1) -->
+  <div class="cat-section">
+    <div class="cat-sec-head">
+      <h2>Browse Top Essential Career Tracks</h2>
+      <span style="font-size:13px; color:var(--fg-faint); font-weight:600;">Foundations to Full-Stack</span>
+    </div>
+    <div class="cat-grid">
+      <div class="squircle-card c-magenta" data-nav="#/learn/web-internet">
+        <div class="sq-icon">🌐</div>
+        <div>
+          <div class="sq-title">Web Basics &<br>Internet</div>
+          <div class="sq-line"></div>
+        </div>
+      </div>
+      <div class="squircle-card c-orange" data-nav="#/learn/html-structure">
+        <div class="sq-icon">📄</div>
+        <div>
+          <div class="sq-title">HTML5 Semantic<br>Architecture</div>
+          <div class="sq-line"></div>
+        </div>
+      </div>
+      <div class="squircle-card c-cyan" data-nav="#/roadmap">
+        <div class="sq-icon">🎨</div>
+        <div>
+          <div class="sq-title">CSS3 Modern<br>Design & Flexbox</div>
+          <div class="sq-line"></div>
+        </div>
+      </div>
+      <div class="squircle-card c-purple" data-nav="#/roadmap">
+        <div class="sq-icon">⚡</div>
+        <div>
+          <div class="sq-title">JavaScript &<br>DOM Logic</div>
+          <div class="sq-line"></div>
+        </div>
+      </div>
+      <button class="browse-all-btn" data-nav="#/roadmap" aria-label="Browse all tracks">
+        <div class="browse-circle">→</div>
+        <div class="browse-lbl">Browse All</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-bottom:28px;">
+    <div class="card">
+      <h3 style="font-size:14px; color:var(--primary); text-transform:uppercase; letter-spacing:.05em;">Curriculum Roadmap</h3>
+      ${LEVELS.map(l=>`
+        <div style="margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:5px;">
+            <span style="font-weight:600;">${l.icon} ${l.title}</span><span class="mono" style="color:var(--fg-dim);">${levelProgress(l.id)}%</span>
+          </div>
+          <div class="bar"><div style="width:${levelProgress(l.id)}%; background:${l.color};"></div></div>
+        </div>`).join("")}
+    </div>
+    <div class="card">
+      <h3 style="font-size:14px; color:var(--primary); text-transform:uppercase; letter-spacing:.05em;">Builder Snapshot</h3>
+      <div class="grid cols-2" style="gap:12px;">
+        <div class="card" style="padding:16px; background:var(--surface-dim); border:1px solid var(--border);"><div style="font-size:26px; font-weight:800; font-family:var(--head); color:var(--fg);">${state.completedLessons.length}</div><div style="font-size:12.5px; color:var(--fg-dim);">Lessons completed</div></div>
+        <div class="card" style="padding:16px; background:var(--surface-dim); border:1px solid var(--border);"><div style="font-size:26px; font-weight:800; font-family:var(--head); color:var(--fg);">${state.completedProjects.length}</div><div style="font-size:12.5px; color:var(--fg-dim);">Projects completed</div></div>
+        <div class="card" style="padding:16px; background:var(--surface-dim); border:1px solid var(--border);"><div style="font-size:26px; font-weight:800; font-family:var(--head); color:var(--primary);">${state.xp}</div><div style="font-size:12.5px; color:var(--fg-dim);">Total XP earned</div></div>
+        <div class="card" style="padding:16px; background:var(--surface-dim); border:1px solid var(--border);"><div style="font-size:26px; font-weight:800; font-family:var(--head); color:var(--primary);">${state.streak}</div><div style="font-size:12.5px; color:var(--fg-dim);">Day active streak</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px; color:var(--primary); text-transform:uppercase; letter-spacing:.05em; margin-bottom:16px;">Milestones & Achievements</h3>
+    ${recentAch.length ? `<div class="grid cols-3">${recentAch.map(a=>`<div class="badge unlocked"><div class="b-emoji">${a.emoji}</div><h4>${a.name}</h4><p style="color:var(--fg-dim);">${a.desc}</p></div>`).join("")}</div>`
+      : `<div class="empty"><div class="e-icon">🏆</div><p>Complete your first lesson to earn a badge.</p></div>`}
+  </div>`;
+}
+
+/* ---- Roadmap ---- */
+function pageRoadmap(){
+  return `
+  <div class="page-head">
+    <div class="eyebrow">The full journey</div>
+    <h1>Learning roadmap</h1>
+    <p class="sub">Nine stages, from "what is a website" to shipping full-stack projects. Work through them in order — each one builds on the last.</p>
+  </div>
+  <div class="roadmap-track">
+    ${LEVELS.map(lvl=>{
+      const pct = levelProgress(lvl.id);
+      const isDone = pct===100 && (lvl.lessons.length+lvl.projectIds.length)>0;
+      const dotClass = isDone ? "done" : (pct>0 ? "current" : "");
+      return `<div class="level-node">
+        <div class="level-dot ${dotClass}">${isDone?'✓':lvl.num}</div>
+        <div class="level-card ${lvl.status==='planned'?'locked':''}" ${lvl.status!=='planned'?`data-nav="#/learn/${(lvl.lessons[0]||{}).id||''}"`:''} style="border-left:3px solid ${lvl.color};">
+          <div class="lh">
+            <h3>${lvl.icon} Level ${lvl.num} — ${lvl.title}</h3>
+            ${lvl.status==='planned' ? `<span class="tag tag-gray">Coming next</span>` : `<span class="tag tag-blue">${pct}% complete</span>`}
+          </div>
+          <div class="level-meta">${lvl.lessons.length} lessons · ${lvl.projectIds.length} projects</div>
+          ${lvl.status!=='planned' ? `<div class="bar" style="margin-top:10px;"><div style="width:${pct}%; background:${lvl.color};"></div></div>` : `<p style="margin-top:8px; font-size:13px;">Full lesson content for this stage is the next thing built on this platform — the projects and structure are already mapped out.</p>`}
+        </div>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+/* ---- Learn index ---- */
+function pageLearnIndex(){
+  return `
+  <div class="page-head">
+    <div class="eyebrow">Course content</div>
+    <h1>Learn</h1>
+    <p class="sub">Pick up any lesson. Each one follows the same format: a simple explanation, an example, a challenge, and a quiz.</p>
+  </div>
+  ${LEVELS.map(lvl=>`
+    <div style="margin-bottom:28px;">
+      <h3 style="font-size:15px; margin-bottom:10px;">${lvl.icon} Level ${lvl.num} — ${lvl.title} ${lvl.status==='planned'?'<span class="tag tag-gray" style="margin-left:8px;">Coming next</span>':''}</h3>
+      ${lvl.lessons.length ? `<div class="grid cols-3">
+        ${lvl.lessons.map(l=>{
+          const done = state.completedLessons.includes(l.id);
+          return `<div class="card" style="cursor:pointer;" data-nav="#/learn/${l.id}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <h4 style="font-size:14px; margin-bottom:6px;">${esc(l.title)}</h4>
+              ${done ? `<span class="tag tag-green">Done</span>` : ``}
+            </div>
+            <p style="font-size:12.5px; margin:0;">${esc(l.goal)}</p>
+          </div>`;
+        }).join("")}
+      </div>` : `<div class="empty" style="padding:20px;"><p>Lessons for this level are planned but not yet written — check back as the platform expands.</p></div>`}
+    </div>
+  `).join("")}`;
+}
+
+/* ---- Lesson page ---- */
+function pageLesson(id){
+  const found = findLesson(id);
+  if(!found) return `<div class="empty"><div class="e-icon">📘</div><h3>Lesson not found</h3></div>`;
+  const {lesson, level} = found;
+  const allInLevel = level.lessons;
+  const idx = allInLevel.findIndex(l=>l.id===id);
+  const done = state.completedLessons.includes(id);
+
+  return `
+  <div class="page-head">
+    <div class="eyebrow">${level.icon} ${level.title} · Lesson ${idx+1} of ${allInLevel.length}</div>
+    <h1>${esc(lesson.title)}</h1>
+  </div>
+  <div class="lesson-layout">
+    <div class="lesson-toc">
+      <div class="toc-group">
+        <div class="toc-group-title">${level.title}</div>
+        ${allInLevel.map(l=>`<div class="toc-item ${l.id===id?'active':''}" data-nav="#/learn/${l.id}"><span class="toc-check">${state.completedLessons.includes(l.id)?'✅':'○'}</span>${esc(l.title)}</div>`).join("")}
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="lesson-sec"><h3><span class="num">1</span> What you will learn</h3><p>${esc(lesson.goal)}</p></div>
+
+      <div class="lesson-sec"><h3><span class="num">2</span> Simple explanation</h3><p>${esc(lesson.simple)}</p></div>
+
+      <div class="lesson-sec"><h3><span class="num">3</span> Real-world analogy</h3><div class="analogy-box">${esc(lesson.analogy)}</div></div>
+
+      ${lesson.syntax ? `<div class="lesson-sec"><h3><span class="num">4</span> ${lesson.syntaxLabel||'Syntax'}</h3><div class="codebox">${esc(lesson.syntax)}</div></div>` : ``}
+
+      ${lesson.example ? `<div class="lesson-sec"><h3><span class="num">5</span> Example</h3>${lesson.exampleNote?`<p style="font-size:13px;">${esc(lesson.exampleNote)}</p>`:''}<div class="codebox">${esc(lesson.example)}</div></div>` : ``}
+
+      ${lesson.lines && lesson.lines.length ? `<div class="lesson-sec"><h3><span class="num">6</span> Line-by-line explanation</h3>
+        ${lesson.lines.map(([code,exp])=>`<div class="line-explain"><code>${code}</code><span style="color:var(--fg-dim);">${esc(exp)}</span></div>`).join("")}
+      </div>` : ``}
+
+      ${lesson.playground ? `<div class="lesson-sec"><h3><span class="num">7</span> Try it yourself</h3><p>${esc(lesson.tryIt)}</p>${playgroundHTML("lesson-"+id, lesson.playground)}</div>` :
+        `<div class="lesson-sec"><h3><span class="num">7</span> Try it yourself</h3><p>${esc(lesson.tryIt)}</p></div>`}
+
+      <div class="lesson-sec"><h3><span class="num">8</span> Common mistakes</h3>
+        ${lesson.mistakes.map(([wrong,fix])=>`<div class="mistake"><span class="m-wrong">✗</span><div><div>${wrong}</div><div style="color:var(--sage); font-size:12.5px; margin-top:2px;"><span class="m-right">✓ Fix:</span> ${fix}</div></div></div>`).join("")}
+      </div>
+
+      <div class="lesson-sec"><h3><span class="num">9</span> Quick quiz</h3>
+        <div id="quizArea">${quizHTML(lesson)}</div>
+      </div>
+
+      <div class="lesson-sec"><h3><span class="num">10</span> Mini challenge</h3><div class="card" style="background:var(--paper-dim);"><p style="margin:0;">${esc(lesson.challenge)}</p></div></div>
+
+      <div class="lesson-sec"><h3><span class="num">11</span> What comes next</h3>
+        <div class="next-box">
+          <p style="margin:0;">${esc(lesson.next)}</p>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-outline" id="markDoneBtn">${done? '✅ Completed' : 'Mark lesson complete'}</button>
+            ${idx < allInLevel.length-1 ? `<button class="btn btn-primary" data-nav="#/learn/${allInLevel[idx+1].id}">Next lesson →</button>` : `<button class="btn btn-primary" data-nav="#/projects">See projects →</button>`}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>`;
+}
+
+function quizHTML(lesson){
+  return lesson.quiz.map((q,qi)=>`
+    <div class="quiz-q" data-qi="${qi}">
+      <p class="qtext">${qi+1}. ${esc(q.q)}</p>
+      ${q.opts.map((o,oi)=>`<button class="quiz-opt" data-oi="${oi}">${esc(o)}</button>`).join("")}
+    </div>`).join("") + `<div style="margin-top:6px;" id="quizScoreLine"></div>`;
+}
+
+function wireLesson(id){
+  const found = findLesson(id);
+  if(!found) return;
+  const {lesson} = found;
+  let scoreCorrect = 0, answered = 0;
+
+  document.querySelectorAll(".quiz-q").forEach(qEl=>{
+    const qi = +qEl.getAttribute("data-qi");
+    const q = lesson.quiz[qi];
+    qEl.querySelectorAll(".quiz-opt").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        if(qEl.querySelector(".quiz-opt.correct, .quiz-opt.wrong")) return; // already answered
+        const oi = +btn.getAttribute("data-oi");
+        answered++;
+        if(oi === q.a){ btn.classList.add("correct"); scoreCorrect++; }
+        else { btn.classList.add("wrong"); qEl.querySelectorAll(".quiz-opt")[q.a].classList.add("correct"); }
+        qEl.querySelectorAll(".quiz-opt").forEach(b=>b.disabled=true);
+        if(answered === lesson.quiz.length){
+          recordQuiz(id, scoreCorrect, lesson.quiz.length);
+          document.getElementById("quizScoreLine").innerHTML = `<p style="font-weight:700; color:${scoreCorrect===lesson.quiz.length?'var(--accent-green)':'var(--fg)'}; margin-top:8px;">Score: ${scoreCorrect}/${lesson.quiz.length} ${scoreCorrect===lesson.quiz.length?'— perfect! 🎯':''}</p>`;
+        }
+      });
+    });
+  });
+
+  const markBtn = document.getElementById("markDoneBtn");
+  if(markBtn) markBtn.addEventListener("click", ()=>{
+    completeLesson(id);
+    render();
+  });
+
+  if(lesson.playground) wirePlayground("lesson-"+id, lesson.playground);
+  wireGenericButtons();
+}
+
+/* ---- Projects ---- */
+function pageProjects(){
+  return `
+  <div class="page-head">
+    <div class="eyebrow">Build by doing</div>
+    <h1>Projects</h1>
+    <p class="sub">Real, scoped projects that get progressively harder. Each one gives you starter code, hints if you get stuck, and a full solution once you're ready to compare.</p>
+  </div>
+  <div class="grid cols-3">
+    ${PROJECTS.map(p=>{
+      const lvl = LEVELS.find(l=>l.id===p.level);
+      const done = state.completedProjects.includes(p.id);
+      return `<div class="proj-card" data-nav="#/projects/${p.id}" style="cursor:pointer;">
+        <div class="proj-bar" style="background:${lvl.color};"></div>
+        <div class="proj-body">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <h3>${esc(p.title)}</h3>
+            ${done?'<span class="tag tag-green">Done</span>':''}
+          </div>
+          <p class="pd">${p.difficulty} ${p.diffLabel} · ${p.time}</p>
+          <div style="margin-bottom:10px;">${p.skills.map(s=>`<span class="skill-chip">${esc(s)}</span>`).join("")}</div>
+          <div class="proj-foot"><span class="tag tag-blue">${lvl.icon} ${lvl.title}</span></div>
+        </div>
+      </div>`;
+    }).join("")}
+    ${LEVELS.filter(l=>l.status==='planned').flatMap(l=>[l]).length ? `
+    <div class="card empty" style="grid-column:1/-1;">
+      <div class="e-icon">🧩</div>
+      <p>Projects for CSS, JavaScript, Git, APIs, databases, and full-stack levels are mapped in the roadmap and ship as those levels' lessons are written.</p>
+    </div>` : ``}
+  </div>`;
+}
+
+function pageProjectDetail(id){
+  const p = findProject(id);
+  if(!p) return `<div class="empty"><div class="e-icon">🧩</div><h3>Project not found</h3></div>`;
+  const lvl = LEVELS.find(l=>l.id===p.level);
+  const done = state.completedProjects.includes(id);
+  return `
+  <div class="page-head">
+    <div class="eyebrow">${lvl.icon} ${lvl.title} project</div>
+    <h1>${esc(p.title)}</h1>
+    <p class="sub">${p.difficulty} ${p.diffLabel} · ⏱ ${p.time}</p>
+  </div>
+
+  <div class="grid cols-2" style="margin-bottom:20px;">
+    <div class="card">
+      <h3 style="font-size:14px;">Instructions</h3>
+      <p>${esc(p.instructions)}</p>
+      <h3 style="font-size:14px; margin-top:16px;">Requirements</h3>
+      <ul style="margin:0; padding-left:18px; color:var(--fg-dim); font-size:13.5px;">${p.requirements.map(r=>`<li style="margin-bottom:4px;">${r}</li>`).join("")}</ul>
+    </div>
+    <div class="card">
+      <h3 style="font-size:14px;">Skills you'll use</h3>
+      <div style="margin-bottom:14px;">${p.skills.map(s=>`<span class="skill-chip">${esc(s)}</span>`).join("")}</div>
+      <h3 style="font-size:14px;">Expected result</h3>
+      <p style="margin:0;">${esc(p.expected)}</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:15px; margin-bottom:8px;">Your workspace</h3>
+  ${playgroundHTML("proj-"+id, p.starter)}
+
+  <div class="grid cols-2" style="margin-top:20px;">
+    <div class="card">
+      <h3 style="font-size:14px;">Stuck? Progressive hints</h3>
+      <div id="hintArea"></div>
+      <button class="btn btn-outline btn-sm" id="hintBtn">Reveal next hint</button>
+    </div>
+    <div class="card">
+      <h3 style="font-size:14px;">Solution</h3>
+      <p style="font-size:13px;">Try it yourself before checking — you'll learn more that way.</p>
+      <button class="btn btn-outline btn-sm" id="solBtn">Show solution</button>
+      <div id="solArea" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h3 style="font-size:14px;">Extension challenges</h3>
+    <ul style="margin:0; padding-left:18px; color:var(--fg-dim); font-size:13.5px;">${p.extensions.map(e=>`<li style="margin-bottom:4px;">${e}</li>`).join("")}</ul>
+  </div>
+
+  <div class="next-box" style="margin-top:20px;">
+    <p style="margin:0;">Happy with your build?</p>
+    <button class="btn btn-primary" id="completeProjBtn">${done? '✅ Project completed' : 'Mark project complete'}</button>
+  </div>`;
+}
+
+function wireProjectDetail(id){
+  const p = findProject(id);
+  if(!p) return;
+  wirePlayground("proj-"+id, p.starter);
+
+  let hintIdx = 0;
+  const hintArea = document.getElementById("hintArea");
+  document.getElementById("hintBtn").addEventListener("click", ()=>{
+    if(hintIdx >= p.hints.length) return;
+    const div = document.createElement("div");
+    div.className = "hint-block";
+    div.innerHTML = `<b>Hint ${hintIdx+1}</b><br>${p.hints[hintIdx]}`;
+    hintArea.appendChild(div);
+    hintIdx++;
+    if(hintIdx >= p.hints.length) document.getElementById("hintBtn").disabled = true;
+  });
+
+  document.getElementById("solBtn").addEventListener("click", ()=>{
+    document.getElementById("solArea").innerHTML = `<div class="codebox">${esc(p.solution.html)}</div>`;
+  });
+
+  document.getElementById("completeProjBtn").addEventListener("click", ()=>{
+    completeProject(id);
+    render();
+  });
+  wireGenericButtons();
+}
+
+/* ---- Glossary ---- */
+function pageGlossary(){
+  return `
+  <div class="page-head">
+    <div class="eyebrow">Reference</div>
+    <h1>Glossary</h1>
+    <p class="sub">Plain-language definitions for every term you'll run into, with the technical definition underneath.</p>
+  </div>
+  <div class="card">
+    ${GLOSSARY.map(g=>`
+      <div class="gloss-item">
+        <div class="gloss-term">${esc(g.term)}</div>
+        <p style="margin-bottom:6px;"><strong style="color:var(--fg);">In plain terms:</strong> ${esc(g.simple)}</p>
+        <p style="margin-bottom:6px; font-size:13px;"><strong style="color:var(--fg);">Technical definition:</strong> ${esc(g.tech)}</p>
+        <div class="codebox" style="padding:8px 12px; font-size:12px;">${esc(g.example)}</div>
+        <div class="gloss-related">${g.related.map(r=>`<span>${esc(r)}</span>`).join("")}</div>
+      </div>`).join("")}
+  </div>`;
+}
+
+/* ---- Achievements ---- */
+function pageAchievements(){
+  return `
+  <div class="page-head">
+    <div class="eyebrow">Milestones</div>
+    <h1>Achievements</h1>
+    <p class="sub">${state.unlockedAchievements.length} of ${ACHIEVEMENTS.length} unlocked.</p>
+  </div>
+  <div class="grid cols-3">
+    ${ACHIEVEMENTS.map(a=>{
+      const unlocked = state.unlockedAchievements.includes(a.id);
+      return `<div class="badge ${unlocked?'unlocked':''}">
+        <div class="b-emoji">${a.emoji}</div>
+        <h4>${a.name}</h4>
+        <p style="color:var(--fg-dim);">${a.desc}</p>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+/* ---------------------------------------------------------------------
+   4. CODE PLAYGROUND — live HTML/CSS/JS preview
+--------------------------------------------------------------------- */
+function playgroundHTML(key, starter){
+  return `
+  <div class="editor-wrap" id="pg-${key}">
+    <div class="editor-tabs">
+      <button class="etab active" data-tab="html">HTML</button>
+      <button class="etab" data-tab="css">CSS</button>
+      <button class="etab" data-tab="js">JS</button>
+      <div class="editor-actions">
+        <button class="btn btn-ghost btn-sm" data-act="run">▶ Run</button>
+        <button class="btn btn-ghost btn-sm" data-act="reset">↺ Reset</button>
+      </div>
+    </div>
+    <div class="editor-panes">
+      <div class="editor-pane">
+        <textarea data-lang="html" spellcheck="false">${esc(starter.html||"")}</textarea>
+        <textarea data-lang="css" style="display:none;" spellcheck="false">${esc(starter.css||"")}</textarea>
+        <textarea data-lang="js" style="display:none;" spellcheck="false">${esc(starter.js||"")}</textarea>
+      </div>
+      <div class="editor-preview"><iframe title="Live preview" sandbox="allow-scripts"></iframe></div>
+    </div>
+  </div>`;
+}
+function wirePlayground(key, starter){
+  const wrap = document.getElementById("pg-"+key);
+  if(!wrap) return;
+  const tabs = wrap.querySelectorAll(".etab");
+  const areas = { html: wrap.querySelector('[data-lang="html"]'), css: wrap.querySelector('[data-lang="css"]'), js: wrap.querySelector('[data-lang="js"]') };
+  const iframe = wrap.querySelector("iframe");
+
+  function runPreview(){
+    const safeJs = (areas.js.value || "").replace(/<\/script>/gi, "<\\/script>");
+    const doc = `<!DOCTYPE html><html><head><style>${areas.css.value}</style></head><body>${areas.html.value}<script>${safeJs}<\/script></body></html>`;
+    iframe.srcdoc = doc;
+  }
+  tabs.forEach(t=>t.addEventListener("click", ()=>{
+    tabs.forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    Object.values(areas).forEach(a=>a.style.display="none");
+    areas[t.getAttribute("data-tab")].style.display="block";
+  }));
+  wrap.querySelector('[data-act="run"]').addEventListener("click", runPreview);
+  wrap.querySelector('[data-act="reset"]').addEventListener("click", ()=>{
+    areas.html.value = starter.html||""; areas.css.value = starter.css||""; areas.js.value = starter.js||"";
+    runPreview();
+  });
+  Object.values(areas).forEach(a=>a.addEventListener("input", debounce(runPreview, 500)));
+  runPreview();
+}
+function debounce(fn, ms){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); }; }
+
+/* ---- generic [data-nav] wiring used on cards outside the shell ---- */
+function wireGenericButtons(){
+  document.querySelectorAll("[data-nav]").forEach(el=>{
+    if(el._wired) return;
+    el._wired = true;
+    el.addEventListener("click", (e)=>{
+      const h = el.getAttribute("data-nav");
+      if(h) navigate(h);
+    });
+  });
+}
+</script>
+</body>
+</html>

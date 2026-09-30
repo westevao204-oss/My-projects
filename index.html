@@ -58,23 +58,42 @@
     }
 
     :root[data-theme="light"] {
-      --bg: #F8FAFC;
-      --surface: #FFFFFF;
-      --surface-hover: #F1F5F9;
-      --surface-dim: #F1F5F9;
-      --surface-glass: rgba(255, 255, 255, 0.9);
-      --border: #E2E8F0;
-      --border-subtle: #F1F5F9;
-      --border-focus: rgba(245, 158, 11, 0.5);
+      /* Background — warm stone, not blinding white */
+      --bg: #EEF0F3;
+      --surface: #F5F6F8;
+      --surface-hover: #EAEDF1;
+      --surface-dim: #E4E8EE;
+      --surface-glass: rgba(238, 240, 243, 0.92);
 
-      --fg: #0F172A;
-      --fg-dim: #475569;
-      --fg-faint: #94A3B8;
-      --code-bg: #0F172A;
+      /* Borders — visible but not harsh */
+      --border: #C8CDD8;
+      --border-subtle: #DDE0E8;
+      --border-focus: rgba(217, 119, 6, 0.55);
 
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
-      --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.15);
+      /* Text — deep ink, not pure black */
+      --fg: #1A2035;
+      --fg-dim: #3D4A62;
+      --fg-faint: #7A8499;
+      --code-bg: #1A2035;
+
+      /* Shadows — more depth for warmth */
+      --shadow-sm: 0 2px 10px rgba(20, 30, 60, 0.09);
+      --shadow-md: 0 12px 32px -8px rgba(20, 30, 60, 0.16);
+      --shadow-glow: 0 0 28px rgba(217, 119, 6, 0.18);
+
+      /* Primary — slightly deeper amber for contrast on light bg */
+      --primary: #C27B0B;
+      --primary-hover: #A86A09;
+      --primary-glow: rgba(194, 123, 11, 0.35);
+      --primary-grad: linear-gradient(135deg, #D97706 0%, #C2440C 100%);
+      --primary-grad-glow: 0 10px 25px -4px rgba(194, 68, 12, 0.35);
+
+      /* Accents — slightly deeper so they pop on the muted bg */
+      --accent-purple: #7C3AED;
+      --accent-cyan: #0891B2;
+      --accent-rose: #E11D48;
+      --accent-green: #059669;
+      --accent-blue: #2563EB;
     }
 
     /* ============ DARK MODE — COLOUR DAMPING ============ */
@@ -102,25 +121,59 @@
       --shadow-glow: 0 0 20px rgba(212, 136, 10, 0.12);
     }
 
-    /* Squircle cards — deep, desaturated tones instead of vivid gradients */
+    /* Squircle cards — modern glowing glass cards */
     :root[data-theme="dark"] .squircle-card.c-magenta {
-      background: linear-gradient(145deg, #6B2A3A 0%, #3D1420 100%);
-      box-shadow: 0 8px 20px -4px rgba(80, 20, 35, 0.5);
+      background: linear-gradient(145deg, rgba(159, 18, 57, 0.45) 0%, rgba(80, 7, 36, 0.75) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(244, 63, 94, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-magenta:hover {
+      box-shadow: 0 16px 32px -4px rgba(244, 63, 94, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     :root[data-theme="dark"] .squircle-card.c-orange {
-      background: linear-gradient(145deg, #7A4E0A 0%, #4A2E06 100%);
-      box-shadow: 0 8px 20px -4px rgba(80, 50, 5, 0.5);
+      background: linear-gradient(145deg, rgba(180, 83, 9, 0.45) 0%, rgba(120, 53, 15, 0.75) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(245, 158, 11, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-orange:hover {
+      box-shadow: 0 16px 32px -4px rgba(245, 158, 11, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     :root[data-theme="dark"] .squircle-card.c-cyan {
-      background: linear-gradient(145deg, #1A5568 0%, #0D3040 100%);
-      box-shadow: 0 8px 20px -4px rgba(10, 40, 55, 0.5);
+      background: linear-gradient(145deg, rgba(14, 116, 144, 0.45) 0%, rgba(8, 51, 68, 0.75) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(6, 182, 212, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-cyan:hover {
+      box-shadow: 0 16px 32px -4px rgba(6, 182, 212, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     :root[data-theme="dark"] .squircle-card.c-purple {
-      background: linear-gradient(145deg, #3D2A6B 0%, #22163D 100%);
-      box-shadow: 0 8px 20px -4px rgba(30, 15, 55, 0.5);
+      background: linear-gradient(145deg, rgba(109, 40, 217, 0.45) 0%, rgba(76, 29, 149, 0.75) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(139, 92, 246, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-purple:hover {
+      box-shadow: 0 16px 32px -4px rgba(139, 92, 246, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    :root[data-theme="dark"] .squircle-card.c-green {
+      background: linear-gradient(145deg, rgba(4, 120, 87, 0.45) 0%, rgba(6, 78, 59, 0.75) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(16, 185, 129, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-green:hover {
+      box-shadow: 0 16px 32px -4px rgba(16, 185, 129, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    :root[data-theme="dark"] .squircle-card.c-sky {
+      background: linear-gradient(145deg, rgba(3, 105, 161, 0.45) 0%, rgba(12, 74, 110, 0.75) 100%);
+      border: 1px solid rgba(14, 165, 233, 0.45);
+      box-shadow: 0 8px 25px -4px rgba(14, 165, 233, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    :root[data-theme="dark"] .squircle-card.c-sky:hover {
+      box-shadow: 0 16px 32px -4px rgba(14, 165, 233, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     /* Hero glow — much softer in dark mode */
@@ -145,6 +198,118 @@
       background-image:
         radial-gradient(circle at 85% 10%, rgba(180, 100, 8, 0.03) 0%, transparent 45%),
         radial-gradient(circle at 10% 85%, rgba(80, 50, 120, 0.02) 0%, transparent 45%);
+    }
+
+    /* ============ LIGHT MODE — OVERRIDES ============ */
+    /* Body — soft warm slate gradient, no harsh white */
+    :root[data-theme="light"] body {
+      background-image:
+        radial-gradient(circle at 80% 8%, rgba(195, 120, 10, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 15% 90%, rgba(80, 50, 190, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.03) 0%, transparent 70%);
+    }
+
+    /* Gradient hero text — richer amber-to-rose on light bg */
+    :root[data-theme="light"] .gradient-text {
+      background: linear-gradient(135deg, #B45309 0%, #9A2714 50%, #881337 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hero glow — warm amber tint */
+    :root[data-theme="light"] .hero-glow {
+      background: radial-gradient(circle, rgba(195, 120, 10, 0.12) 0%, transparent 70%);
+    }
+
+    /* Sidebar — slightly deeper surface so it stands apart from content */
+    :root[data-theme="light"] .sidebar {
+      background: #E2E6ED;
+      border-right: 1px solid #BEC5D4;
+    }
+
+    /* Topbar — glassy slate instead of stark white */
+    :root[data-theme="light"] .topbar {
+      background: rgba(224, 228, 236, 0.94);
+      border-bottom: 1px solid #C0C8D8;
+    }
+
+    /* Cards — elevated vs bg */
+    :root[data-theme="light"] .card {
+      background: #EBEEF4;
+      border: 1px solid #C5CAD8;
+    }
+
+    /* Search input */
+    :root[data-theme="light"] .search-input {
+      background: #E4E8EE;
+      border-color: #C0C8D8;
+    }
+
+    /* Progress bar track */
+    :root[data-theme="light"] .bar {
+      background: #CDD2DE;
+    }
+
+    /* Nav item active — amber tinted */
+    :root[data-theme="light"] .nav-item.active {
+      background: rgba(180, 83, 9, 0.1);
+      border-color: rgba(180, 83, 9, 0.3);
+    }
+
+    /* Squircle cards — full saturation in light mode */
+    :root[data-theme="light"] .squircle-card.c-magenta {
+      background: linear-gradient(145deg, #F43F5E 0%, #BE123C 100%);
+      border-color: rgba(190, 18, 60, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(244, 63, 94, 0.35);
+    }
+    :root[data-theme="light"] .squircle-card.c-orange {
+      background: linear-gradient(145deg, #F59E0B 0%, #D97706 100%);
+      border-color: rgba(180, 83, 9, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(245, 158, 11, 0.35);
+    }
+    :root[data-theme="light"] .squircle-card.c-cyan {
+      background: linear-gradient(145deg, #06B6D4 0%, #0369A1 100%);
+      border-color: rgba(6, 182, 212, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(6, 182, 212, 0.35);
+    }
+    :root[data-theme="light"] .squircle-card.c-purple {
+      background: linear-gradient(145deg, #8B5CF6 0%, #6D28D9 100%);
+      border-color: rgba(109, 40, 217, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(139, 92, 246, 0.35);
+    }
+    :root[data-theme="light"] .squircle-card.c-green {
+      background: linear-gradient(145deg, #10B981 0%, #059669 100%);
+      border-color: rgba(5, 150, 105, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.35);
+    }
+    :root[data-theme="light"] .squircle-card.c-sky {
+      background: linear-gradient(145deg, #0EA5E9 0%, #0284C7 100%);
+      border-color: rgba(14, 165, 233, 0.25);
+      box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.35);
+    }
+
+    /* Browse circle */
+    :root[data-theme="light"] .browse-circle {
+      border-color: #D97706;
+      color: #D97706;
+      background: rgba(217, 119, 6, 0.08);
+      box-shadow: 0 0 18px rgba(217, 119, 6, 0.2);
+    }
+    :root[data-theme="light"] .browse-all-btn:hover .browse-circle {
+      background: #D97706;
+      color: #FFFFFF;
+      box-shadow: 0 0 28px rgba(217, 119, 6, 0.5);
+    }
+
+    /* Analogy box */
+    :root[data-theme="light"] .analogy-box {
+      background: rgba(180, 83, 9, 0.07);
+      border-left-color: #D97706;
+    }
+
+    /* Challenge box */
+    :root[data-theme="light"] .challenge-box {
+      background: rgba(109, 40, 217, 0.07);
     }
 
     * {
@@ -992,54 +1157,15 @@
 
     .cat-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr) 100px;
-      gap: 16px;
-      align-items: center;
-    }
-
-    @media (max-width: 1040px) {
-      .cat-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .browse-all-btn {
-        grid-column: span 2;
-        flex-direction: row;
-        justify-content: center;
-        padding: 14px 20px;
-        background: var(--surface);
-        border: 1px dashed var(--border);
-        border-radius: var(--radius);
-        gap: 12px;
-      }
-
-      .browse-circle {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cat-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .browse-all-btn {
-        grid-column: span 1;
-      }
-
-      .cat-sec-head {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
     .squircle-card {
       height: 160px;
-      border-radius: 24px;
-      padding: 22px;
+      border-radius: 20px;
+      padding: 20px 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1049,87 +1175,278 @@
       position: relative;
       overflow: hidden;
       transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .squircle-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5);
+      transform: translateY(-5px);
     }
 
     .squircle-card.c-magenta {
-      background: linear-gradient(145deg, #F43F5E 0%, #BE123C 100%);
-      box-shadow: 0 10px 24px -4px rgba(244, 63, 94, 0.4);
+      background: linear-gradient(145deg, rgba(190, 24, 93, 0.45) 0%, rgba(136, 19, 55, 0.75) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(244, 63, 94, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-magenta:hover {
+      box-shadow: 0 16px 32px -4px rgba(244, 63, 94, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .squircle-card.c-orange {
-      background: linear-gradient(145deg, #F59E0B 0%, #D97706 100%);
-      box-shadow: 0 10px 24px -4px rgba(245, 158, 11, 0.4);
+      background: linear-gradient(145deg, rgba(217, 119, 6, 0.45) 0%, rgba(146, 64, 14, 0.75) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(245, 158, 11, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-orange:hover {
+      box-shadow: 0 16px 32px -4px rgba(245, 158, 11, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .squircle-card.c-cyan {
-      background: linear-gradient(145deg, #06B6D4 0%, #0369A1 100%);
-      box-shadow: 0 10px 24px -4px rgba(6, 182, 212, 0.4);
+      background: linear-gradient(145deg, rgba(8, 145, 178, 0.45) 0%, rgba(21, 94, 117, 0.75) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(6, 182, 212, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-cyan:hover {
+      box-shadow: 0 16px 32px -4px rgba(6, 182, 212, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .squircle-card.c-purple {
-      background: linear-gradient(145deg, #8B5CF6 0%, #6D28D9 100%);
-      box-shadow: 0 10px 24px -4px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(145deg, rgba(124, 58, 237, 0.45) 0%, rgba(76, 29, 149, 0.75) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(139, 92, 246, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-purple:hover {
+      box-shadow: 0 16px 32px -4px rgba(139, 92, 246, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .squircle-card.c-green {
+      background: linear-gradient(145deg, rgba(5, 150, 105, 0.45) 0%, rgba(6, 78, 59, 0.75) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-green:hover {
+      box-shadow: 0 16px 32px -4px rgba(16, 185, 129, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .squircle-card.c-sky {
+      background: linear-gradient(145deg, rgba(2, 132, 199, 0.45) 0%, rgba(12, 74, 110, 0.8) 100%);
+      border: 1px solid rgba(14, 165, 233, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .squircle-card.c-sky:hover {
+      box-shadow: 0 16px 32px -4px rgba(14, 165, 233, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .squircle-card.c-wide {
+      grid-column: span 2;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .sq-wide-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .sq-phone-graphic {
+      position: absolute;
+      right: 22px;
+      bottom: -18px;
+      width: 106px;
+      height: 144px;
+      pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+    }
+
+    .squircle-card:hover .sq-phone-graphic {
+      transform: translateY(-5px) scale(1.04);
+    }
+
+    .phone-body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #0f172a 0%, #020617 100%);
+      border: 3px solid rgba(56, 189, 248, 0.45);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 24px rgba(56, 189, 248, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 7px;
+    }
+
+    .phone-island {
+      width: 26px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+
+    .phone-atom-svg {
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.8));
+    }
+
+    .sq-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .sq-arrow {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 700;
+      transition: all 0.22s ease;
+    }
+
+    .squircle-card:hover .sq-arrow {
+      color: #FFFFFF;
+      transform: translateX(4px);
     }
 
     .sq-icon {
-      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
     }
 
     .sq-title {
       font-family: var(--head);
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .sq-line {
-      width: 34px;
+      width: 32px;
       height: 3px;
-      background: rgba(255, 255, 255, 0.6);
       border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+      transition: width 0.25s ease;
     }
+
+    .squircle-card:hover .sq-line {
+      width: 46px;
+    }
+
+    .squircle-card.c-magenta .sq-line { background: #FB7185; box-shadow: 0 0 8px rgba(251, 113, 133, 0.6); }
+    .squircle-card.c-orange .sq-line { background: #FBBF24; box-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+    .squircle-card.c-cyan .sq-line { background: #22D3EE; box-shadow: 0 0 8px rgba(34, 211, 238, 0.6); }
+    .squircle-card.c-purple .sq-line { background: #A78BFA; box-shadow: 0 0 8px rgba(167, 139, 250, 0.6); }
+    .squircle-card.c-green .sq-line { background: #34D399; box-shadow: 0 0 8px rgba(52, 211, 153, 0.6); }
+    .squircle-card.c-sky .sq-line { background: #38BDF8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.6); }
 
     .browse-all-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
       text-decoration: none;
       background: none;
       border: none;
+      height: 160px;
+      transition: all 0.25s ease;
     }
 
     .browse-circle {
-      width: 64px;
-      height: 64px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: var(--primary-grad);
+      border: 2px solid #F59E0B;
+      background: rgba(245, 158, 11, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #FFF;
-      font-size: 22px;
-      font-weight: 800;
-      box-shadow: var(--primary-grad-glow);
-      transition: all 0.22s ease;
+      color: #F59E0B;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .browse-all-btn:hover .browse-circle {
-      transform: scale(1.08) rotate(45deg);
+      transform: scale(1.1);
+      background: #F59E0B;
+      color: #0B0F17;
+      box-shadow: 0 0 28px rgba(245, 158, 11, 0.6);
     }
 
     .browse-lbl {
       font-size: 13px;
       font-weight: 700;
-      color: var(--fg-dim);
+      color: var(--fg);
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 1100px) {
+      .cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .squircle-card.c-wide {
+        grid-column: span 2;
+      }
+      .browse-all-btn {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .squircle-card.c-wide {
+        grid-column: span 2;
+      }
+      .browse-all-btn {
+        grid-column: span 2;
+        flex-direction: row;
+        height: auto;
+        padding: 14px 20px;
+        background: var(--surface);
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+      }
+      .browse-circle {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cat-grid {
+        grid-template-columns: 1fr;
+      }
+      .squircle-card.c-wide {
+        grid-column: span 1;
+      }
+      .browse-all-btn {
+        grid-column: span 1;
+      }
+      .cat-sec-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
     }
 
     /* ============ ROADMAP & LEVEL CARDS ============ */
@@ -1217,15 +1534,77 @@
     }
 
     /* ============ LESSON VIEWER & CODEBOX ============ */
+    .lesson-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .lesson-breadcrumb::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    .lesson-bc-level {
+      cursor: pointer;
+      color: var(--primary);
+      transition: opacity 0.15s;
+    }
+
+    .lesson-bc-level:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .lesson-bc-sep {
+      color: var(--fg-faint);
+      font-weight: 400;
+      margin: 0 2px;
+    }
+
+    .lesson-bc-current {
+      color: var(--fg-dim);
+    }
+
+    .lesson-page-header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lesson-page-title {
+      font-family: var(--head);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      color: var(--fg);
+      margin: 0;
+    }
+
     .lesson-layout {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       align-items: flex-start;
     }
 
     .lesson-toc {
-      width: 260px;
-      flex: 0 0 260px;
+      width: 270px;
+      flex: 0 0 270px;
       position: sticky;
       top: 86px;
     }
@@ -1245,15 +1624,18 @@
 
     .toc-item {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 12px;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 10px 13px;
       border-radius: 10px;
-      font-size: 13.5px;
+      font-size: 13px;
+      line-height: 1.45;
       color: var(--fg-dim);
       cursor: pointer;
       font-weight: 500;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      margin-bottom: 3px;
     }
 
     .toc-item:hover {
@@ -1265,12 +1647,84 @@
       background: rgba(245, 158, 11, 0.12);
       color: var(--primary);
       font-weight: 700;
-      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.3);
     }
 
-    .toc-check {
-      font-size: 12px;
+    :root[data-theme="light"] .toc-item.active {
+      background: #FFF7ED;
+      color: #9A3412;
+      border-color: #FDBA74;
+    }
+
+    .toc-indicator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 16px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .toc-empty-dot {
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--fg-faint);
+      opacity: 0.65;
+    }
+
+    .toc-active-dot {
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    .toc-done-dot {
+      color: var(--accent-green);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .toc-label {
+      flex: 1;
+    }
+
+    .toc-lesson-nav {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .toc-nav-btn {
+      flex: 1;
+      padding: 8px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--fg-dim);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .toc-nav-btn:hover {
+      background: var(--surface-dim);
+      color: var(--fg);
+      border-color: var(--primary);
+    }
+
+    .toc-nav-next {
+      color: var(--primary);
+      font-weight: 700;
+      border-color: rgba(245, 158, 11, 0.3);
     }
 
     .lesson-body {
@@ -1291,135 +1745,339 @@
     }
 
     .lesson-sec {
-      margin-bottom: 28px;
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .lesson-sec h3 {
-      font-size: 13.5px;
+    .lesson-sec-last {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .lsec-head {
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: var(--fg-dim);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      font-weight: 800;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .lesson-sec .num {
-      width: 24px;
-      height: 24px;
+    .lsec-num {
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--surface-dim);
-      color: var(--primary);
+      border: 1.5px solid var(--border);
+      color: var(--fg);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 12px;
       font-family: var(--mono);
-      font-weight: 700;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .lsec-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--fg);
+      font-weight: 800;
+    }
+
+    .lsec-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--fg-dim);
+      margin: 0;
+    }
+
+    .lsec-note {
+      font-size: 13.5px;
+      color: var(--fg-dim);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .lsec-tryit {
+      font-size: 15px;
+      color: var(--fg-dim);
+      line-height: 1.6;
+      margin-bottom: 14px;
     }
 
     .analogy-box {
-      background: rgba(245, 158, 11, 0.08);
-      border-left: 3px solid var(--primary);
-      padding: 14px 18px;
-      border-radius: 0 12px 12px 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: rgba(245, 158, 11, 0.07);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 18px 20px;
+      line-height: 1.65;
       font-size: 15px;
-      line-height: 1.6;
+      color: var(--fg);
+    }
+
+    :root[data-theme="light"] .analogy-box {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+      border-left-color: #D97706;
+    }
+
+    .analogy-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.15);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .analogy-box p {
+      margin: 0;
+      align-self: center;
     }
 
     /* Modern macOS style Codebox */
+    .codebox-wrap {
+      margin-top: 10px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .codebox-chrome {
+      background: #0D1117;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cb-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .cb-red {
+      background: #FF5F56;
+    }
+
+    .cb-yellow {
+      background: #FFBD2E;
+    }
+
+    .cb-green {
+      background: #27C93F;
+    }
+
+    .cb-filename {
+      margin-left: 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: #94A3B8;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
     .codebox {
       background: var(--code-bg);
       color: #E2E8F0;
-      border-radius: 12px;
-      padding: 16px 18px;
+      padding: 18px 20px;
       font-family: var(--mono);
-      font-size: 13px;
+      font-size: 13.5px;
       overflow-x: auto;
       line-height: 1.65;
       white-space: pre;
-      border: 1px solid var(--border);
+      border: none;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+      margin: 0;
     }
 
-    .line-explain {
+    .line-table {
       display: flex;
-      gap: 12px;
-      padding: 9px 0;
-      border-bottom: 1px dashed var(--border);
-      font-size: 14px;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .line-explain:last-child {
-      border-bottom: none;
+    .line-row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
     }
 
-    .line-explain code {
+    .line-code {
       background: var(--surface-dim);
+      color: var(--primary);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      font-weight: 600;
       padding: 3px 8px;
       border-radius: 6px;
-      font-size: 12.5px;
-      flex: 0 0 auto;
-      color: var(--primary);
+      white-space: nowrap;
       border: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
-    .mistake {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
+    .line-desc {
       font-size: 14px;
+      color: var(--fg-dim);
+      line-height: 1.5;
     }
 
-    .mistake .m-wrong {
+    .mistakes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mistake-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .mistake-wrong {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
       color: var(--accent-rose);
-      font-weight: 800;
-      font-size: 15px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      font-family: var(--mono);
     }
 
-    .mistake .m-right {
+    .mistake-fix {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
       color: var(--accent-green);
-      font-weight: 700;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .mistake-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .wrong-icon {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+    }
+
+    .fix-icon {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
     }
 
     /* Quizzes */
     .quiz-q {
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 22px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
     }
 
     .quiz-q:last-child {
-      border: none;
+      margin-bottom: 12px;
     }
 
     .quiz-q p.qtext {
       color: var(--fg);
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-size: 15px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .quiz-q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--surface-dim);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-family: var(--mono);
+      font-weight: 800;
+      color: var(--fg-dim);
+      flex-shrink: 0;
+    }
+
+    .quiz-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .quiz-opt {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       width: 100%;
       text-align: left;
-      padding: 12px 16px;
-      margin-bottom: 8px;
-      border-radius: 12px;
+      padding: 11px 16px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--surface-dim);
       font-size: 14px;
       color: var(--fg);
       font-weight: 500;
+      cursor: pointer;
       transition: all 0.18s ease;
     }
 
     .quiz-opt:hover {
       border-color: var(--primary);
-      background: var(--surface-dim);
+      background: var(--surface-hover);
+    }
+
+    .quiz-opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--fg-dim);
+      flex-shrink: 0;
     }
 
     .quiz-opt.correct {
@@ -1429,6 +2087,12 @@
       font-weight: 700;
     }
 
+    .quiz-opt.correct .quiz-opt-letter {
+      background: var(--accent-green);
+      color: #FFFFFF;
+      border-color: var(--accent-green);
+    }
+
     .quiz-opt.wrong {
       background: rgba(244, 63, 94, 0.15);
       border-color: var(--accent-rose);
@@ -1436,20 +2100,95 @@
       font-weight: 700;
     }
 
+    .quiz-opt.wrong .quiz-opt-letter {
+      background: var(--accent-rose);
+      color: #FFFFFF;
+      border-color: var(--accent-rose);
+    }
+
     .quiz-opt:disabled {
       cursor: default;
     }
 
-    .next-box {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(234, 88, 12, 0.05) 100%);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      border-radius: var(--radius);
-      padding: 20px 24px;
+    /* Challenge Box */
+    .challenge-box {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 16px;
+      align-items: flex-start;
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.25);
+      border-left: 4px solid var(--accent-purple);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--fg);
+    }
+
+    :root[data-theme="light"] .challenge-box {
+      background: #F5F3FF;
+      border-color: #DDD6FE;
+      border-left-color: #8B5CF6;
+    }
+
+    .challenge-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(139, 92, 246, 0.15);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .challenge-box p {
+      margin: 0;
+      align-self: center;
+    }
+
+    /* What comes next box */
+    .next-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .next-box p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--fg-dim);
+      line-height: 1.6;
+    }
+
+    .next-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
       flex-wrap: wrap;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #FFFFFF !important;
+      border: none;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.45);
     }
 
     .toast {
@@ -2066,7 +2805,14 @@
       { term: "Authorization", simple: "Deciding what someone who's already logged in is allowed to do.", tech: "The process of determining whether an authenticated identity has permission to perform an action.", example: "Only admins can delete other users' posts", related: ["Authentication"] },
       { term: "Semantic HTML", simple: "Using HTML tags that describe what the content *means*, not just how it looks.", tech: "Writing markup using elements (nav, header, article, footer) chosen for their meaning rather than their default appearance.", example: "<nav> instead of <div class='nav'>", related: ["HTML", "Accessibility"] },
       { term: "Responsive design", simple: "Building a site so it looks good on phones, tablets, and desktops.", tech: "A design approach using flexible layouts and media queries so a UI adapts to different viewport sizes.", example: "A 3-column layout that becomes 1 column on mobile", related: ["CSS", "Media query"] },
-      { term: "undefined", simple: "JavaScript's way of saying 'this variable exists, but nobody ever gave it a value.'", tech: "A primitive value automatically assigned to declared variables that have not been initialized, and returned by missing object properties or functions with no return statement.", example: "let x; console.log(x); // undefined", related: ["Variable", "JavaScript"] },
+      { term: "undefined", simple: "JavaScript's way of saying 'this variable exists, but nobody ever gave it a value.'", tech: "A primitive value automatically assigned to declared variables that have not been initialized, and returned by missing object properties or functions with no return statement.", example: "let x; console.log(x); // undefined", related: ["Variable", "JavaScript"] },      { term: "Node.js", simple: "A tool that lets you run JavaScript on your computer or a server, not just in web browsers.", tech: "An open-source, cross-platform JavaScript runtime environment built on Chrome's V8 engine that executes JavaScript code outside a web browser.", example: "const http = require('http');", related: ["JavaScript", "Server", "Event loop", "npm"] },
+      { term: "Event loop", simple: "The behind-the-scenes coordinator in Node.js that handles many tasks without freezing your program.", tech: "The mechanism that allows Node.js to perform non-blocking I/O operations by offloading tasks to the OS kernel whenever possible.", example: "setTimeout(() => console.log('ding'), 1000);", related: ["Node.js", "Asynchronous", "Promise"] },
+      { term: "npm", simple: "The world's biggest store of ready-made JavaScript code you can install and use in your projects.", tech: "Node Package Manager: the default package manager and online registry for the JavaScript runtime environment Node.js.", example: "npm install express", related: ["Node.js", "package.json", "Library"] },
+      { term: "Express", simple: "A popular toolkit for Node.js that makes building websites and APIs much faster and cleaner.", tech: "A fast, unopinionated, minimalist web framework for Node.js used to build web applications and RESTful APIs.", example: "app.get('/api/users', (req, res) => res.json(users));", related: ["Node.js", "API", "REST", "Server"] },
+      { term: "React Native", simple: "A framework that lets you build real mobile apps for iPhones and Android phones using JavaScript and React.", tech: "An open-source UI software framework created by Meta used to develop applications for Android, iOS, and the web by enabling developers to use React with native platform capabilities.", example: "<View><Text>Hello Mobile!</Text></View>", related: ["React", "View", "StyleSheet", "Mobile"] },
+      { term: "StyleSheet", simple: "The way you write styles (colors, sizes, spacing) for mobile apps in React Native using JavaScript.", tech: "An abstraction similar to CSS style sheets in React Native that validates style rules and transmits them across the native bridge efficiently.", example: "const styles = StyleSheet.create({ box: { padding: 16 } });", related: ["React Native", "CSS", "Flexbox"] },
+      { term: "FlatList", simple: "A high-speed list for mobile phones that only displays the items currently visible on the screen, saving memory.", tech: "A core component in React Native that renders performant, scrollable lists with memory virtualization, lazy loading, and view recycling.", example: "<FlatList data={items} renderItem={({ item }) => <Text>{item.name}</Text>} />", related: ["React Native", "ScrollView", "Performance"] },
+
     ];
 
     const ACHIEVEMENTS = [
@@ -2077,10 +2823,14 @@
       { id: "quiz_ace", emoji: "🎯", name: "Quiz Ace", desc: "Score 100% on any quiz", check: s => s.perfectQuizzes >= 1 },
       { id: "project_finisher", emoji: "🛠️", name: "Project Finisher", desc: "Complete 2 projects", check: s => s.completedProjects.length >= 2 },
       { id: "streak3", emoji: "🔥", name: "On a Roll", desc: "Reach a 3-day streak", check: s => s.streak >= 3 },
-      { id: "xp500", emoji: "⭐", name: "Rising Builder", desc: "Earn 500 XP", check: s => s.xp >= 500 },
+      { id: "xp500", emoji: "⭐", name: "Rising Builder", desc: "Earn 500 XP", check: s => s.xp >= 500 },      { id: "node_starter", emoji: "🟢", name: "Node Pioneer", desc: "Complete your first Node.js lesson", check: s => s.completedLessons.some(id => id.startsWith("node-")) },
+      { id: "node_master", emoji: "⚡", name: "Server Architect", desc: "Complete all Node.js lessons", check: s => levelLessonsDone(s, "backend") },
+      { id: "rn_starter", emoji: "📱", name: "Mobile Explorer", desc: "Complete your first React Native lesson", check: s => s.completedLessons.some(id => id.startsWith("rn-")) },
+      { id: "rn_master", emoji: "🚀", name: "Native App Engineer", desc: "Complete all React Native lessons", check: s => levelLessonsDone(s, "react-native") },
+
     ];
-    function countByLevel(s, lvl) { return LEVELS.find(l => l.id === lvl).lessons.filter(l => s.completedLessons.includes(l.id)).length; }
-    function levelLessonsDone(s, lvl) { const L = LEVELS.find(l => l.id === lvl); return L.lessons.every(l => s.completedLessons.includes(l.id)); }
+    function countByLevel(s, lvl) { const found = LEVELS.find(l => l.id === lvl); return found ? found.lessons.filter(l => s.completedLessons.includes(l.id)).length : 0; }
+    function levelLessonsDone(s, lvl) { const L = LEVELS.find(l => l.id === lvl); return L && L.lessons.length > 0 ? L.lessons.every(l => s.completedLessons.includes(l.id)) : false; }
 
     /* ---- Lesson content helper: each lesson follows the 11-part structure ---- */
     function L(id, title, data) { return Object.assign({ id, title }, data); }
@@ -2372,6 +3122,414 @@
       }),
     ];
 
+const NODE_LESSONS = [
+      L("node-intro-runtime", "What is Node.js? V8 Engine & Server-Side JavaScript", {
+        goal: "Understand what Node.js is, how it executes JavaScript outside the browser via Google's V8 engine, and how server runtime environments differ from browser runtimes.",
+        simple: "Node.js is an open-source, cross-platform runtime environment that lets you execute JavaScript directly on your computer or cloud server instead of inside a web browser.",
+        analogy: "Think of JavaScript as a high-performance engine. In Google Chrome, that engine is installed in a passenger car (the browser) with windows, mirrors, and seats (the DOM, window, document). Ryan Dahl took that exact same V8 engine out of the car, bolted it onto an industrial electrical generator (Node.js), and gave it direct access to the fuel tank, gears, and electrical grid (the file system, network sockets, operating system processes).",
+        syntaxLabel: "Terminal & Runtime Execution",
+        syntax: "// Run a JavaScript file on your machine from your terminal:\\n$ node app.js\\n\\n// Inspect process runtime data:\\nconsole.log(process.version); // e.g. v24.19.0\\nconsole.log(process.platform); // 'win32', 'darwin', or 'linux'\\nconsole.log(process.memoryUsage());",
+        example: "// server-info.js\\nconst os = require('os');\\n\\nconsole.log('--- NODE RUNTIME ACTIVE ---');\\nconsole.log('Node Version:', process.version);\\nconsole.log('Operating System:', process.platform, os.release());\\nconsole.log('CPU Architecture:', process.arch);\\nconsole.log('Total System Memory:', Math.round(os.totalmem() / 1024 / 1024), 'MB');\\nconsole.log('Server Uptime:', Math.round(process.uptime()), 'seconds');",
+        exampleNote: "Inspecting machine and operating system stats directly through Node core APIs",
+        lines: [
+          ["const os = require('os');", "Imports Node's built-in operating system module using CommonJS require syntax."],
+          ["process.version", "Global process object property containing the currently running Node.js version."],
+          ["process.platform", "Reports the host OS ('win32' for Windows, 'darwin' for macOS, 'linux' for Linux)."],
+          ["os.totalmem()", "Accesses host RAM directly in bytes — something browsers strictly forbid for security."],
+          ["process.uptime()", "Returns how many continuous seconds this Node process has been executing."]
+        ],
+        tryIt: "Run the code in the terminal sandbox below to inspect the server environment variables, architecture, and memory footprint.",
+        mistakes: [
+          ["Trying to use window or document in Node.js.", "window and document are browser Web APIs for the DOM. In Node.js, the global execution object is named global (or globalThis), and there is no HTML document."],
+          ["Thinking Node.js is a separate programming language.", "Node.js is not a new language; it runs the exact same standard ECMAScript JavaScript you write on the web, with server-specific APIs added."]
+        ],
+        quiz: [
+          { q: "What engine powers JavaScript execution inside Node.js?", opts: ["SpiderMonkey", "Google V8", "JavaScriptCore", "Chakra"], a: 1 },
+          { q: "Which of the following objects exists in the browser DOM but is undefined in Node.js?", opts: ["console", "document", "process", "JSON"], a: 1 },
+          { q: "What is the global scope object in Node.js equivalent to 'window' in the browser?", opts: ["system", "root", "global", "parent"], a: 2 }
+        ],
+        challenge: "Write a script that prints a formatted greeting to process.env.USER or 'Senior Developer' along with the current system timestamp.",
+        next: "Next up: Organizing your codebase into reusable modules with require, module.exports, and npm packages.",
+        playground: {
+          mode: "node",
+          js: "// 1. Welcome to the Foundry Node.js Sandbox!\\nconsole.log('🚀 [Node.js Runtime] Starting process initialization...');\\n\\nconst os = require('os');\\n\\n// Inspect process and runtime globals\\nconsole.log('📌 Node.js Version:', process.version);\\nconsole.log('💻 Host Platform:', process.platform, '(' + process.arch + ')');\\nconsole.log('⏱️ Server Process Uptime:', process.uptime().toFixed(1) + 's');\\nconsole.log('🧠 Memory Usage:', JSON.stringify(process.memoryUsage()));\\n\\nconsole.log('✅ Node environment validated successfully!');",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("node-modules-npm", "Modules, require / export & package.json", {
+        goal: "Master modular software architecture using CommonJS (require / module.exports) and ES Modules, and understand npm package management.",
+        simple: "In Node.js, each JavaScript file is treated as an isolated module with its own private scope. To share functions or data between files, you explicitly export them and import them using require() or import.",
+        analogy: "Imagine an expert watchmaker's workshop. Instead of assembling all the gears, springs, and hands in one massive tangled box, each gear mechanism is crafted in its own labeled drawer (a module). When the watchmaker builds the watch, they order specific specialized components from the Swiss supplier catalog (npm) and pull exactly the pieces they need onto the workbench (require).",
+        syntaxLabel: "CommonJS vs ES Module Syntax",
+        syntax: "// 1. Exporting from mathUtils.js (CommonJS):\\nfunction add(a, b) { return a + b; }\\nfunction multiply(a, b) { return a * b; }\\nmodule.exports = { add, multiply };\\n\\n// 2. Importing in app.js:\\nconst { add, multiply } = require('./mathUtils');\\nconsole.log(add(5, 3)); // 8",
+        example: "// logger.js\\nconst formatLog = (msg, level = 'INFO') => \`[\${new Date().toISOString()}] [\${level}] \${msg}\`;\\n\\nmodule.exports = {\\n  info: (msg) => console.log(formatLog(msg, 'INFO')),\\n  warn: (msg) => console.warn(formatLog(msg, 'WARN')),\\n  error: (msg) => console.error(formatLog(msg, 'ERROR'))\\n};\\n\\n// Consumer script\\nconst logger = require('./logger');\\nlogger.info('Database connection established');\\nlogger.warn('Cache miss for user_id: 104');",
+        exampleNote: "Encapsulating logging logic inside a reusable module pattern",
+        lines: [
+          ["module.exports = { ... };", "Assigns public functions to the module's export interface, keeping internal helper variables private."],
+          ["const logger = require('./logger');", "Loads the local file module using a relative path prefix ('./')."],
+          ["logger.info('Database connection established');", "Invokes the exported public method from the imported module namespace."]
+        ],
+        tryIt: "Inspect how modular exports work in the sandbox. Try adding a new exported function 'calculateTax(amount, rate)' and calling it.",
+        mistakes: [
+          ["Omitting './' when importing a local file (e.g. require('logger') instead of require('./logger')).", "Node interprets paths without './' or '../' as built-in core modules (like 'fs' or 'http') or packages installed in node_modules, triggering a MODULE_NOT_FOUND error."],
+          ["Reassigning exports = { ... } directly instead of module.exports = { ... }.", "exports is merely a reference to module.exports. Reassigning exports directly breaks the reference; always use module.exports for object exports in CommonJS."]
+        ],
+        quiz: [
+          { q: "What file in a Node.js project defines its metadata, scripts, and external dependencies?", opts: ["server.config", "package.json", "node.xml", "dependencies.lock"], a: 1 },
+          { q: "How do you import a local file named 'helpers.js' located in the same directory?", opts: ["require('helpers')", "require('./helpers')", "import 'helpers'", "include('./helpers')"], a: 1 },
+          { q: "What command creates a default package.json without interactive prompts?", opts: ["npm start", "npm install -g", "npm init -y", "node --init"], a: 2 }
+        ],
+        challenge: "Write a currency converter module that exports two methods: usdToEur(amount) and eurToUsd(amount) with fixed exchange rates, then test both.",
+        next: "Next: The heart of Node.js performance — the Event Loop, non-blocking asynchronous I/O, and the fs module.",
+        playground: {
+          mode: "node",
+          js: "// Simulated modular architecture\\nconst mathModule = (function() {\\n  const PI = 3.14159265359;\\n  function circleArea(radius) { return PI * radius * radius; }\\n  function calculateMargin(cost, revenue) {\\n    const profit = revenue - cost;\\n    return Math.round((profit / revenue) * 100) + '%';\\n  }\\n  return { circleArea, calculateMargin };\\n})();\\n\\nconsole.log('📐 Circle Area (r=5):', mathModule.circleArea(5).toFixed(2));\\nconsole.log('📈 Profit Margin ($80 cost, $120 rev):', mathModule.calculateMargin(80, 120));\\n\\nconsole.log('📦 Module exports verified successfully.');",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("node-event-loop-async", "The Event Loop, Non-Blocking I/O & fs", {
+        goal: "Master Node's single-threaded asynchronous concurrency model, understand how the Event Loop coordinates tasks with libuv, and read/write files with fs.",
+        simple: "Node.js runs JavaScript on a single thread, meaning it executes one instruction at a time. To handle millions of concurrent connections, it delegates slow I/O operations (like disk access and database queries) to the operating system in the background, invoking callbacks only when the results are ready.",
+        analogy: "Imagine a master chef at a popular brunch spot. If the chef toasted bread by standing rigidly in front of the toaster for 4 minutes before taking another ticket, the restaurant would go bankrupt (blocking I/O). Instead, the chef pops the bread in, sets a timer, and immediately cracks eggs, chops chives, and plates pancakes. When the toaster ding rings (event loop tick), the chef butter-plates the toast between ticket tasks.",
+        syntaxLabel: "Asynchronous File I/O Syntax",
+        syntax: "const fs = require('fs').promises;\\n\\nasync function handleFile() {\\n  // Non-blocking asynchronous read\\n  const data = await fs.readFile('config.json', 'utf8');\\n  console.log('File content:', data);\\n\\n  // Non-blocking asynchronous write\\n  await fs.writeFile('output.txt', 'Job completed');\\n}",
+        example: "const fs = require('fs');\\n\\nconsole.log('1. Script Execution Starts');\\n\\nsetTimeout(() => {\\n  console.log('3. Timer callback fired from Event Loop task queue');\\n}, 0);\\n\\nfs.promises.readFile('data.txt', 'utf8')\\n  .then(content => console.log('4. Async File Read Finished:', content))\\n  .catch(err => console.error(err));\\n\\nconsole.log('2. Script Synchronous Execution Ends');",
+        exampleNote: "Tracing the execution order of synchronous code vs event loop microtasks and macrotasks",
+        lines: [
+          ["console.log('1. Script Execution Starts');", "Executes immediately on the synchronous Call Stack."],
+          ["setTimeout(..., 0);", "Registers a timer with libuv. The callback is deferred to the Timer phase of the Event Loop."],
+          ["fs.promises.readFile(...)", "Offloads asynchronous disk reading to libuv thread pool. Returns an unresolved Promise."],
+          ["console.log('2. Script Synchronous Ends');", "Synchronous thread finishes before any queued background event loop callbacks can execute!"]
+        ],
+        tryIt: "Hit Run to watch asynchronous execution order unfold. Notice how step 2 finishes before background callbacks run.",
+        mistakes: [
+          ["Using synchronous methods like fs.readFileSync in a live HTTP server handler.", "readFileSync blocks the single JavaScript thread completely. While reading a 10MB file from disk, no other user in the world can load a single web page or API response from your server!"],
+          ["Believing Node.js runs your JavaScript code on multiple parallel CPU threads.", "Your JavaScript runs on a single main thread. Concurrency is achieved through non-blocking asynchronous event dispatching, not multi-threaded JS execution."]
+        ],
+        quiz: [
+          { q: "Why is non-blocking I/O critical for Node.js servers?", opts: ["It compiles JavaScript into C++", "It prevents the single JavaScript thread from freezing during slow operations", "It allows using HTML tags on the server", "It encrypts all network packets"], a: 1 },
+          { q: "What C library powers Node's event loop, thread pool, and asynchronous I/O?", opts: ["glibc", "libuv", "V8-lib", "nginx-core"], a: 1 },
+          { q: "In what order does Node run: (A) Synchronous code, (B) setTimeout(..., 0)?", opts: ["B then A", "A then B", "Simultaneously in parallel", "Randomly"], a: 1 }
+        ],
+        challenge: "Predict what happens if you queue 3 async operations: write a mock function that simulates fetching 3 user records in parallel with Promise.all.",
+        next: "Next: Creating your first real HTTP server using Node's native 'http' module.",
+        playground: {
+          mode: "node",
+          js: "const fs = require('fs');\\n\\nconsole.log('🏎️ [1] Synchronous task begins');\\n\\n// Schedule background timer\\nsetTimeout(() => {\\n  console.log('⏰ [3] Timer callback executed via Event Loop queue!');\\n}, 50);\\n\\n// Read virtual file system asynchronously\\nfs.promises.readFile('notes.json', 'utf8')\\n  .then(data => {\\n    console.log('📂 [4] Async file data received:');\\n    console.log(data);\\n  })\\n  .catch(err => console.error(err));\\n\\nconsole.log('🏁 [2] Synchronous main thread execution completed.');",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("node-http-server", "Building an HTTP Web Server from Scratch", {
+        goal: "Build and run a native HTTP web server using Node's built-in 'http' module without any external dependencies.",
+        simple: "Node.js has a built-in 'http' module. With just a few lines of code, you can bind to a port, listen for incoming network requests from browsers or mobile apps, and return HTTP status codes, headers, and responses.",
+        analogy: "An HTTP server is like the front desk receptionist at a corporate headquarters. The receptionist sits at a designated entrance desk (the port number, e.g. 3000). When a visitor walks up with an inquiry (the incoming request 'req'), the receptionist inspects their badge and request type (GET, POST), retrieves the appropriate visitor package, stamps it with an approval seal (status code 200 OK), and hands it over (the outgoing response 'res').",
+        syntaxLabel: "Native HTTP Server Syntax",
+        syntax: "const http = require('http');\\n\\nconst server = http.createServer((req, res) => {\\n  res.writeHead(200, { 'Content-Type': 'application/json' });\\n  res.end(JSON.stringify({ status: 'online' }));\\n});\\n\\nserver.listen(3000, () => {\\n  console.log('Server running on http://localhost:3000');\\n});",
+        example: "const http = require('http');\\n\\nconst server = http.createServer((req, res) => {\\n  const { method, url } = req;\\n  console.log(\`Received \${method} request for \${url}\`);\\n\\n  if (url === '/' && method === 'GET') {\\n    res.writeHead(200, { 'Content-Type': 'text/plain' });\\n    res.end('Welcome to the Foundry Node.js Server');\\n  } else if (url === '/api/health' && method === 'GET') {\\n    res.writeHead(200, { 'Content-Type': 'application/json' });\\n    res.end(JSON.stringify({ status: 'healthy', uptime: process.uptime() }));\\n  } else {\\n    res.writeHead(404, { 'Content-Type': 'text/plain' });\\n    res.end('404 Not Found');\\n  }\\n});\\n\\nserver.listen(3000);",
+        exampleNote: "Basic request routing based on URL path and HTTP method",
+        lines: [
+          ["http.createServer((req, res) => { ... })", "Registers a request listener function triggered every time a client sends an HTTP request."],
+          ["const { method, url } = req;", "Destructures the incoming HTTP verb ('GET', 'POST') and endpoint path ('/api/health')."],
+          ["res.writeHead(200, { ... })", "Sends the HTTP status code (200 OK) and response headers to the client."],
+          ["res.end('...')", "Transmits the response body payload and closes the HTTP connection stream."],
+          ["server.listen(3000)", "Binds the server process to network TCP port 3000 to listen for traffic."]
+        ],
+        tryIt: "Hit Run to start the simulated HTTP server, then click 'Send GET /' or 'Send GET /api/data' in the active test bench below!",
+        mistakes: [
+          ["Forgetting to call res.end().", "If you write headers or body data with res.write() but never call res.end(), the client's browser will spin forever waiting for the connection to terminate until it times out."],
+          ["Attempting to set headers with res.writeHead() after calling res.end() or res.write().", "HTTP specification requires headers to be sent before the response body. Sending headers after body bytes results in 'ERR_HTTP_HEADERS_SENT'."]
+        ],
+        quiz: [
+          { q: "What two critical objects are passed into the http.createServer() callback?", opts: ["input, output", "req (request), res (response)", "client, host", "socket, buffer"], a: 1 },
+          { q: "Which HTTP status code indicates a successful request?", opts: ["404", "500", "200", "301"], a: 2 },
+          { q: "What method must always be called to finalize and send an HTTP response?", opts: ["res.close()", "res.finish()", "res.end()", "res.send()"], a: 2 }
+        ],
+        challenge: "Add a new route '/api/time' that returns the current UTC timestamp formatted as JSON: { timestamp: Date.now() }.",
+        next: "Next: Building industry-standard REST APIs using the Express framework.",
+        playground: {
+          mode: "node",
+          js: "const http = require('http');\\n\\n// Initialize core HTTP server\\nconst server = http.createServer((req, res) => {\\n  console.log('📨 Incoming HTTP request:', req.method, req.url);\\n\\n  if (req.url === '/') {\\n    res.writeHead(200, { 'Content-Type': 'text/plain' });\\n    res.end('Hello from Foundry Node.js Core Server! 🚀');\\n  } else if (req.url === '/api/data') {\\n    res.writeHead(200, { 'Content-Type': 'application/json' });\\n    res.end(JSON.stringify({\\n      service: 'Foundry Core API',\\n      status: 'active',\\n      timestamp: new Date().toISOString(),\\n      platform: process.platform\\n    }));\\n  } else {\\n    res.writeHead(404, { 'Content-Type': 'application/json' });\\n    res.end(JSON.stringify({ error: 'Endpoint not found' }));\\n  }\\n});\\n\\nserver.listen(3000, () => {\\n  console.log('🟢 Native HTTP Server ready on port 3000');\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("node-express-rest-api", "REST APIs with Express: Routing & Middleware", {
+        goal: "Learn how production engineering teams build scalable REST APIs using Express, routing parameters, and the middleware pattern.",
+        simple: "Express is the most popular minimalist web framework for Node.js. It simplifies HTTP server creation with intuitive routing (app.get, app.post), automatic JSON parsing, and modular middleware functions that process requests in an orderly pipeline.",
+        analogy: "Think of an Express API like an automated airport security and boarding pipeline. The passenger is the incoming request. They first pass through metal detectors and passport scanners (middleware functions that verify tokens, parse JSON, or log timestamps). If their boarding pass is valid, next() is called, allowing them to proceed to their assigned departure gate (the route handler: GET /flight/104).",
+        syntaxLabel: "Express REST Syntax",
+        syntax: "const express = require('express');\\nconst app = express();\\n\\n// Middleware to parse incoming JSON payloads\\napp.use(express.json());\\n\\n// Route handler\\napp.get('/api/users/:id', (req, res) => {\\n  const userId = req.params.id;\\n  res.json({ id: userId, name: 'Senior Developer' });\\n});\\n\\napp.listen(3000);",
+        example: "const express = require('express');\\nconst app = express();\\napp.use(express.json());\\n\\n// In-memory data store\\nlet tasks = [\\n  { id: 1, title: 'Master Node.js Event Loop', done: true },\\n  { id: 2, title: 'Build Express REST API', done: false }\\n];\\n\\n// GET all tasks\\napp.get('/api/tasks', (req, res) => {\\n  res.json({ count: tasks.length, data: tasks });\\n});\\n\\n// POST a new task\\napp.post('/api/tasks', (req, res) => {\\n  const { title } = req.body;\\n  if (!title) return res.status(400).json({ error: 'Title required' });\\n  const newTask = { id: tasks.length + 1, title, done: false };\\n  tasks.push(newTask);\\n  res.status(201).json(newTask);\\n});\\n\\napp.listen(3000);",
+        exampleNote: "Express route handling with HTTP verbs, JSON parsing, and status codes",
+        lines: [
+          ["app.use(express.json());", "Global middleware that parses raw JSON request bodies and attaches them to req.body."],
+          ["app.get('/api/tasks', ...)", "Registers a route handler specifically for HTTP GET requests matching '/api/tasks'."],
+          ["res.status(201).json(newTask);", "Chains the HTTP 201 Created status code with automatic JSON serialization."],
+          ["app.post('/api/tasks', ...)", "Handles incoming POST requests to append newly created resources."]
+        ],
+        tryIt: "Click Run to launch the Express API, then use the interactive endpoint buttons to test GET and POST requests in real-time.",
+        mistakes: [
+          ["Forgetting app.use(express.json()) and wondering why req.body is undefined on POST requests.", "By default, Node streams request bodies as raw chunks of bytes. Express requires the express.json() middleware to assemble and parse those chunks into a JavaScript object."],
+          ["Calling both res.send() and res.json() in the same handler.", "An HTTP request can only receive one response. Attempting to send two responses will trigger 'Cannot set headers after they are sent to the client'."]
+        ],
+        quiz: [
+          { q: "What function must be called inside custom Express middleware to pass control to the next handler?", opts: ["continue()", "next()", "proceed()", "return()"], a: 1 },
+          { q: "Which HTTP status code should be returned when a new resource is successfully created via POST?", opts: ["200", "201", "204", "302"], a: 1 },
+          { q: "How do you extract the parameter '42' from a route defined as '/api/products/:productId'?", opts: ["req.query.productId", "req.params.productId", "req.body.productId", "req.headers.productId"], a: 1 }
+        ],
+        challenge: "Add a GET '/api/tasks/:id' endpoint that finds a single task by ID or returns a 404 status code if not found.",
+        next: "Next: Full CRUD REST API with Error Handling, input validation, and data persistence.",
+        playground: {
+          mode: "node",
+          js: "const express = require('express');\\nconst app = express();\\napp.use(express.json());\\n\\nlet users = [\\n  { id: 1, name: 'Ada Lovelace', role: 'Architect' },\\n  { id: 2, name: 'Alan Turing', role: 'Cryptographer' }\\n];\\n\\n// GET: Fetch list\\napp.get('/api/users', (req, res) => {\\n  res.json({ success: true, users });\\n});\\n\\n// POST: Add new entry\\napp.post('/api/users', (req, res) => {\\n  const { name, role } = req.body;\\n  if (!name || !role) {\\n    return res.status(400).json({ error: 'Name and role are required fields' });\\n  }\\n  const newUser = { id: users.length + 1, name, role };\\n  users.push(newUser);\\n  res.status(201).json(newUser);\\n});\\n\\napp.listen(3000, () => {\\n  console.log('🚀 Express REST API server running on port 3000');\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("node-crud-json-storage", "Full CRUD REST API with Error Handling & Data Persistence", {
+        goal: "Implement a complete Create, Read, Update, Delete (CRUD) backend API with HTTP status codes, structured validation, and centralized error handling.",
+        simple: "CRUD represents the four fundamental operations of any database-backed system: Create (POST), Read (GET), Update (PUT/PATCH), and Delete (DELETE). A production-ready API maps each operation to standard REST conventions.",
+        analogy: "Think of CRUD like managing records in a doctor's medical office: registering a new patient chart (Create / POST), looking up their medical chart (Read / GET), updating their medication dosage (Update / PUT), and archiving or discharging an expired record (Delete / DELETE). Each operation requires verifying identity and following standard medical protocols (status codes and validation).",
+        syntaxLabel: "RESTful CRUD Convention Mapping",
+        syntax: "// REST Architecture Standards:\\n// POST   /api/items       -> 201 Created (Create)\\n// GET    /api/items       -> 200 OK (Read collection)\\n// GET    /api/items/:id   -> 200 OK or 404 Not Found (Read item)\\n// PUT    /api/items/:id   -> 200 OK or 404 Not Found (Update)\\n// DELETE /api/items/:id   -> 200 OK or 204 No Content (Delete)",
+        example: "const express = require('express');\\nconst app = express();\\napp.use(express.json());\\n\\nlet inventory = [\\n  { id: 101, name: 'Mechanical Keyboard', qty: 25 },\\n  { id: 102, name: '4K Monitor', qty: 14 }\\n];\\n\\n// UPDATE\\napp.put('/api/inventory/:id', (req, res) => {\\n  const id = Number(req.params.id);\\n  const item = inventory.find(i => i.id === id);\\n  if (!item) return res.status(404).json({ error: 'Item not found' });\\n  item.qty = req.body.qty ?? item.qty;\\n  res.json({ message: 'Updated', item });\\n});\\n\\n// DELETE\\napp.delete('/api/inventory/:id', (req, res) => {\\n  const id = Number(req.params.id);\\n  const initialLength = inventory.length;\\n  inventory = inventory.filter(i => i.id !== id);\\n  if (inventory.length === initialLength) return res.status(404).json({ error: 'Item not found' });\\n  res.json({ message: 'Deleted successfully' });\\n});\\n\\napp.listen(3000);",
+        exampleNote: "Production PUT and DELETE implementation with defensive validation and 404 handling",
+        lines: [
+          ["Number(req.params.id)", "Always cast route parameters from strings to numbers when matching numerical IDs."],
+          ["if (!item) return res.status(404)...", "Returns an early HTTP 404 Not Found response if the target resource does not exist."],
+          ["app.delete('/api/inventory/:id', ...)", "Binds the HTTP DELETE verb to remove the item from the persistent collection."]
+        ],
+        tryIt: "Test full CRUD operations in the sandbox: retrieve items, create a new record, and verify update responses.",
+        mistakes: [
+          ["Returning HTTP 200 OK when a resource is not found.", "Client applications rely on HTTP status codes to detect errors. Always return 404 Not Found so frontend apps and mobile clients can handle missing resources correctly."],
+          ["Mutating req.params directly instead of reading it.", "req.params is an input descriptor provided by Express routing; treat it as read-only."]
+        ],
+        quiz: [
+          { q: "Which HTTP verb is conventionally used to update an existing resource completely?", opts: ["POST", "PUT", "FETCH", "UPDATE"], a: 1 },
+          { q: "What status code should an API return when a client sends invalid or missing required data?", opts: ["500 Internal Server Error", "400 Bad Request", "401 Unauthorized", "404 Not Found"], a: 1 },
+          { q: "What does the 'D' in CRUD stand for?", opts: ["Document", "Delete", "Deploy", "Debug"], a: 1 }
+        ],
+        challenge: "Build a DELETE endpoint that checks if an item has qty > 0 before deleting, returning a 400 Bad Request if stock still remains.",
+        next: "Congratulations! You have completed Level 6: Node.js & Backend Architecture. Now apply your skills in Project: Building a complete RESTful catalog API!",
+        playground: {
+          mode: "node",
+          js: "const express = require('express');\\nconst app = express();\\napp.use(express.json());\\n\\nlet catalog = [\\n  { id: 1, title: 'Ergonomic Desk Chair', price: 299 },\\n  { id: 2, title: 'USB-C Dual Dock', price: 149 }\\n];\\n\\n// 1. READ ALL (GET)\\napp.get('/api/catalog', (req, res) => {\\n  res.json({ total: catalog.length, items: catalog });\\n});\\n\\n// 2. CREATE (POST)\\napp.post('/api/catalog', (req, res) => {\\n  const { title, price } = req.body;\\n  if (!title || price === undefined) {\\n    return res.status(400).json({ error: 'Title and price are required' });\\n  }\\n  const newItem = { id: catalog.length + 1, title, price: Number(price) };\\n  catalog.push(newItem);\\n  res.status(201).json(newItem);\\n});\\n\\n// 3. DELETE (DELETE)\\napp.delete('/api/catalog/:id', (req, res) => {\\n  const id = Number(req.params.id);\\n  const idx = catalog.findIndex(i => i.id === id);\\n  if (idx === -1) return res.status(404).json({ error: 'Item not found' });\\n  const removed = catalog.splice(idx, 1)[0];\\n  res.json({ message: 'Item removed', removed });\\n});\\n\\napp.listen(3000, () => {\\n  console.log('📦 Full CRUD Catalog API running on port 3000');\\n});",
+          css: "",
+          html: ""
+        }
+      })
+    ];
+
+const REACT_NATIVE_LESSONS = [
+      L("rn-intro-core", "What is React Native? Native Mobile Architecture", {
+        goal: "Understand how React Native compiles JavaScript and React components into real native iOS and Android user interface widgets.",
+        simple: "React Native is an open-source mobile app framework created by Meta. It allows you to build iOS and Android apps using React and JavaScript, but instead of rendering HTML into a browser, it directly instantiates real native platform components (like UIView on iOS and android.view.View on Android).",
+        analogy: "Imagine an architect (React) designing a blueprint for a luxury home. On the web, the builder uses drywall and laminate flooring (HTML & CSS). On mobile, React Native hands the exact same blueprint to master stonemasons and ironworkers in Italy (iOS) and Germany (Android)—each using genuine native stone and hand-forged steel (native UIKit and Android widgets). The user experiences a 100% native mobile app with fluid 60/120fps animations, not a sluggish website trapped inside a web frame.",
+        syntaxLabel: "React Native Primitives Syntax",
+        syntax: "// Import mobile native primitives instead of HTML elements:\\nimport React from 'react';\\nimport { View, Text, StyleSheet } from 'react-native';\\n\\nexport default function App() {\\n  return (\\n    <View style={styles.container}>\\n      <Text style={styles.heading}>Hello React Native!</Text>\\n    </View>\\n  );\\n}",
+        example: "// Mobile Native Component\\nfunction ProfileCard() {\\n  return (\\n    <View style={styles.card}>\\n      <Text style={styles.title}>Foundry Mobile Academy</Text>\\n      <Text style={styles.subtitle}>Native iOS & Android Architecture</Text>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  card: { backgroundColor: '#1E293B', padding: 16, borderRadius: 12 },\\n  title: { color: '#F8FAFC', fontSize: 18, fontWeight: 'bold' },\\n  subtitle: { color: '#94A3B8', fontSize: 13, marginTop: 4 }\\n});",
+        exampleNote: "Core React Native component structure replacing div, h1, and p with View and Text",
+        lines: [
+          ["import { View, Text } from 'react-native';", "Imports mobile native primitives from the React Native package."],
+          ["<View style={styles.card}>", "View is the fundamental mobile UI container, equivalent to a native UIView or android.view.View."],
+          ["<Text style={styles.title}>", "In React Native, ALL text strings MUST be wrapped in a <Text> component. Unwrapped text causes a fatal mobile crash!"],
+          ["StyleSheet.create({ ... })", "Defines structured styles using JavaScript objects with camelCase keys."]
+        ],
+        tryIt: "Examine the simulated smartphone viewport below. Try editing the title or subtitle text to see the native mobile screen update!",
+        mistakes: [
+          ["Using HTML tags like <div>, <p>, <span>, or <h1> in React Native.", "Mobile operating systems do not understand HTML! You must use <View> for layout containers and <Text> for all text."],
+          ["Writing raw text directly inside <View>Hello</View>.", "React Native throws an immediate runtime error: 'Text strings must be rendered within a <Text> component'."]
+        ],
+        quiz: [
+          { q: "What company originally developed and open-sourced React Native?", opts: ["Google", "Meta (Facebook)", "Apple", "Microsoft"], a: 1 },
+          { q: "What core component is the primary layout container in React Native, replacing <div>?", opts: ["<Container>", "<Box>", "<View>", "<Section>"], a: 2 },
+          { q: "Where must all text strings be placed in a React Native app?", opts: ["Inside <Text> components", "Inside <div> tags", "Directly inside <View>", "Inside <p> tags"], a: 0 }
+        ],
+        challenge: "Create a View component that contains a title Text and two subtitle Texts explaining why native rendering is faster than a webview.",
+        next: "Next: Mobile styling with StyleSheet.create, unitless dimensions, and native colors.",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  return (\\n    <View style={styles.container}>\\n      <View style={styles.header}>\\n        <Text style={styles.badge}>MOBILE NATIVE</Text>\\n        <Text style={styles.title}>Welcome to React Native</Text>\\n        <Text style={styles.body}>Building iOS & Android apps with a single React codebase. Real native performance at 60fps.</Text>\\n      </View>\\n      <View style={styles.card}>\\n        <Text style={styles.cardTitle}>Why Engineers Love RN</Text>\\n        <Text style={styles.cardText}>• Real native platform widgets</Text>\\n        <Text style={styles.cardText}>• Fast Refresh development speed</Text>\\n        <Text style={styles.cardText}>• Shared logic across platforms</Text>\\n      </View>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 20 },\\n  header: { marginBottom: 24 },\\n  badge: { backgroundColor: 'rgba(6,182,212,0.15)', color: '#06B6D4', fontSize: 11, fontWeight: '700', paddingVertical: 4, paddingHorizontal: 10, borderRadius: 20, alignSelf: 'flex-start', marginBottom: 10 },\\n  title: { fontSize: 24, fontWeight: '800', color: '#F8FAFC', marginBottom: 8 },\\n  body: { fontSize: 13.5, color: '#94A3B8', lineHeight: 20 },\\n  card: { backgroundColor: '#121826', borderRadius: 16, padding: 18, border: '1px solid #1E293B' },\\n  cardTitle: { fontSize: 15, fontWeight: '700', color: '#38BDF8', marginBottom: 10 },\\n  cardText: { fontSize: 13, color: '#E2E8F0', marginVertical: 4 }\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("rn-primitives-styling", "Core Components & Mobile Styling with StyleSheet", {
+        goal: "Master View, Text, Image, and the StyleSheet API, understanding unitless dimensions (density-independent points) and mobile style constraints.",
+        simple: "In React Native, styling is defined using JavaScript objects rather than CSS files. Property names use camelCase (like backgroundColor instead of background-color). Dimensions are unitless numbers representing density-independent points on high-resolution Retina/OLED mobile screens.",
+        analogy: "Think of web CSS like a one-size-fits-all poncho—it flows, cascades, and leaks styles across all elements unpredictably. React Native StyleSheet is like a tailored Italian suit: every seam, button, and cuff is precisely sized to that specific garment, with zero unexpected style leaks.",
+        syntaxLabel: "StyleSheet.create Syntax",
+        syntax: "import { StyleSheet, View, Text, Image } from 'react-native';\\n\\nconst styles = StyleSheet.create({\\n  container: {\\n    flex: 1,\\n    padding: 16, // Density-independent points (NOT '16px')\\n    backgroundColor: '#0F172A'\\n  },\\n  avatar: {\\n    width: 64,\\n    height: 64,\\n    borderRadius: 32 // Circle\\n  }\\n});",
+        example: "function UserProfile() {\\n  return (\\n    <View style={styles.card}>\\n      <Image\\n        source={{ uri: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' }}\\n        style={styles.avatar}\\n      />\\n      <View style={styles.info}>\\n        <Text style={styles.name}>Elena Rostova</Text>\\n        <Text style={styles.handle}>@elena_codes</Text>\\n      </View>\\n    </View>\\n  );\\n}",
+        exampleNote: "Displaying remote images and avatar styling using StyleSheet",
+        lines: [
+          ["Image source={{ uri: '...' }}", "Remote images in React Native require an object with a 'uri' property, plus explicit width and height dimensions in style."],
+          ["borderRadius: 32", "In mobile development, setting borderRadius to half of width/height creates a perfect circle."],
+          ["padding: 16", "Notice there is NO 'px' suffix. Units are numbers representing density-independent pixels."]
+        ],
+        tryIt: "Test the mobile card styling in the phone simulator. Try tweaking the avatar size, border colors, or font weights.",
+        mistakes: [
+          ["Writing '16px' or '2rem' as dimensions in React Native.", "React Native expects numbers (e.g. padding: 16). Passing strings with CSS units causes a fatal parsing crash!"],
+          ["Rendering remote images without setting width and height in style.", "Unlike web browsers which resize images automatically after download, React Native Image components default to 0x0 size unless explicit width and height are provided."]
+        ],
+        quiz: [
+          { q: "How do you specify a 24-point margin in React Native StyleSheet?", opts: ["margin: '24px'", "margin: 24", "margin: '24pt'", "margin: 24rem"], a: 1 },
+          { q: "How are multi-word CSS property names written in React Native?", opts: ["kebab-case (background-color)", "camelCase (backgroundColor)", "snake_case (background_color)", "UPPERCASE (BACKGROUND_COLOR)"], a: 1 },
+          { q: "What property is required when rendering a remote image with Image?", opts: ["src", "href", "source={{ uri: '...' }}", "url"], a: 2 }
+        ],
+        challenge: "Build a styled mobile metric card that displays a user badge, follower count, and a glowing green 'Online' indicator circle.",
+        next: "Next: Mobile Flexbox layout — why flexDirection defaults to column on mobile devices.",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  return (\\n    <View style={styles.container}>\\n      <View style={styles.profileCard}>\\n        <Image\\n          source={{ uri: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200' }}\\n          style={styles.avatar}\\n        />\\n        <View style={styles.onlineBadge} />\\n        <Text style={styles.userName}>Maya Lin</Text>\\n        <Text style={styles.userRole}>Staff Mobile Engineer @ Meta</Text>\\n        <View style={styles.tagRow}>\\n          <Text style={styles.tag}>React Native</Text>\\n          <Text style={styles.tag}>TypeScript</Text>\\n          <Text style={styles.tag}>iOS / Swift</Text>\\n        </View>\\n      </View>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 16, justifyContent: 'center' },\\n  profileCard: { backgroundColor: '#121826', borderRadius: 20, padding: 22, alignItems: 'center', border: '1px solid #1E293B' },\\n  avatar: { width: 88, height: 88, borderRadius: 44, marginBottom: 12, border: '3px solid #06B6D4' },\\n  onlineBadge: { width: 14, height: 14, borderRadius: 7, backgroundColor: '#10B981', position: 'absolute', top: 90, right: 120, border: '2px solid #121826' },\\n  userName: { fontSize: 20, fontWeight: '700', color: '#F8FAFC', marginBottom: 4 },\\n  userRole: { fontSize: 13, color: '#94A3B8', marginBottom: 16 },\\n  tagRow: { flexDirection: 'row', gap: 8 },\\n  tag: { backgroundColor: 'rgba(6,182,212,0.12)', color: '#06B6D4', fontSize: 11, fontWeight: '600', paddingVertical: 4, paddingHorizontal: 10, borderRadius: 8 }\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("rn-flexbox-layout", "Mobile Layout with Flexbox: Differences from the Web", {
+        goal: "Master mobile layout using React Native's Flexbox engine (Yoga) and understand the critical differences from CSS web Flexbox.",
+        simple: "React Native uses Flexbox for all component layouts. However, there is one massive difference: on the web, flexDirection defaults to 'row' (horizontal); in React Native, flexDirection defaults to 'column' (vertical) because smartphones are held vertically in portrait orientation!",
+        analogy: "Think of packing a tall school locker vs packing a wide desk drawer. On a wide desktop monitor (the desk drawer), you arrange items left-to-right in a row. On a tall smartphone (the tall locker), you naturally stack things top-to-bottom on shelves (column). React Native sets the default to column so you don't have to write flexDirection: 'column' on every single screen component.",
+        syntaxLabel: "React Native Flexbox Properties",
+        syntax: "const styles = StyleSheet.create({\\n  screen: {\\n    flex: 1, // Expands to fill the entire mobile display\\n    flexDirection: 'column', // Default in React Native!\\n    justifyContent: 'space-between', // Primary axis alignment\\n    alignItems: 'center' // Cross axis alignment\\n  }\\n});",
+        example: "function AppHeader() {\\n  return (\\n    <View style={styles.headerBar}>\\n      <Text style={styles.iconBtn}>☰</Text>\\n      <Text style={styles.headerTitle}>Feed</Text>\\n      <Text style={styles.iconBtn}>🔔</Text>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  headerBar: {\\n    flexDirection: 'row',\\n    justifyContent: 'space-between',\\n    alignItems: 'center',\\n    paddingHorizontal: 16,\\n    height: 56,\\n    backgroundColor: '#1E293B'\\n  },\\n  headerTitle: { fontSize: 18, fontWeight: 'bold', color: '#fff' },\\n  iconBtn: { fontSize: 20, color: '#38BDF8' }\\n});",
+        exampleNote: "Building an iOS/Android top navigation header using flexDirection: 'row'",
+        lines: [
+          ["flex: 1", "Tells the container to expand and fill all available space in the parent mobile window."],
+          ["flexDirection: 'row'", "Switches the primary axis from default vertical column to horizontal row."],
+          ["justifyContent: 'space-between'", "Pushes the left button to the far left, the bell to the far right, and centers the title."],
+          ["alignItems: 'center'", "Centers all items vertically along the cross-axis."]
+        ],
+        tryIt: "Toggle the flex layout in the simulator to see how mobile columns and rows distribute elements dynamically.",
+        mistakes: [
+          ["Assuming flexDirection defaults to 'row' like CSS on the web.", "This is the #1 gotcha for web developers transitioning to React Native. In React Native, containers are columns by default!"],
+          ["Forgetting flex: 1 on the top-level container.", "Without flex: 1, your root View will collapse to the height of its children instead of covering the full mobile screen height."]
+        ],
+        quiz: [
+          { q: "What is the default flexDirection in React Native?", opts: ["row", "column", "row-reverse", "grid"], a: 1 },
+          { q: "What property allows a component to expand and occupy all remaining available screen space?", opts: ["fill: true", "flex: 1", "height: '100%'", "expand: auto"], a: 1 },
+          { q: "What is the name of the C++ cross-platform layout engine powering React Native Flexbox?", opts: ["Gecko", "WebKit", "Yoga", "Blink"], a: 2 }
+        ],
+        challenge: "Build a 3-column stats row (Posts, Followers, Following) where each column has flex: 1 and centered items.",
+        next: "Next: Handling mobile gestures, touchable feedback, and user input with Pressable and TextInput.",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  return (\\n    <View style={styles.container}>\\n      {/* Top Mobile Navigation Header */}\\n      <View style={styles.navBar}>\\n        <Text style={styles.navIcon}>☰</Text>\\n        <Text style={styles.navTitle}>Analytics</Text>\\n        <Text style={styles.navIcon}>⚙️</Text>\\n      </View>\\n\\n      {/* Horizontal Stats Row */}\\n      <View style={styles.statsRow}>\\n        <View style={styles.statBox}>\\n          <Text style={styles.statNum}>2.4k</Text>\\n          <Text style={styles.statLabel}>Users</Text>\\n        </View>\\n        <View style={styles.statBox}>\\n          <Text style={styles.statNum}>99.9%</Text>\\n          <Text style={styles.statLabel}>Uptime</Text>\\n        </View>\\n        <View style={styles.statBox}>\\n          <Text style={styles.statNum}>42ms</Text>\\n          <Text style={styles.statLabel}>Latency</Text>\\n        </View>\\n      </View>\\n\\n      {/* Content Area */}\\n      <View style={styles.contentCard}>\\n        <Text style={styles.cardHeader}>System Performance</Text>\\n        <Text style={styles.cardDesc}>Flexbox Yoga engine automatically adapts across all iOS and Android screen aspect ratios.</Text>\\n      </View>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 16 },\\n  navBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 48, marginBottom: 20 },\\n  navTitle: { fontSize: 18, fontWeight: '700', color: '#F8FAFC' },\\n  navIcon: { fontSize: 20, color: '#38BDF8' },\\n  statsRow: { flexDirection: 'row', gap: 12, marginBottom: 20 },\\n  statBox: { flex: 1, backgroundColor: '#121826', padding: 14, borderRadius: 14, alignItems: 'center', border: '1px solid #1E293B' },\\n  statNum: { fontSize: 18, fontWeight: '800', color: '#06B6D4', marginBottom: 2 },\\n  statLabel: { fontSize: 11, color: '#64748B', fontWeight: '600' },\\n  contentCard: { flex: 1, backgroundColor: '#121826', borderRadius: 16, padding: 18, border: '1px solid #1E293B' },\\n  cardHeader: { fontSize: 16, fontWeight: '700', color: '#F8FAFC', marginBottom: 8 },\\n  cardDesc: { fontSize: 13, color: '#94A3B8', lineHeight: 18 }\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("rn-touchables-inputs", "Handling Touches & Inputs: Pressable, TouchableOpacity & TextInput", {
+        goal: "Capture user gestures and touches with Pressable / TouchableOpacity, manage mobile keyboard text input, and maintain local state.",
+        simple: "Smartphones do not have mouse cursors or hover states; users interact through finger taps and swipes. React Native provides touchable components (TouchableOpacity, Pressable) that provide instantaneous visual feedback (like dimming opacity) when pressed, and TextInput for typing.",
+        analogy: "Imagine an elevator button. When you push your finger against the plastic button, it physically gives way under your finger and lights up with an amber glow. If elevator buttons were rigid slabs of immovable steel that showed no light when touched, passengers would punch the button ten times thinking it was broken. TouchableOpacity provides that essential visual feedback.",
+        syntaxLabel: "Touchables & Input Syntax",
+        syntax: "import { TouchableOpacity, TextInput, Text } from 'react-native';\\n\\n// Touchable with tactile feedback\\n<TouchableOpacity activeOpacity={0.7} onPress={handlePress}>\\n  <Text>Tap Me</Text>\\n</TouchableOpacity>\\n\\n// Mobile Text Input\\n<TextInput\\n  value={text}\\n  onChangeText={setText} // Passes string directly, NOT an event!\\n  placeholder=\"Enter note...\"\\n/>",
+        example: "function CounterButton() {\\n  const [count, setCount] = React.useState(0);\\n  return (\\n    <TouchableOpacity\\n      style={styles.button}\\n      activeOpacity={0.75}\\n      onPress={() => setCount(count + 1)}\\n    >\\n      <Text style={styles.buttonText}>Taps: {count}</Text>\\n    </TouchableOpacity>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  button: { backgroundColor: '#06B6D4', paddingVertical: 12, borderRadius: 10, alignItems: 'center' },\\n  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }\\n});",
+        exampleNote: "Interactive mobile touch component with dynamic state updates",
+        lines: [
+          ["<TouchableOpacity activeOpacity={0.75}>", "Dips component opacity to 75% while the finger is touching the screen, confirming the tap."],
+          ["onPress={() => setCount(count + 1)}", "Mobile touch event handler equivalent to web onClick."],
+          ["onChangeText={setText}", "In React Native, TextInput gives you the raw string value directly; you do NOT do e.target.value!"]
+        ],
+        tryIt: "Tap the button in the phone simulator below! Notice the tactile touch feedback and the state counter incrementing in real time.",
+        mistakes: [
+          ["Trying to use e.target.value in onChangeText.", "Web React uses e.target.value inside onChange. React Native's onChangeText passes the updated text string directly as the first argument: onChangeText={(text) => setText(text)}."],
+          ["Using standard <button> or <div> with onClick.", "There are no <button> elements in React Native! Use <TouchableOpacity> or <Pressable> with the onPress prop."]
+        ],
+        quiz: [
+          { q: "What prop on TouchableOpacity handles user tap gestures?", opts: ["onClick", "onPress", "onTap", "onTouch"], a: 1 },
+          { q: "What does the TextInput component pass to its onChangeText callback?", opts: ["An event object with target.value", "The raw text string directly", "A DOM node", "A promise"], a: 1 },
+          { q: "What visual effect does TouchableOpacity provide by default during a touch?", opts: ["It turns red", "It dims component opacity", "It shakes the device", "It plays a chime"], a: 1 }
+        ],
+        challenge: "Add a TextInput where users can type a task, and an 'Add Task' button that adds it to a state array when pressed.",
+        next: "Next: Rendering high-performance mobile feeds using FlatList vs ScrollView.",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  const [count, setCount] = React.useState(0);\\n  const [note, setNote] = React.useState('');\\n  const [savedNotes, setSavedNotes] = React.useState(['Learn React Native Primitives', 'Explore Yoga Flexbox']);\\n\\n  const handleAdd = () => {\\n    if (!note.trim()) return;\\n    setSavedNotes([...savedNotes, note.trim()]);\\n    setNote('');\\n  };\\n\\n  return (\\n    <View style={styles.container}>\\n      <Text style={styles.heading}>Interactive Mobile UI</Text>\\n\\n      {/* Tactile Counter Button */}\\n      <TouchableOpacity\\n        style={styles.tapBtn}\\n        onPress={() => setCount(count + 1)}\\n      >\\n        <Text style={styles.tapBtnText}>⚡ Tap Counter: {count}</Text>\\n      </TouchableOpacity>\\n\\n      {/* Mobile Input Group */}\\n      <View style={styles.inputGroup}>\\n        <TextInput\\n          style={styles.input}\\n          placeholder=\"Type a quick note...\"\\n          value={note}\\n          onChangeText={setNote}\\n        />\\n        <TouchableOpacity style={styles.addBtn} onPress={handleAdd}>\\n          <Text style={styles.addBtnText}>Add</Text>\\n        </TouchableOpacity>\\n      </View>\\n\\n      <Text style={styles.subhead}>Saved Notes ({savedNotes.length})</Text>\\n      {savedNotes.map((n, idx) => (\\n        <View key={idx} style={styles.noteItem}>\\n          <Text style={styles.noteText}>• {n}</Text>\\n        </View>\\n      ))}\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 18 },\\n  heading: { fontSize: 20, fontWeight: '700', color: '#F8FAFC', marginBottom: 16 },\\n  tapBtn: { backgroundColor: '#06B6D4', paddingVertical: 14, borderRadius: 12, alignItems: 'center', marginBottom: 20 },\\n  tapBtnText: { color: '#FFFFFF', fontWeight: '700', fontSize: 15 },\\n  inputGroup: { flexDirection: 'row', gap: 8, marginBottom: 20 },\\n  input: { flex: 1, backgroundColor: '#121826', border: '1px solid #1E293B', borderRadius: 10, paddingHorizontal: 12, color: '#F8FAFC' },\\n  addBtn: { backgroundColor: '#10B981', paddingVertical: 10, paddingHorizontal: 18, borderRadius: 10, justifyContent: 'center' },\\n  addBtnText: { color: '#FFFFFF', fontWeight: '700' },\\n  subhead: { fontSize: 14, fontWeight: '600', color: '#94A3B8', marginBottom: 10 },\\n  noteItem: { backgroundColor: '#121826', padding: 12, borderRadius: 8, marginBottom: 6, border: '1px solid #1E293B' },\\n  noteText: { color: '#F8FAFC', fontSize: 13 }\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("rn-scroll-flatlist", "High-Performance Mobile Lists: ScrollView vs FlatList", {
+        goal: "Understand mobile memory limits and how FlatList uses window virtualization to render infinite feeds smoothly at 60/120 FPS.",
+        simple: "ScrollView renders every single child component in memory at once—great for small forms, fatal for long feeds. FlatList only renders items currently visible inside the viewport window, recycling off-screen views to keep memory usage tiny.",
+        analogy: "Imagine an ancient scrolls library vs an iPad reader. With a ScrollView, you unroll a 10-mile parchment paper across an entire football field: it's heavy, creases, and consumes all the storage space in the building (memory crash). With FlatList (the iPad), you only display the 5 paragraphs currently on the screen. As your finger swipes up, the screen instantly repaints new paragraphs while throwing away off-screen ones.",
+        syntaxLabel: "FlatList Core Syntax",
+        syntax: "import { FlatList, Text, View } from 'react-native';\\n\\n<FlatList\\n  data={posts}\\n  keyExtractor={(item) => item.id}\\n  renderItem={({ item }) => (\\n    <View style={styles.row}>\\n      <Text>{item.title}</Text>\\n    </View>\\n  )}\\n/>",
+        example: "function ActivityFeed() {\\n  const feedItems = [\\n    { id: '1', user: 'Alex', action: 'merged pull request #402', time: '2m' },\\n    { id: '2', user: 'Sophia', action: 'deployed v1.4 to production', time: '14m' },\\n    { id: '3', user: 'Jordan', action: 'added integration tests', time: '1h' }\\n  ];\\n\\n  return (\\n    <FlatList\\n      data={feedItems}\\n      keyExtractor={item => item.id}\\n      renderItem={({ item }) => (\\n        <View style={styles.card}>\\n          <Text style={styles.author}>{item.user}</Text>\\n          <Text style={styles.text}>{item.action}</Text>\\n        </View>\\n      )}\\n    />\\n  );\\n}",
+        exampleNote: "Virtualizing a list of items using FlatList with keyExtractor",
+        lines: [
+          ["<FlatList data={feedItems}", "Accepts an array of items to render efficiently."],
+          ["keyExtractor={item => item.id}", "Extracts a unique string key for each row to optimize re-rendering and list diffing."],
+          ["renderItem={({ item }) => ... }", "Function that receives the individual item and returns the native component JSX to render."]
+        ],
+        tryIt: "Scroll through the virtualized list in the phone simulator. Notice how smoothly it glides and how each row is structured.",
+        mistakes: [
+          ["Using ScrollView with a .map() for lists containing hundreds or thousands of items.", "ScrollView mounts every element simultaneously into device memory. On older phones, a 1,000-item ScrollView will run out of RAM and abruptly crash the app."],
+          ["Forgetting keyExtractor in FlatList.", "Without keyExtractor, React Native will fall back to array indexes, causing UI glitches, dropped frames, and state corruption when items are inserted or deleted."]
+        ],
+        quiz: [
+          { q: "Why is FlatList preferred over ScrollView for long or infinite lists?", opts: ["FlatList has more colors", "FlatList only renders visible items to conserve memory and maintain 60 FPS", "ScrollView is deprecated", "FlatList runs on the GPU only"], a: 1 },
+          { q: "What prop does FlatList use to assign unique keys to each item?", opts: ["idProp", "keyExtractor", "uniqueId", "itemKey"], a: 1 },
+          { q: "What signature does the renderItem prop function accept?", opts: ["(item, index)", "({ item, index, separators })", "(data)", "(rows)"], a: 1 }
+        ],
+        challenge: "Add an ItemSeparatorComponent prop to FlatList to display a subtle divider line between items.",
+        next: "Next: Capstone Lesson — Building a complete production-quality mobile app screen.",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  const feeds = [\\n    { id: '1', title: 'Shipped v2.4 Release', time: '10m ago', icon: '🚀', tag: 'Deploy' },\\n    { id: '2', title: 'Reviewed Pull Request #88', time: '45m ago', icon: '🔍', tag: 'Review' },\\n    { id: '3', title: 'Fixed Memory Leak in Video Player', time: '2h ago', icon: '🐛', tag: 'Bugfix' },\\n    { id: '4', title: 'Mentored Junior Mobile Engineers', time: '4h ago', icon: '💡', tag: 'Mentorship' },\\n    { id: '5', title: 'Optimized FlatList to 120fps', time: '1d ago', icon: '⚡', tag: 'Performance' }\\n  ];\\n\\n  return (\\n    <View style={styles.container}>\\n      <View style={styles.header}>\\n        <Text style={styles.headerTitle}>Engineering Feed</Text>\\n        <Text style={styles.headerSub}>Virtual list rendering with FlatList</Text>\\n      </View>\\n\\n      <FlatList\\n        data={feeds}\\n        keyExtractor={item => item.id}\\n        renderItem={({ item }) => (\\n          <View style={styles.card}>\\n            <Text style={styles.icon}>{item.icon}</Text>\\n            <View style={styles.cardInfo}>\\n              <Text style={styles.cardTitle}>{item.title}</Text>\\n              <View style={styles.cardMeta}>\\n                <Text style={styles.cardTime}>{item.time}</Text>\\n                <Text style={styles.badge}>{item.tag}</Text>\\n              </View>\\n            </View>\\n          </View>\\n        )}\\n      />\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 16 },\\n  header: { marginBottom: 16 },\\n  headerTitle: { fontSize: 20, fontWeight: '700', color: '#F8FAFC' },\\n  headerSub: { fontSize: 12, color: '#64748B', marginTop: 2 },\\n  card: { flexDirection: 'row', backgroundColor: '#121826', padding: 14, borderRadius: 14, marginBottom: 10, alignItems: 'center', border: '1px solid #1E293B' },\\n  icon: { fontSize: 24, marginRight: 12 },\\n  cardInfo: { flex: 1 },\\n  cardTitle: { fontSize: 14, fontWeight: '600', color: '#F8FAFC', marginBottom: 4 },\\n  cardMeta: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },\\n  cardTime: { fontSize: 11, color: '#64748B' },\\n  badge: { backgroundColor: 'rgba(6,182,212,0.12)', color: '#06B6D4', fontSize: 10, fontWeight: '600', paddingVertical: 2, paddingHorizontal: 6, borderRadius: 4 }\\n});",
+          css: "",
+          html: ""
+        }
+      }),
+
+      L("rn-full-mobile-app", "Building a Complete Production-Ready Mobile Screen", {
+        goal: "Assemble an entire production-grade mobile application screen integrating headers, metrics, category filter chips, interactive lists, and bottom navigation.",
+        simple: "A complete mobile app screen in production incorporates all core mobile engineering patterns: safe area headers, dynamic state filters, interactive touchables, scrollable lists, and bottom navigation tab bars designed specifically for human thumb ergonomics.",
+        analogy: "Think of a modern luxury automobile dashboard. Every switch, display dial, steering wheel paddle, and navigation map is ergonomically arranged directly within the driver's natural reach. In mobile architecture, critical controls live in the bottom 'thumb zone' where users can comfortably tap with one hand.",
+        syntaxLabel: "Full Screen Component Composition",
+        syntax: "// Multi-component screen hierarchy:\\nexport default function Screen() {\\n  return (\\n    <View style={styles.root}>\\n      <Header />\\n      <FilterChips active={filter} onSelect={setFilter} />\\n      <FlatList data={filteredData} ... />\\n      <BottomTabBar activeTab={tab} onTab={setTab} />\\n    </View>\\n  );\\n}",
+        example: "// Production mobile screen structure\\nfunction MobileDashboard() {\\n  const [tab, setTab] = React.useState('Home');\\n  return (\\n    <View style={{ flex: 1 }}>\\n      {/* Top Header & Content */}\\n      <View style={{ flex: 1, padding: 16 }}>\\n        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Dashboard</Text>\\n      </View>\\n      {/* Sticky Bottom Navigation */}\\n      <View style={styles.tabBar}>\\n        <TouchableOpacity onPress={() => setTab('Home')}><Text>Home</Text></TouchableOpacity>\\n        <TouchableOpacity onPress={() => setTab('Profile')}><Text>Profile</Text></TouchableOpacity>\\n      </View>\\n    </View>\\n  );\\n}",
+        exampleNote: "Composing full mobile screens with sticky bottom tabs",
+        lines: [
+          ["<View style={{ flex: 1 }}>", "The root container fills 100% of the mobile device height."],
+          ["style={styles.tabBar}", "Sticky bottom bar positioned naturally below the flex: 1 scrollable content area."],
+          ["onPress={() => setTab(...)}", "Interactive tab switcher updating view state on user touch."]
+        ],
+        tryIt: "Test the full mobile app in the phone simulator! Tap the filter chips and bottom navigation tabs to experience fluid mobile UI state transitions.",
+        mistakes: [
+          ["Placing critical action buttons in the top-left corner of giant modern smartphone screens.", "Human thumbs cannot easily reach the top corners of large mobile phones. Place primary actions in bottom action bars or floating action buttons (FABs)."],
+          ["Ignoring mobile safe areas (notch and bottom home bar).", "Always ensure top headers don't overlap the camera notch/Dynamic Island, and bottom buttons leave clearance for the iOS home swipe bar."]
+        ],
+        quiz: [
+          { q: "What area of mobile screens is most ergonomically accessible to a user's thumb?", opts: ["The top-left corner", "The bottom-half of the screen (the Thumb Zone)", "The top-right corner", "The camera cutout"], a: 1 },
+          { q: "How do you achieve a sticky bottom navigation bar below scrollable content in React Native?", opts: ["position: 'fixed' (from web CSS)", "Place a flex: 1 content container above the tab bar in a column layout", "float: bottom", "z-index: 99999"], a: 1 },
+          { q: "What is the recommended practice for state management across mobile screen tabs?", opts: ["Store everything in localStorage", "Keep active tab state in a top-level parent component or React Context", "Use cookies", "Reload the window"], a: 1 }
+        ],
+        challenge: "Add a 4th tab 'Saved' and display a counter badge showing how many items have been bookmarked.",
+        next: "Congratulations! You have completed Level 9: React Native & Mobile Apps. You are now equipped to build cross-platform mobile apps for iOS and Android!",
+        playground: {
+          mode: "react-native",
+          js: "function App() {\\n  const [activeTab, setActiveTab] = React.useState('Feed');\\n  const [selectedFilter, setSelectedFilter] = React.useState('All');\\n  const [bookmarks, setBookmarks] = React.useState({});\\n\\n  const items = [\\n    { id: '1', title: 'React 19 Server Components Explained', category: 'React', time: '15m' },\\n    { id: '2', title: 'Building Zero-Lag Gestures with Reanimated', category: 'Mobile', time: '1h' },\\n    { id: '3', title: 'Designing High-Performance Node Microservices', category: 'Backend', time: '3h' },\\n    { id: '4', title: 'From Web to Mobile: A Senior Staff Guide', category: 'Mobile', time: '1d' }\\n  ];\\n\\n  const filtered = selectedFilter === 'All' ? items : items.filter(i => i.category === selectedFilter);\\n  const toggleBookmark = (id) => setBookmarks({ ...bookmarks, [id]: !bookmarks[id] });\\n\\n  return (\\n    <View style={styles.container}>\\n      {/* Mobile Top Header */}\\n      <View style={styles.topHeader}>\\n        <View>\\n          <Text style={styles.appTitle}>Foundry Native</Text>\\n          <Text style={styles.subTitle}>Mobile Engineering Track</Text>\\n        </View>\\n        <View style={styles.avatarMini}><Text style={{color:'#fff', fontWeight:'700'}}>FR</Text></View>\\n      </View>\\n\\n      {/* Category Filter Chips */}\\n      <View style={styles.chipsRow}>\\n        {['All', 'Mobile', 'Backend', 'React'].map(cat => (\\n          <TouchableOpacity\\n            key={cat}\\n            style={[styles.chip, selectedFilter === cat && styles.chipActive]}\\n            onPress={() => setSelectedFilter(cat)}\\n          >\\n            <Text style={[styles.chipText, selectedFilter === cat && styles.chipTextActive]}>{cat}</Text>\\n          </TouchableOpacity>\\n        ))}\\n      </View>\\n\\n      {/* Main Scrollable Feed */}\\n      <View style={{ flex: 1 }}>\\n        <FlatList\\n          data={filtered}\\n          keyExtractor={item => item.id}\\n          renderItem={({ item }) => (\\n            <View style={styles.card}>\\n              <View style={{ flex: 1 }}>\\n                <Text style={styles.cardTitle}>{item.title}</Text>\\n                <Text style={styles.cardMeta}>{item.category} • {item.time} ago</Text>\\n              </View>\\n              <TouchableOpacity onPress={() => toggleBookmark(item.id)} style={styles.bmBtn}>\\n                <Text style={{ fontSize: 16 }}>{bookmarks[item.id] ? '★' : '☆'}</Text>\\n              </TouchableOpacity>\\n            </View>\\n          )}\\n        />\\n      </View>\\n\\n      {/* Sticky Bottom Navigation Bar */}\\n      <View style={styles.bottomNav}>\\n        {['Feed', 'Bookmarks', 'Profile'].map(tab => (\\n          <TouchableOpacity\\n            key={tab}\\n            style={styles.navTab}\\n            onPress={() => setActiveTab(tab)}\\n          >\\n            <Text style={[styles.navTabText, activeTab === tab && styles.navTabActive]}>{tab}</Text>\\n          </TouchableOpacity>\\n        ))}\\n      </View>\\n    </View>\\n  );\\n}\\n\\nconst styles = StyleSheet.create({\\n  container: { flex: 1, backgroundColor: '#0B0F17' },\\n  topHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 16, borderBottom: '1px solid #1E293B' },\\n  appTitle: { fontSize: 18, fontWeight: '800', color: '#F8FAFC' },\\n  subTitle: { fontSize: 11, color: '#64748B' },\\n  avatarMini: { width: 34, height: 34, borderRadius: 17, backgroundColor: '#06B6D4', justifyContent: 'center', alignItems: 'center' },\\n  chipsRow: { flexDirection: 'row', padding: 12, gap: 8 },\\n  chip: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: 16, backgroundColor: '#121826', border: '1px solid #1E293B' },\\n  chipActive: { backgroundColor: '#06B6D4', borderColor: '#06B6D4' },\\n  chipText: { fontSize: 12, color: '#94A3B8', fontWeight: '600' },\\n  chipTextActive: { color: '#FFFFFF' },\\n  card: { flexDirection: 'row', backgroundColor: '#121826', padding: 14, marginHorizontal: 12, marginBottom: 8, borderRadius: 12, border: '1px solid #1E293B', alignItems: 'center' },\\n  cardTitle: { fontSize: 13.5, fontWeight: '600', color: '#F8FAFC', marginBottom: 4 },\\n  cardMeta: { fontSize: 11, color: '#64748B' },\\n  bmBtn: { padding: 8 },\\n  bottomNav: { flexDirection: 'row', height: 54, borderTop: '1px solid #1E293B', backgroundColor: '#0E1420', justifyContent: 'space-around', alignItems: 'center' },\\n  navTab: { alignItems: 'center', padding: 8 },\\n  navTabText: { fontSize: 12, color: '#64748B', fontWeight: '600' },\\n  navTabActive: { color: '#06B6D4', fontWeight: '700' }\\n});",
+          css: "",
+          html: ""
+        }
+      })
+    ];
+
     const LEVELS = [
       { id: "web-basics", num: 0, title: "Computer & Web Basics", icon: "🌐", color: "var(--blue)", lessons: LVL0_LESSONS, projectIds: ["p0"], status: "available" },
       { id: "html", num: 1, title: "HTML", icon: "📄", color: "var(--amber)", lessons: LVL1_LESSONS, projectIds: ["p1", "p2", "p3", "p4"], status: "available" },
@@ -2379,9 +3537,10 @@
       { id: "javascript", num: 3, title: "JavaScript", icon: "⚡", color: "#7C5CE0", lessons: [], projectIds: ["p9", "p10", "p11", "p12", "p13", "p14", "p15", "p16"], status: "planned" },
       { id: "git", num: 4, title: "Git & GitHub", icon: "🌿", color: "#3E8E5B", lessons: [], projectIds: ["p17"], status: "planned" },
       { id: "apis", num: 5, title: "APIs & the Web", icon: "🔌", color: "#2F9AA0", lessons: [], projectIds: ["p18", "p19", "p20"], status: "planned" },
-      { id: "backend", num: 6, title: "Backend Development", icon: "🖥️", color: "#B0554A", lessons: [], projectIds: [], status: "planned" },
+      { id: "backend", num: 6, title: "Node.js & Backend Architecture", icon: "🟢", color: "#10B981", lessons: NODE_LESSONS, projectIds: ["p-node-api"], status: "available" },
       { id: "databases", num: 7, title: "Databases", icon: "🗄️", color: "#6A6F8C", lessons: [], projectIds: ["p21", "p22", "p23"], status: "planned" },
       { id: "fullstack", num: 8, title: "Full-Stack Projects", icon: "🚀", color: "#C24B43", lessons: [], projectIds: ["p24", "p25", "p26", "p27", "p28", "p29", "p30"], status: "planned" },
+      { id: "react-native", num: 9, title: "React Native & Mobile Apps", icon: "📱", color: "#06B6D4", lessons: REACT_NATIVE_LESSONS, projectIds: ["p-rn-mobile"], status: "available" },
     ];
 
     function P(id, data) { return Object.assign({ id }, data); }
@@ -2460,7 +3619,71 @@
         ],
         solution: { html: "<header>\n  <h1>Jordan Rivera</h1>\n  <nav>\n    <a href=\"#about\">About</a>\n    <a href=\"#projects\">Projects</a>\n  </nav>\n</header>\n<main>\n  <h2 id=\"about\">About</h2>\n  <p>I'm a beginner web developer building my very first portfolio.</p>\n  <h2 id=\"projects\">Projects</h2>\n  <ul>\n    <li>Personal Profile Page</li>\n    <li>Restaurant Menu</li>\n    <li>Student Registration Form</li>\n  </ul>\n</main>\n<footer>\n  <p>Contact: <a href=\"mailto:jordan@example.com\">jordan@example.com</a></p>\n</footer>", css: "body{font-family:sans-serif;padding:0;margin:0;} header,main,footer{padding:20px;} header{background:#1B2430;color:#fff;} nav a{color:#fff;margin-right:12px;text-decoration:none;} footer{background:#f1ece0;}", js: "" },
         extensions: ["Link each project to a real anchor further down the page.", "Add a simple skills list section."]
+      }),      P("p-node-api", {
+        title: "RESTful Task & Catalog API with Express", level: "backend", difficulty: "🟡", diffLabel: "Intermediate", time: "45–60 min",
+        skills: ["Node.js", "Express", "REST APIs", "JSON Responses", "HTTP Status Codes", "CRUD Operations"],
+        requirements: [
+          "Initialize an Express app listening on port 3000",
+          "Implement GET /api/items to return all catalog items in JSON format",
+          "Implement POST /api/items with defensive validation: reject missing name or price with 400 Bad Request",
+          "Implement DELETE /api/items/:id that removes an item and returns 404 if not found",
+          "Proper HTTP status codes throughout (200 OK, 201 Created, 400 Bad Request, 404 Not Found)"
+        ],
+        instructions: "Build a production-style REST API using Node.js and Express to manage an inventory catalog. Test your endpoints using the interactive request buttons.",
+        expected: "A running Node.js REST server that routes incoming HTTP requests and responds with clean JSON payloads and strict status codes.",
+        starter: {
+          mode: "node",
+          html: "",
+          css: "",
+          js: "const express = require('express');\nconst app = express();\napp.use(express.json());\n\n// In-memory catalog store\nlet items = [\n  { id: 1, name: 'Wireless Headphones', price: 99 },\n  { id: 2, name: 'Mechanical Keyboard', price: 129 }\n];\n\n// 1. GET /api/items - list all items\napp.get('/api/items', (req, res) => {\n  res.json({ total: items.length, items });\n});\n\n// 2. POST /api/items - add new item with validation\napp.post('/api/items', (req, res) => {\n  const { name, price } = req.body;\n  if (!name || price === undefined) {\n    return res.status(400).json({ error: 'Name and price are required fields' });\n  }\n  const newItem = { id: Date.now(), name, price: Number(price) };\n  items.push(newItem);\n  res.status(201).json(newItem);\n});\n\n// Start listening\napp.listen(3000, () => {\n  console.log('⚡ Catalog REST API active on port 3000');\n});"
+        },
+        hints: [
+          "Use app.use(express.json()) at the top of your server so req.body is parsed automatically.",
+          "Check (!name || price === undefined) before creating the item, and return res.status(400).json(...).",
+          "Use res.status(201).json(newItem) for successful creation."
+        ],
+        solution: {
+          html: "", css: "",
+          js: "const express = require('express');\nconst app = express();\napp.use(express.json());\n\nlet items = [\n  { id: 1, name: 'Wireless Headphones', price: 99 },\n  { id: 2, name: 'Mechanical Keyboard', price: 129 }\n];\n\napp.get('/api/items', (req, res) => res.json({ total: items.length, items }));\n\napp.post('/api/items', (req, res) => {\n  const { name, price } = req.body;\n  if (!name || price === undefined) return res.status(400).json({ error: 'Name and price are required' });\n  const newItem = { id: Date.now(), name, price: Number(price) };\n  items.push(newItem);\n  res.status(201).json(newItem);\n});\n\napp.delete('/api/items/:id', (req, res) => {\n  const id = Number(req.params.id);\n  const idx = items.findIndex(i => i.id === id);\n  if (idx === -1) return res.status(404).json({ error: 'Item not found' });\n  const removed = items.splice(idx, 1)[0];\n  res.json({ message: 'Deleted', removed });\n});\n\napp.listen(3000);"
+        },
+        extensions: [
+          "Add a PUT /api/items/:id endpoint to update an existing item price or name.",
+          "Add query parameter filtering (e.g. GET /api/items?maxPrice=100)."
+        ]
       }),
+      P("p-rn-mobile", {
+        title: "Native Mobile Profile & Activity Feed", level: "react-native", difficulty: "🟡", diffLabel: "Intermediate", time: "45–60 min",
+        skills: ["React Native", "View & Text Primitives", "StyleSheet", "Flexbox Layout", "TouchableOpacity", "FlatList"],
+        requirements: [
+          "A mobile top profile card with avatar, name, and role title",
+          "An interactive Flexbox statistics row (Posts, Followers, Likes)",
+          "An action button using TouchableOpacity that toggles a following state on user tap",
+          "A scrollable list of recent user activities using FlatList",
+          "Strict mobile primitives — no HTML <div> or <p> tags"
+        ],
+        instructions: "Build a production-quality mobile user profile and activity feed screen using React Native primitives and StyleSheet layout.",
+        expected: "A native mobile screen rendering inside the smartphone simulator with responsive touch interactions, avatar, stats, and activity feed.",
+        starter: {
+          mode: "react-native",
+          html: "",
+          css: "",
+          js: "function App() {\n  const [following, setFollowing] = React.useState(false);\n  const [likes, setLikes] = React.useState(128);\n\n  const activities = [\n    { id: '1', title: 'Shipped v2.0 Mobile Architecture', time: '2h ago', tag: 'Release' },\n    { id: '2', title: 'Mentored Junior Engineers at Foundry', time: '5h ago', tag: 'Mentorship' },\n    { id: '3', title: 'Optimized FlatList scroll rate to 120fps', time: '1d ago', tag: 'Performance' }\n  ];\n\n  return (\n    <View style={styles.container}>\n      {/* Profile Header */}\n      <View style={styles.profileHeader}>\n        <Image source={{ uri: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200' }} style={styles.avatar} />\n        <Text style={styles.name}>Alex Rivera</Text>\n        <Text style={styles.role}>Lead Mobile Architect</Text>\n        <TouchableOpacity\n          style={[styles.followBtn, following && styles.followingBtn]}\n          onPress={() => setFollowing(!following)}\n        >\n          <Text style={[styles.followBtnText, following && styles.followingBtnText]}>\n            {following ? 'Following ✓' : '+ Follow'}\n          </Text>\n        </TouchableOpacity>\n      </View>\n\n      {/* Stats Row */}\n      <View style={styles.statsRow}>\n        <View style={styles.statItem}><Text style={styles.statNum}>48</Text><Text style={styles.statLbl}>Posts</Text></View>\n        <View style={styles.statItem}><Text style={styles.statNum}>14.2k</Text><Text style={styles.statLbl}>Followers</Text></View>\n        <View style={styles.statItem}><Text style={styles.statNum}>{likes}</Text><Text style={styles.statLbl}>Likes</Text></View>\n      </View>\n\n      {/* Activity Feed */}\n      <Text style={styles.sectionTitle}>Recent Activity</Text>\n      <FlatList\n        data={activities}\n        keyExtractor={item => item.id}\n        renderItem={({ item }) => (\n          <View style={styles.activityCard}>\n            <Text style={styles.activityTitle}>{item.title}</Text>\n            <View style={styles.cardFooter}>\n              <Text style={styles.activityTime}>{item.time}</Text>\n              <Text style={styles.tag}>{item.tag}</Text>\n            </View>\n          </View>\n        )}\n      />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: { flex: 1, backgroundColor: '#0B0F17', padding: 16 },\n  profileHeader: { alignItems: 'center', marginBottom: 18 },\n  avatar: { width: 80, height: 80, borderRadius: 40, marginBottom: 10, border: '3px solid #06B6D4' },\n  name: { fontSize: 20, fontWeight: '700', color: '#F8FAFC', marginBottom: 2 },\n  role: { fontSize: 13, color: '#94A3B8', marginBottom: 12 },\n  followBtn: { backgroundColor: '#06B6D4', paddingVertical: 8, paddingHorizontal: 26, borderRadius: 20 },\n  followingBtn: { backgroundColor: '#1E293B', border: '1px solid #334155' },\n  followBtnText: { color: '#FFFFFF', fontWeight: '700', fontSize: 13 },\n  followingBtnText: { color: '#06B6D4' },\n  statsRow: { flexDirection: 'row', justifyContent: 'space-around', backgroundColor: '#121826', borderRadius: 14, padding: 12, marginBottom: 18, border: '1px solid #1E293B' },\n  statItem: { alignItems: 'center' },\n  statNum: { fontSize: 17, fontWeight: '800', color: '#F8FAFC' },\n  statLbl: { fontSize: 11, color: '#64748B', marginTop: 2 },\n  sectionTitle: { fontSize: 15, fontWeight: '700', color: '#F8FAFC', marginBottom: 10 },\n  activityCard: { backgroundColor: '#121826', borderRadius: 12, padding: 12, marginBottom: 8, border: '1px solid #1E293B' },\n  activityTitle: { fontSize: 13, color: '#F8FAFC', fontWeight: '600', marginBottom: 6 },\n  cardFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },\n  activityTime: { fontSize: 11, color: '#64748B' },\n  tag: { backgroundColor: 'rgba(6,182,212,0.12)', color: '#06B6D4', paddingVertical: 2, paddingHorizontal: 8, borderRadius: 6, fontSize: 10.5, fontWeight: '600' }\n});"
+        },
+        hints: [
+          "Wrap the avatar, name, and follow button inside an alignItems: 'center' profileHeader container.",
+          "Use flexDirection: 'row' on the statsRow to position Post, Follower, and Like counts side-by-side.",
+          "Pass activeOpacity={0.7} to TouchableOpacity for smooth tactile feedback."
+        ],
+        solution: {
+          html: "", css: "",
+          js: "function App() { return <Text>Solution viewable in playground starter</Text>; }"
+        },
+        extensions: [
+          "Add a heart button next to each activity card that increments the like counter.",
+          "Add a search TextInput above the list to filter activities."
+        ]
+      }),
+
     ];
 
     /* ---------------------------------------------------------------------
@@ -2786,8 +4009,8 @@
           <button class="btn btn-outline" data-nav="#/roadmap">Explore Roadmap</button>
         </div>
         <div class="hero-stats-row">
-          <div class="hero-stat-item"><div class="h-num">9</div><div class="h-lbl">Career Levels</div></div>
-          <div class="hero-stat-item"><div class="h-num">30+</div><div class="h-lbl">Guided Projects</div></div>
+          <div class="hero-stat-item"><div class="h-num">10</div><div class="h-lbl">Career Tracks</div></div>
+          <div class="hero-stat-item"><div class="h-num">32+</div><div class="h-lbl">Guided Projects</div></div>
           <div class="hero-stat-item"><div class="h-num">Live</div><div class="h-lbl">Interactive Sandbox</div></div>
         </div>
       </div>
@@ -2802,31 +4025,76 @@
     </div>
     <div class="cat-grid">
       <div class="squircle-card c-magenta" data-nav="#/learn/web-internet">
-        <div class="sq-icon">🌐</div>
+        <div class="sq-top">
+          <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+          <span class="sq-arrow">→</span>
+        </div>
         <div>
           <div class="sq-title">Web Basics &<br>Internet</div>
           <div class="sq-line"></div>
         </div>
       </div>
       <div class="squircle-card c-orange" data-nav="#/learn/html-structure">
-        <div class="sq-icon">📄</div>
+        <div class="sq-top">
+          <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><polyline points="10 13 8 15 10 17"></polyline><polyline points="14 13 16 15 14 17"></polyline></svg></div>
+          <span class="sq-arrow">→</span>
+        </div>
         <div>
           <div class="sq-title">HTML5 Semantic<br>Architecture</div>
           <div class="sq-line"></div>
         </div>
       </div>
       <div class="squircle-card c-cyan" data-nav="#/roadmap">
-        <div class="sq-icon">🎨</div>
+        <div class="sq-top">
+          <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="1.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="1.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="1.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.24-.26-.38-.61-.38-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-5.5-4.5-10-10-10z"></path></svg></div>
+          <span class="sq-arrow">→</span>
+        </div>
         <div>
           <div class="sq-title">CSS3 Modern<br>Design & Flexbox</div>
           <div class="sq-line"></div>
         </div>
       </div>
       <div class="squircle-card c-purple" data-nav="#/roadmap">
-        <div class="sq-icon">⚡</div>
+        <div class="sq-top">
+          <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+          <span class="sq-arrow">→</span>
+        </div>
         <div>
           <div class="sq-title">JavaScript &<br>DOM Logic</div>
           <div class="sq-line"></div>
+        </div>
+      </div>
+      <div class="squircle-card c-green" data-nav="#/learn/node-intro-runtime">
+        <div class="sq-top">
+          <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l8 4.6v9.8l-8 4.6-8-4.6V7.1l8-4.6z"></path><text x="12" y="15" text-anchor="middle" font-size="7.5" font-family="system-ui, -apple-system, sans-serif" font-weight="800" fill="currentColor" stroke="none">JS</text></svg></div>
+          <span class="sq-arrow">→</span>
+        </div>
+        <div>
+          <div class="sq-title">Node.js &<br>Backend Runtime</div>
+          <div class="sq-line"></div>
+        </div>
+      </div>
+      <div class="squircle-card c-sky c-wide" data-nav="#/learn/rn-intro-core">
+        <div class="sq-wide-left">
+          <div class="sq-top">
+            <div class="sq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.2" fill="currentColor"></circle><ellipse cx="12" cy="12" rx="9.5" ry="3.8"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"></ellipse></svg></div>
+          </div>
+          <div>
+            <div class="sq-title">React Native &<br>Mobile Apps</div>
+            <div class="sq-line"></div>
+          </div>
+        </div>
+        <span class="sq-arrow" style="position:absolute; top:20px; right:20px; z-index:3;">→</span>
+        <div class="sq-phone-graphic">
+          <div class="phone-body">
+            <div class="phone-island"></div>
+            <svg class="phone-atom-svg" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="2.2" fill="#38BDF8"></circle>
+              <ellipse cx="12" cy="12" rx="9.5" ry="3.8"></ellipse>
+              <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"></ellipse>
+              <ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"></ellipse>
+            </svg>
+          </div>
         </div>
       </div>
       <button class="browse-all-btn" data-nav="#/roadmap" aria-label="Browse all tracks">
@@ -2928,54 +4196,133 @@
       const allInLevel = level.lessons;
       const idx = allInLevel.findIndex(l => l.id === id);
       const done = state.completedLessons.includes(id);
+      const prevLesson = idx > 0 ? allInLevel[idx - 1] : null;
+      const nextLesson = idx < allInLevel.length - 1 ? allInLevel[idx + 1] : null;
+
+      // Build section numbers dynamically (skip absent sections)
+      let secNum = 0;
+      const n = () => ++secNum;
 
       return `
-  <div class="page-head">
-    <div class="eyebrow">${level.icon} ${level.title} · Lesson ${idx + 1} of ${allInLevel.length}</div>
-    <h1>${esc(lesson.title)}</h1>
+  <div class="lesson-breadcrumb">
+    <span class="lesson-bc-level" data-nav="#/roadmap">${level.icon} ${level.title}</span>
+    <span class="lesson-bc-sep">›</span>
+    <span class="lesson-bc-current">Lesson ${idx + 1} of ${allInLevel.length}</span>
+  </div>
+  <div class="lesson-page-header">
+    <h1 class="lesson-page-title">${esc(lesson.title)}</h1>
   </div>
   <div class="lesson-layout">
     <div class="lesson-toc">
       <div class="toc-group">
-        <div class="toc-group-title">${level.title}</div>
-        ${allInLevel.map(l => `<div class="toc-item ${l.id === id ? 'active' : ''}" data-nav="#/learn/${l.id}"><span class="toc-check">${state.completedLessons.includes(l.id) ? '✅' : '○'}</span>${esc(l.title)}</div>`).join("")}
+        <div class="toc-group-title">${level.icon} ${level.title}</div>
+        ${allInLevel.map((l, li) => {
+          const isActive = l.id === id;
+          const isDone = state.completedLessons.includes(l.id);
+          return `<div class="toc-item ${isActive ? 'active' : ''}" data-nav="#/learn/${l.id}">
+            <span class="toc-indicator">${isDone ? '<span class="toc-done-dot">✓</span>' : isActive ? '<span class="toc-active-dot"></span>' : '<span class="toc-empty-dot"></span>'}</span>
+            <span class="toc-label">${esc(l.title)}</span>
+          </div>`;
+        }).join("")}
+      </div>
+      <div class="toc-lesson-nav">
+        ${prevLesson ? `<button class="toc-nav-btn" data-nav="#/learn/${prevLesson.id}">← Previous</button>` : `<span></span>`}
+        ${nextLesson ? `<button class="toc-nav-btn toc-nav-next" data-nav="#/learn/${nextLesson.id}">Next →</button>` : `<button class="toc-nav-btn toc-nav-next" data-nav="#/projects">Projects →</button>`}
       </div>
     </div>
     <div class="lesson-body">
 
-      <div class="lesson-sec"><h3><span class="num">1</span> What you will learn</h3><p>${esc(lesson.goal)}</p></div>
-
-      <div class="lesson-sec"><h3><span class="num">2</span> Simple explanation</h3><p>${esc(lesson.simple)}</p></div>
-
-      <div class="lesson-sec"><h3><span class="num">3</span> Real-world analogy</h3><div class="analogy-box">${esc(lesson.analogy)}</div></div>
-
-      ${lesson.syntax ? `<div class="lesson-sec"><h3><span class="num">4</span> ${lesson.syntaxLabel || 'Syntax'}</h3><div class="codebox">${esc(lesson.syntax)}</div></div>` : ``}
-
-      ${lesson.example ? `<div class="lesson-sec"><h3><span class="num">5</span> Example</h3>${lesson.exampleNote ? `<p style="font-size:13px;">${esc(lesson.exampleNote)}</p>` : ''}<div class="codebox">${esc(lesson.example)}</div></div>` : ``}
-
-      ${lesson.lines && lesson.lines.length ? `<div class="lesson-sec"><h3><span class="num">6</span> Line-by-line explanation</h3>
-        ${lesson.lines.map(([code, exp]) => `<div class="line-explain"><code>${code}</code><span style="color:var(--fg-dim);">${esc(exp)}</span></div>`).join("")}
-      </div>` : ``}
-
-      ${lesson.playground ? `<div class="lesson-sec"><h3><span class="num">7</span> Try it yourself</h3><p>${esc(lesson.tryIt)}</p>${playgroundHTML("lesson-" + id, lesson.playground)}</div>` :
-          `<div class="lesson-sec"><h3><span class="num">7</span> Try it yourself</h3><p>${esc(lesson.tryIt)}</p></div>`}
-
-      <div class="lesson-sec"><h3><span class="num">8</span> Common mistakes</h3>
-        ${lesson.mistakes.map(([wrong, fix]) => `<div class="mistake"><span class="m-wrong">✗</span><div><div>${wrong}</div><div style="color:var(--sage); font-size:12.5px; margin-top:2px;"><span class="m-right">✓ Fix:</span> ${fix}</div></div></div>`).join("")}
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">What you will learn</span></div>
+        <p class="lsec-body">${esc(lesson.goal)}</p>
       </div>
 
-      <div class="lesson-sec"><h3><span class="num">9</span> Quick quiz</h3>
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Simple explanation</span></div>
+        <p class="lsec-body">${esc(lesson.simple)}</p>
+      </div>
+
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Real-world analogy</span></div>
+        <div class="analogy-box">
+          <div class="analogy-icon">💡</div>
+          <p>${esc(lesson.analogy)}</p>
+        </div>
+      </div>
+
+      ${lesson.syntax ? `
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">${lesson.syntaxLabel || 'Syntax'}</span></div>
+        <div class="codebox-wrap">
+          <div class="codebox-chrome"><span class="cb-dot cb-red"></span><span class="cb-dot cb-yellow"></span><span class="cb-dot cb-green"></span><span class="cb-filename">${lesson.syntaxLabel || 'syntax.js'}</span></div>
+          <div class="codebox">${esc(lesson.syntax)}</div>
+        </div>
+      </div>` : ``}
+
+      ${lesson.example ? `
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Example</span></div>
+        ${lesson.exampleNote ? `<p class="lsec-note">${esc(lesson.exampleNote)}</p>` : ''}
+        <div class="codebox-wrap">
+          <div class="codebox-chrome"><span class="cb-dot cb-red"></span><span class="cb-dot cb-yellow"></span><span class="cb-dot cb-green"></span><span class="cb-filename">example.js</span></div>
+          <div class="codebox">${esc(lesson.example)}</div>
+        </div>
+      </div>` : ``}
+
+      ${lesson.lines && lesson.lines.length ? `
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Line-by-line explanation</span></div>
+        <div class="line-table">
+          ${lesson.lines.map(([code, exp]) => `
+          <div class="line-row">
+            <code class="line-code">${code}</code>
+            <span class="line-desc">${esc(exp)}</span>
+          </div>`).join("")}
+        </div>
+      </div>` : ``}
+
+      ${lesson.playground ? `
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Try it yourself</span></div>
+        <p class="lsec-tryit">${esc(lesson.tryIt)}</p>
+        ${playgroundHTML("lesson-" + id, lesson.playground)}
+      </div>` : `
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Try it yourself</span></div>
+        <p class="lsec-body">${esc(lesson.tryIt)}</p>
+      </div>`}
+
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Common mistakes</span></div>
+        <div class="mistakes-list">
+          ${lesson.mistakes.map(([wrong, fix]) => `
+          <div class="mistake-row">
+            <div class="mistake-wrong"><span class="mistake-icon wrong-icon">✕</span><span>${wrong}</span></div>
+            <div class="mistake-fix"><span class="mistake-icon fix-icon">✓</span><span><strong>Fix:</strong> ${fix}</span></div>
+          </div>`).join("")}
+        </div>
+      </div>
+
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Quick quiz</span></div>
         <div id="quizArea">${quizHTML(lesson)}</div>
       </div>
 
-      <div class="lesson-sec"><h3><span class="num">10</span> Mini challenge</h3><div class="card" style="background:var(--paper-dim);"><p style="margin:0;">${esc(lesson.challenge)}</p></div></div>
+      <div class="lesson-sec">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">Mini challenge</span></div>
+        <div class="challenge-box">
+          <div class="challenge-icon">🎯</div>
+          <p>${esc(lesson.challenge)}</p>
+        </div>
+      </div>
 
-      <div class="lesson-sec"><h3><span class="num">11</span> What comes next</h3>
+      <div class="lesson-sec lesson-sec-last">
+        <div class="lsec-head"><span class="lsec-num">${n()}</span><span class="lsec-label">What comes next</span></div>
         <div class="next-box">
-          <p style="margin:0;">${esc(lesson.next)}</p>
-          <div style="display:flex; gap:8px;">
-            <button class="btn btn-outline" id="markDoneBtn">${done ? '✅ Completed' : 'Mark lesson complete'}</button>
-            ${idx < allInLevel.length - 1 ? `<button class="btn btn-primary" data-nav="#/learn/${allInLevel[idx + 1].id}">Next lesson →</button>` : `<button class="btn btn-primary" data-nav="#/projects">See projects →</button>`}
+          <p>${esc(lesson.next)}</p>
+          <div class="next-actions">
+            <button class="btn ${done ? 'btn-outline' : 'btn-success'}" id="markDoneBtn">${done ? '✅ Completed' : '✓ Mark lesson complete'}</button>
+            ${nextLesson ? `<button class="btn btn-primary" data-nav="#/learn/${nextLesson.id}">Next lesson →</button>` : `<button class="btn btn-primary" data-nav="#/projects">See projects →</button>`}
           </div>
         </div>
       </div>
@@ -2987,9 +4334,11 @@
     function quizHTML(lesson) {
       return lesson.quiz.map((q, qi) => `
     <div class="quiz-q" data-qi="${qi}">
-      <p class="qtext">${qi + 1}. ${esc(q.q)}</p>
-      ${q.opts.map((o, oi) => `<button class="quiz-opt" data-oi="${oi}">${esc(o)}</button>`).join("")}
-    </div>`).join("") + `<div style="margin-top:6px;" id="quizScoreLine"></div>`;
+      <p class="qtext"><span class="quiz-q-num">${qi + 1}</span>${esc(q.q)}</p>
+      <div class="quiz-opts">
+        ${q.opts.map((o, oi) => `<button class="quiz-opt" data-oi="${oi}"><span class="quiz-opt-letter">${['A','B','C','D'][oi]}</span>${esc(o)}</button>`).join("")}
+      </div>
+    </div>`).join("") + `<div id="quizScoreLine"></div>`;
     }
 
     function wireLesson(id) {
@@ -3184,15 +4533,28 @@
     }
 
     /* ---------------------------------------------------------------------
-       4. CODE PLAYGROUND — live HTML/CSS/JS preview
+       4. CODE PLAYGROUND — Live Multi-Environment Sandbox (HTML/CSS/JS, Node.js & React Native)
     --------------------------------------------------------------------- */
     function playgroundHTML(key, starter) {
+      const mode = starter.mode || (key.includes("node-") ? "node" : (key.includes("rn-") ? "react-native" : "web"));
+      const isNode = mode === "node";
+      const isRN = mode === "react-native";
+
+      const tab1Label = isNode ? "server.js" : (isRN ? "App.js" : "HTML");
+      const tab2Label = isNode ? "config.json" : (isRN ? "styles.js" : "CSS");
+      const tab3Label = isNode ? "test.js" : (isRN ? "Mobile Docs" : "JS");
+
+      const defaultTab = (isNode || isRN) ? "js" : "html";
+
       return `
-  <div class="editor-wrap" id="pg-${key}">
+  <div class="editor-wrap ${isNode ? 'editor-node' : (isRN ? 'editor-rn' : '')}" id="pg-${key}" data-mode="${mode}">
     <div class="editor-tabs">
-      <button class="etab active" data-tab="html">HTML</button>
-      <button class="etab" data-tab="css">CSS</button>
-      <button class="etab" data-tab="js">JS</button>
+      <button class="etab ${defaultTab === 'html' ? 'active' : ''}" data-tab="html">${tab1Label}</button>
+      <button class="etab ${defaultTab === 'css' ? 'active' : ''}" data-tab="css">${tab2Label}</button>
+      <button class="etab ${defaultTab === 'js' ? 'active' : ''}" data-tab="js">${tab3Label}</button>
+      <div style="margin-left: 10px; font-size: 11px; font-weight: 700; color: ${isNode ? '#10B981' : (isRN ? '#06B6D4' : '#F59E0B')}; font-family: var(--mono); text-transform: uppercase;">
+        ${isNode ? '🟢 Node.js Sandbox' : (isRN ? '📱 React Native Virtual Device' : '🌐 Web Preview')}
+      </div>
       <div class="editor-actions">
         <button class="btn btn-ghost btn-sm" data-act="run">▶ Run</button>
         <button class="btn btn-ghost btn-sm" data-act="reset">↺ Reset</button>
@@ -3200,42 +4562,166 @@
     </div>
     <div class="editor-panes">
       <div class="editor-pane">
-        <textarea data-lang="html" spellcheck="false">${esc(starter.html || "")}</textarea>
-        <textarea data-lang="css" style="display:none;" spellcheck="false">${esc(starter.css || "")}</textarea>
-        <textarea data-lang="js" style="display:none;" spellcheck="false">${esc(starter.js || "")}</textarea>
+        <textarea data-lang="html" style="display:${defaultTab === 'html' ? 'block' : 'none'};" spellcheck="false">${esc(starter.html || "")}</textarea>
+        <textarea data-lang="css" style="display:${defaultTab === 'css' ? 'block' : 'none'};" spellcheck="false">${esc(starter.css || "")}</textarea>
+        <textarea data-lang="js" style="display:${defaultTab === 'js' ? 'block' : 'none'};" spellcheck="false">${esc(starter.js || "")}</textarea>
       </div>
-      <div class="editor-preview"><iframe title="Live preview" sandbox="allow-scripts"></iframe></div>
+      <div class="editor-preview"><iframe title="Live preview" sandbox="allow-scripts allow-modals"></iframe></div>
     </div>
   </div>`;
     }
+
     function wirePlayground(key, starter) {
       const wrap = document.getElementById("pg-" + key);
       if (!wrap) return;
+      const mode = wrap.getAttribute("data-mode") || starter.mode || "web";
       const tabs = wrap.querySelectorAll(".etab");
-      const areas = { html: wrap.querySelector('[data-lang="html"]'), css: wrap.querySelector('[data-lang="css"]'), js: wrap.querySelector('[data-lang="js"]') };
+      const areas = {
+        html: wrap.querySelector('[data-lang="html"]'),
+        css: wrap.querySelector('[data-lang="css"]'),
+        js: wrap.querySelector('[data-lang="js"]')
+      };
       const iframe = wrap.querySelector("iframe");
 
       function runPreview() {
-        const safeJs = (areas.js.value || "").replace(/<\/script>/gi, "<\\/script>");
-        const doc = `<!DOCTYPE html><html><head><style>${areas.css.value}</style></head><body>${areas.html.value}<script>${safeJs}<\/script></body></html>`;
+        if (mode === "node") {
+          runNodePreview();
+        } else if (mode === "react-native") {
+          runRNPreview();
+        } else {
+          runWebPreview();
+        }
+      }
+
+      function runWebPreview() {
+        const safeJs = (areas.js.value || "").replace(/<\/script>/gi, "<" + "\\/script>");
+        const doc = "<!DOCTYPE html><html><head><meta charset='UTF-8'><style>" + (areas.css.value || "") + "</style></head><body>" + (areas.html.value || "") + "<" + "script>" + safeJs + "<" + "/script></body></html>";
         iframe.srcdoc = doc;
       }
-      tabs.forEach(t => t.addEventListener("click", () => {
-        tabs.forEach(x => x.classList.remove("active"));
+
+      function runNodePreview() {
+        const rawJs = areas.js.value || "";
+        const safeJs = rawJs.replace(/<\/script>/gi, "<" + "\\/script>");
+        const parts = [
+          '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>',
+          '* { box-sizing: border-box; }',
+          'body { margin: 0; padding: 14px; background: #0B0F17; color: #E2E8F0; font-family: Consolas, monospace; font-size: 12px; line-height: 1.55; min-height: 100vh; overflow-y: auto; }',
+          '.term-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }',
+          '.term-title { font-weight: 700; color: #10B981; display: flex; align-items: center; gap: 8px; font-size: 12.5px; }',
+          '.term-dot { width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981; }',
+          '.term-badge { background: rgba(16,185,129,0.15); color: #10B981; padding: 2px 8px; border-radius: 4px; font-size: 11px; }',
+          '.term-prompt { color: #64748B; margin-bottom: 10px; font-size: 11.5px; }',
+          '.term-prompt span { color: #38BDF8; font-weight: 600; }',
+          '.term-line { margin: 4px 0; word-break: break-word; }',
+          '.term-log { color: #F8FAFC; }',
+          '.term-info { color: #38BDF8; }',
+          '.term-warn { color: #F59E0B; }',
+          '.term-error { color: #F43F5E; background: rgba(244,63,94,0.1); padding: 4px 8px; border-radius: 4px; }',
+          '.term-server-box { margin-top: 14px; padding: 12px; background: #121826; border: 1px solid #1E293B; border-radius: 8px; }',
+          '.term-server-title { color: #10B981; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 12.5px; }',
+          '.test-btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }',
+          '.test-btn { background: #1E293B; color: #F8FAFC; border: 1px solid #334155; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 11.5px; font-weight: 600; transition: all 0.2s; }',
+          '.test-btn:hover { background: #334155; border-color: #10B981; color: #10B981; }',
+          '.http-res { background: #070B11; border: 1px solid #1E293B; padding: 10px; border-radius: 6px; margin-top: 10px; font-size: 11.5px; }',
+          '.status-200, .status-201 { color: #10B981; font-weight: 700; }',
+          '.status-400, .status-404, .status-500 { color: #F43F5E; font-weight: 700; }',
+          'pre { margin: 0; white-space: pre-wrap; color: #94A3B8; font-family: inherit; }',
+          '</style></head><body>',
+          '<div class="term-header"><div class="term-title"><span class="term-dot"></span> Node.js v24.19.0 Runtime</div><div class="term-badge">V8 Engine Sandbox</div></div>',
+          '<div class="term-prompt">foundry@server:~/app$ <span>node index.js</span></div>',
+          '<div id="output"></div><div id="serverUI"></div>',
+          "<" + "script>",
+          'var output = document.getElementById("output");',
+          'var serverUI = document.getElementById("serverUI");',
+          'function formatVal(v) { if (typeof v === "object" && v !== null) { try { return JSON.stringify(v, null, 2); } catch(e) { return String(v); } } return String(v); }',
+          'function printLog(type) { var args = Array.prototype.slice.call(arguments, 1); var div = document.createElement("div"); div.className = "term-line term-" + type; div.textContent = args.map(formatVal).join(" "); output.appendChild(div); }',
+          'console.log = function() { printLog.apply(null, ["log"].concat(Array.prototype.slice.call(arguments))); };',
+          'console.info = function() { printLog.apply(null, ["info"].concat(Array.prototype.slice.call(arguments))); };',
+          'console.warn = function() { printLog.apply(null, ["warn"].concat(Array.prototype.slice.call(arguments))); };',
+          'console.error = function() { printLog.apply(null, ["error"].concat(Array.prototype.slice.call(arguments))); };',
+          'var virtualFS = { "notes.json": JSON.stringify([{ id: 1, title: "Learn Node.js Architecture", done: true }, { id: 2, title: "Build Express REST API", done: false }], null, 2), "data.txt": "Foundry Backend Connected" };',
+          'var fs = { promises: { readFile: async function(f) { return virtualFS[f] || "File data"; }, writeFile: async function(f, d) { virtualFS[f] = String(d); return true; } }, readFileSync: function(f) { return virtualFS[f] || "File data"; }, writeFileSync: function(f, d) { virtualFS[f] = String(d); } };',
+          'var os = { platform: function() { return "win32"; }, arch: function() { return "x64"; }, release: function() { return "10.0.22631"; }, totalmem: function() { return 17179869184; }, freemem: function() { return 8589934592; }, cpus: function() { return [{ model: "Foundry Cloud VCPU" }]; } };',
+          'var serverPort = 3000;',
+          'function createExpressApp() { var app = { _routes: [], use: function(fn){}, get: function(p,h){ this._routes.push({method:"GET", path:p, handler:h}); }, post: function(p,h){ this._routes.push({method:"POST", path:p, handler:h}); }, put: function(p,h){ this._routes.push({method:"PUT", path:p, handler:h}); }, delete: function(p,h){ this._routes.push({method:"DELETE", path:p, handler:h}); }, listen: function(p, cb){ serverPort = p || 3000; console.log("⚡ [Express] Server listening on http://localhost:" + serverPort); if (cb) cb(); renderServerUI(this._routes); } }; return app; }',
+          'var express = createExpressApp; express.json = function() { return function(req, res, next) { next(); }; };',
+          'var http = { createServer: function(handler) { return { listen: function(port, cb) { serverPort = port || 3000; console.log("⚡ [HTTP] Node Core Server listening on port " + serverPort); if (cb) cb(); renderHttpHandlerUI(handler); } }; } };',
+          'function renderServerUI(routesList) { if (!routesList || routesList.length === 0) return; var box = document.createElement("div"); box.className = "term-server-box"; box.innerHTML = "<div class=\"term-server-title\">📡 Active Server Endpoints</div><p style=\"color:#94A3B8; font-size:11.5px; margin:0 0 8px;\">Click any endpoint below to trigger a live client request:</p><div class=\"test-btn-group\" id=\"btnGroup\"></div><div id=\"testRes\"></div>"; serverUI.appendChild(box); var grp = box.querySelector("#btnGroup"); var resEl = box.querySelector("#testRes"); routesList.forEach(function(r) { var b = document.createElement("button"); b.className = "test-btn"; b.textContent = r.method + " " + r.path; b.onclick = function() { var sentStatus = 200; var sentBody = ""; var mockReq = { method: r.method, url: r.path, params: { id: "1" }, query: {}, body: r.method === "POST" || r.method === "PUT" ? { name: "Smart Wireless Mouse", price: 49.99, title: "Learn Asynchronous I/O" } : {} }; var mockRes = { status: function(s){ sentStatus = s; return this; }, setHeader: function(){ return this; }, json: function(data){ sentBody = JSON.stringify(data, null, 2); showRes(sentStatus, sentBody, r.method + " " + r.path); }, send: function(data){ sentBody = typeof data === "object" ? JSON.stringify(data, null, 2) : String(data); showRes(sentStatus, sentBody, r.method + " " + r.path); }, end: function(data){ if (data) sentBody = String(data); showRes(sentStatus, sentBody, r.method + " " + r.path); } }; try { r.handler(mockReq, mockRes); } catch(err) { showRes(500, err.stack || err.message, r.method + " " + r.path); } }; grp.appendChild(b); }); function showRes(status, body, endpoint) { resEl.innerHTML = "<div class=\"http-res\"><div style=\"display:flex; justify-content:space-between; margin-bottom:6px;\"><span style=\"color:#64748B;\">Client Request: <b>" + endpoint + "</b></span><span class=\"status-" + status + "\">HTTP " + status + "</span></div><pre>" + (body || "[Empty response payload]") + "</pre></div>"; } }',
+          'function renderHttpHandlerUI(handler) { var box = document.createElement("div"); box.className = "term-server-box"; box.innerHTML = "<div class=\"term-server-title\">📡 Test HTTP Server</div><div class=\"test-btn-group\"><button class=\"test-btn\" id=\"btnGet\">Send GET /</button><button class=\"test-btn\" id=\"btnApi\">Send GET /api/data</button></div><div id=\"httpResBox\"></div>"; serverUI.appendChild(box); var resBox = box.querySelector("#httpResBox"); function sendReq(urlPath) { var status = 200; var body = ""; var req = { url: urlPath, method: "GET", headers: { host: "localhost:" + serverPort } }; var res = { writeHead: function(s) { status = s; }, write: function(d) { body += d; }, end: function(d) { if (d) body += d; resBox.innerHTML = "<div class=\"http-res\"><div style=\"display:flex; justify-content:space-between; margin-bottom:6px;\"><span>GET " + urlPath + "</span><span class=\"status-" + status + "\">" + status + "</span></div><pre>" + (body || "[Empty payload]") + "</pre></div>"; } }; try { handler(req, res); } catch(e) { resBox.innerHTML = "<div class=\"http-res status-500\">" + e.message + "</div>"; } } box.querySelector("#btnGet").onclick = function() { sendReq("/"); }; box.querySelector("#btnApi").onclick = function() { sendReq("/api/data"); }; }',
+          'var module = { exports: {} }; var exports = module.exports;',
+          'var process = { version: "v24.19.0", platform: "win32", arch: "x64", uptime: function() { return 342.4; }, memoryUsage: function() { return { rss: 35651584, heapTotal: 8388608, heapUsed: 5242880 }; }, env: { NODE_ENV: "development", PORT: 3000, USER: "FoundryEngineer" } };',
+          'function require(mod) { if (mod === "http") return http; if (mod === "express") return express; if (mod === "fs") return fs; if (mod === "fs/promises") return fs.promises; if (mod === "os") return os; if (mod === "path") return { join: function() { return Array.prototype.join.call(arguments, "/"); }, resolve: function() { return Array.prototype.join.call(arguments, "/"); } }; return {}; }',
+          'try {',
+          safeJs,
+          '} catch(err) { console.error(err.stack || err.message); }',
+          "<" + "/script>",
+          '</body></html>'
+        ].join('\n');
+        iframe.srcdoc = parts;
+      }
+
+      function runRNPreview() {
+        const rawJs = areas.js.value || "";
+        const safeJs = rawJs.replace(/<\/script>/gi, "<" + "\\/script>");
+        const parts = [
+          '<!DOCTYPE html><html><head><meta charset="UTF-8">',
+          '<script src="https://unpkg.com/react@18/umd/react.production.min.js"><' + '/script>',
+          '<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><' + '/script>',
+          '<script src="https://unpkg.com/@babel/standalone/babel.min.js"><' + '/script>',
+          '<style>',
+          '* { box-sizing: border-box; }',
+          'body { margin: 0; padding: 12px; background: #0B0F17; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }',
+          '.phone-frame { width: 310px; height: 550px; background: #000000; border-radius: 42px; box-shadow: 0 20px 45px -10px rgba(0,0,0,0.8), 0 0 0 9px #1E293B, 0 0 0 11px #334155; position: relative; overflow: hidden; display: flex; flex-direction: column; }',
+          '.dynamic-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 86px; height: 22px; background: #000000; border-radius: 20px; z-index: 100; }',
+          '.status-bar { height: 38px; padding: 9px 18px 0; display: flex; justify-content: space-between; align-items: center; color: #FFFFFF; font-size: 11px; font-weight: 600; z-index: 90; }',
+          '.screen-content { flex: 1; overflow-y: auto; overflow-x: hidden; background: #0B0F17; color: #F8FAFC; display: flex; flex-direction: column; position: relative; }',
+          '.home-indicator { height: 14px; display: flex; align-items: center; justify-content: center; background: transparent; }',
+          '.home-bar { width: 110px; height: 4px; background: rgba(255,255,255,0.4); border-radius: 4px; }',
+          '.phone-caption { margin-top: 10px; color: #64748B; font-size: 11px; font-family: "IBM Plex Mono", monospace; text-align: center; }',
+          '</style></head><body>',
+          '<div class="phone-frame"><div class="dynamic-island"></div><div class="status-bar"><span>9:41</span><span style="display:flex; gap:4px; align-items:center;"><span>●●●</span> <span>📶</span> <span>100%</span></span></div><div class="screen-content" id="rnRoot"></div><div class="home-indicator"><div class="home-bar"></div></div></div>',
+          '<div class="phone-caption">📱 React Native Virtual Device · iOS/Android Engine</div>',
+          "<" + "script>",
+          'var StyleSheet = { create: function(s) { return s; } };',
+          'function flattenStyle(style) { if (!style) return {}; if (Array.isArray(style)) return Object.assign.apply(Object, [{}].concat(style.map(function(s) { return flattenStyle(s); }))); return style; }',
+          'function processStyleObj(style) { var s = flattenStyle(style); var out = {}; for (var k in s) { if (Object.prototype.hasOwnProperty.call(s, k)) { var v = s[k]; if (typeof v === "number" && ["flex", "fontWeight", "opacity", "zIndex", "elevation"].indexOf(k) === -1) { out[k] = v + "px"; } else { out[k] = v; } } } return out; }',
+          'var View = function(props) { var style = props.style, children = props.children; var rest = Object.assign({}, props); delete rest.style; delete rest.children; var base = { display: "flex", flexDirection: "column", boxSizing: "border-box", position: "relative" }; return React.createElement("div", Object.assign({ style: Object.assign(base, processStyleObj(style)) }, rest), children); };',
+          'var Text = function(props) { var style = props.style, children = props.children; var rest = Object.assign({}, props); delete rest.style; delete rest.children; var base = { margin: 0, padding: 0, boxSizing: "border-box" }; return React.createElement("div", Object.assign({ style: Object.assign(base, processStyleObj(style)) }, rest), children); };',
+          'var TouchableOpacity = function(props) { var style = props.style, onPress = props.onPress, activeOpacity = props.activeOpacity || 0.6, children = props.children; var rest = Object.assign({}, props); delete rest.style; delete rest.onPress; delete rest.activeOpacity; delete rest.children; var stateArr = React.useState(false); var pressed = stateArr[0]; var setPressed = stateArr[1]; var base = { display: "flex", flexDirection: "column", boxSizing: "border-box", cursor: "pointer", userSelect: "none", transition: "opacity 0.15s ease" }; return React.createElement("div", Object.assign({ style: Object.assign(base, processStyleObj(style), pressed ? { opacity: activeOpacity } : {}), onMouseDown: function(){ setPressed(true); }, onMouseUp: function(){ setPressed(false); }, onMouseLeave: function(){ setPressed(false); }, onTouchStart: function(){ setPressed(true); }, onTouchEnd: function(){ setPressed(false); }, onClick: onPress }, rest), children); };',
+          'var Pressable = TouchableOpacity;',
+          'var TextInput = function(props) { var style = props.style, value = props.value, onChangeText = props.onChangeText, placeholder = props.placeholder; var rest = Object.assign({}, props); delete rest.style; delete rest.value; delete rest.onChangeText; delete rest.placeholder; var base = { fontFamily: "inherit", fontSize: "13px", outline: "none", boxSizing: "border-box", border: "1px solid #334155", borderRadius: "8px", padding: "8px 12px", background: "#121826", color: "#F8FAFC" }; return React.createElement("input", Object.assign({ style: Object.assign(base, processStyleObj(style)), value: value || "", onChange: function(e){ if (onChangeText) onChangeText(e.target.value); }, placeholder: placeholder }, rest)); };',
+          'var Image = function(props) { var style = props.style, source = props.source; var rest = Object.assign({}, props); delete rest.style; delete rest.source; var base = { objectFit: "cover", display: "block", boxSizing: "border-box" }; var uri = (source && source.uri) ? source.uri : (typeof source === "string" ? source : ""); return React.createElement("img", Object.assign({ style: Object.assign(base, processStyleObj(style)), src: uri, alt: "" }, rest)); };',
+          'var FlatList = function(props) { var data = props.data || [], renderItem = props.renderItem, keyExtractor = props.keyExtractor, style = props.style; var base = { display: "flex", flexDirection: "column", width: "100%" }; return React.createElement("div", { style: Object.assign(base, processStyleObj(style)) }, data.map(function(item, index) { var key = keyExtractor ? keyExtractor(item, index) : index; return React.createElement(React.Fragment, { key: key }, renderItem({ item: item, index: index })); })); };',
+          "<" + "/script>",
+          "<" + 'script type="text/babel">',
+          'try {',
+          safeJs,
+          'if (typeof App !== "undefined") { var root = ReactDOM.createRoot(document.getElementById("rnRoot")); root.render(<App />); }',
+          '} catch(err) { document.getElementById("rnRoot").innerHTML = "<div style=\"padding:16px; color:#F43F5E; font-size:12px;\"><b>React Native Error:</b><br>" + err.message + "</div>"; }',
+          "<" + "/script>",
+          '</body></html>'
+        ].join('\n');
+        iframe.srcdoc = parts;
+      }
+
+      tabs.forEach(function(t) { t.addEventListener("click", function() {
+        tabs.forEach(function(x) { x.classList.remove("active"); });
         t.classList.add("active");
-        Object.values(areas).forEach(a => a.style.display = "none");
+        Object.values(areas).forEach(function(a) { a.style.display = "none"; });
         areas[t.getAttribute("data-tab")].style.display = "block";
-      }));
+      }); });
+
       wrap.querySelector('[data-act="run"]').addEventListener("click", runPreview);
-      wrap.querySelector('[data-act="reset"]').addEventListener("click", () => {
-        areas.html.value = starter.html || ""; areas.css.value = starter.css || ""; areas.js.value = starter.js || "";
+      wrap.querySelector('[data-act="reset"]').addEventListener("click", function() {
+        areas.html.value = starter.html || "";
+        areas.css.value = starter.css || "";
+        areas.js.value = starter.js || "";
         runPreview();
       });
-      Object.values(areas).forEach(a => a.addEventListener("input", debounce(runPreview, 500)));
+      Object.values(areas).forEach(function(a) { a.addEventListener("input", debounce(runPreview, 600)); });
       runPreview();
     }
-    function debounce(fn, ms) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
-
+    function debounce(fn, ms) { var t; return function() { var args = arguments; clearTimeout(t); t = setTimeout(function() { fn.apply(null, args); }, ms); }; }
     /* ---- generic [data-nav] wiring used on cards outside the shell ---- */
     function wireGenericButtons() {
       document.querySelectorAll("[data-nav]").forEach(el => {

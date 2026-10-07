@@ -446,8 +446,9 @@
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      position: sticky;
+      position: fixed;   /* ✅ Fixed to the viewport — never scrolls */
       top: 0;
+      left: 0;           /* ✅ Anchored to the left edge */
       height: 100vh;
       height: 100dvh;
       overflow-y: auto;
@@ -641,6 +642,7 @@
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
+      margin-left: 250px; /* ✅ Offset content so it starts after the fixed sidebar */
     }
 
     .topbar {
@@ -2535,6 +2537,10 @@
         flex: 0 0 210px;
       }
 
+      .main {
+        margin-left: 210px; /* Match narrower sidebar at tablet size */
+      }
+
       .brand {
         padding: 16px 14px 14px;
         gap: 10px;
@@ -2583,6 +2589,10 @@
         transform: translateX(-100%);
         box-shadow: none;
         transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .main {
+        margin-left: 0; /* Sidebar is an off-screen drawer on mobile, no offset needed */
       }
 
       .sidebar.open {
